@@ -13,6 +13,7 @@
     <string name="login_button">Iniciar sesión</string>
     <string name="register_button">Registrarse</string>
     <string name="back_button">Volver</string>
+    <string name="password_error">Mínimo 8 caracteres</string>
 
     <!--Sample static data-->
     <!--Cattle-->
