@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--Login & Register-->
     <dimen name="welcome_brand_image_width">64dp</dimen>
     <dimen name="welcome_brand_image_height">64dp</dimen>
     <dimen name="welcome_brand_image_margin_top">48dp</dimen>
     <dimen name="welcome_brand_image_margin_bottom">48dp</dimen>
     <dimen name="login_input_margin">8dp</dimen>
     <dimen name="end_button_margin">8dp</dimen>
+
+    <!--Cattle Card-->
+    <dimen name="cattle_card_height">160dp</dimen>
+    <dimen name="cattle_card_padding">4dp</dimen>
+    <dimen name="cattle_card_text_margin">8dp</dimen>
 </resources>
