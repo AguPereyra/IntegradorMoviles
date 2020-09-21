@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <PreferenceCategory
+        android:title="@string/contact_us">
+        <Preference
+            app:key="help_contact_us_email"
+            android:title="@string/email"
+            android:icon="@drawable/ic_baseline_email_24"
+            android:selectable="true"/>
+    </PreferenceCategory>
+</PreferenceScreen>

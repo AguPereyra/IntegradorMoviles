@@ -4,6 +4,7 @@
     <string name="save">Guardar</string>
     <string name="cancel">Cancelar</string>
     <string name="brand_name">Vacas Locas</string>
+    <string name="email">Email</string>
 
     <!--Login & Register-->
     <string name="hint_username">Usuario</string>
@@ -45,4 +46,7 @@
     <string name="nav_preferences">Preferencias</string>
     <string name="nav_account">Cuenta</string>
     <string name="nav_help">Ayuda</string>
+
+    <!--Help section-->
+    <string name="contact_us">Contactenos</string>
 </resources>
