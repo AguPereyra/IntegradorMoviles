@@ -3,6 +3,7 @@
     <!--Generic-->
     <string name="save">Guardar</string>
     <string name="cancel">Cancelar</string>
+    <string name="brand_name">Vacas Locas</string>
 
     <!--Login & Register-->
     <string name="hint_username">Usuario</string>
@@ -39,4 +40,9 @@
     <string name="old_password">Contraseña actual</string>
     <string name="new_password">Nueva contraseña</string>
     <string name="validate_password">Confirmar contraseña</string>
+
+    <!--Navigation Menu-->
+    <string name="nav_preferences">Preferencias</string>
+    <string name="nav_account">Cuenta</string>
+    <string name="nav_help">Ayuda</string>
 </resources>
