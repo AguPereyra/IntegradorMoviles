@@ -12,4 +12,11 @@
     <dimen name="cattle_card_height">160dp</dimen>
     <dimen name="cattle_card_padding">4dp</dimen>
     <dimen name="cattle_card_text_margin">8dp</dimen>
+
+    <!--User account-->
+    <dimen name="user_image_margin_top">48dp</dimen>
+    <dimen name="user_image_margin_bottom">16dp</dimen>
+    <dimen name="user_image_size">128dp</dimen>
+    <dimen name="user_input_margin">@dimen/login_input_margin</dimen>
+    <dimen name="user_account_button_margin">@dimen/end_button_margin</dimen>
 </resources>
