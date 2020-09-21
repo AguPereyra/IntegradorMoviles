@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory>
+        <SwitchPreferenceCompat
+            app:key="switch_sex_filter"
+            app:title="@string/filter_by_sex_title"/>
+
+        <ListPreference
+            app:key="settings_filter_by_sex"
+            app:entries="@array/filter_by_entries"
+            app:entryValues="@array/filter_by_values"
+            app:defaultValue="@string/filter_by_female"
+            app:dependency="switch_sex_filter"/>
+    </PreferenceCategory>
+    <PreferenceCategory>
+        <SwitchPreferenceCompat
+            app:key="switch_weight_filter"
+            app:title="@string/filter_by_weight_title"/>
+
+        <SeekBarPreference
+            app:key="weight_filter_seek_bar"
+            app:showSeekBarValue="true"
+            app:dependency="switch_weight_filter"
+            app:adjustable="true"/>
+
+    </PreferenceCategory>
+</PreferenceScreen>

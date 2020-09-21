@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ListPreference
+        app:key="settings_order_by"
+        app:title="@string/order_by_settings_title"
+        app:summary="@string/order_by_settings_sum"
+        app:entries="@array/order_by_entries"
+        app:entryValues="@array/order_by_values"
+        app:defaultValue="@string/order_by_sex"/>
+
+    <Preference
+        app:key="settings_filter"
+        app:title="@string/filter_title"
+        app:summary="@string/filter_sum"/>
+</PreferenceScreen>

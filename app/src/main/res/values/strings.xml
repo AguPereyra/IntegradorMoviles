@@ -12,4 +12,19 @@
     <!--Sample static data-->
     <string name="cattle_caravan">A34B8-09</string>
     <string name="cattle_weight">680Kg</string>
+    
+    <!--Settings-->
+    <!--Order by-->
+    <string name="order_by_settings_title">Ordenar ganado por</string>
+    <string name="order_by_settings_sum">Sexo</string>
+    <string name="order_by_sex">Sexo</string>
+    <string name="order_by_weight_asc">Peso ascendente</string>
+    <string name="order_by_weight_des">Peso descendente</string>
+    <!--Filter-->
+    <string name="filter_title">Filtrar ganado</string>
+    <string name="filter_sum">Filtrar ganado por sexo y peso</string>
+    <string name="filter_by_sex_title">Filtrar por sexo</string>
+    <string name="filter_by_male">Macho</string>
+    <string name="filter_by_female">Hembra</string>
+    <string name="filter_by_weight_title">Filtrar por peso</string>
 </resources>
