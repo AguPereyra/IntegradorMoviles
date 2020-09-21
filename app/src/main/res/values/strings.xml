@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Integrador</string>
+    <string name="hint_username">Usuario</string>
+    <string name="hint_password">Contraseña</string>
+    <string name="hint_email">Email</string>
+    <string name="login_button">Iniciar sesión</string>
+    <string name="register_button">Registrarse</string>
+    <string name="back_button">Volver</string>
 </resources>
