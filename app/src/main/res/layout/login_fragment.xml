@@ -41,4 +41,21 @@
         android:text="@string/login_button"
         android:layout_gravity="center_horizontal"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/new_user_question"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/new_account_question_margin_top"
+        android:layout_marginBottom="@dimen/new_account_question_margin_bottom"
+        style="@style/TextAppearance.MaterialComponents.Headline6"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/login_register_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/register_button"
+        android:layout_gravity="center_horizontal"
+        style="@style/Widget.MaterialComponents.Button.TextButton"/>
+
 </LinearLayout>
