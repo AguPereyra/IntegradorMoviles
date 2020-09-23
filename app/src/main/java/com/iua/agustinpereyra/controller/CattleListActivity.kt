@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.navigation.NavigationView
 import com.iua.agustinpereyra.R
 import com.iua.agustinpereyra.model.Cattle
+import com.iua.agustinpereyra.utils.VIEW_USER_REQUEST
 import kotlinx.android.synthetic.main.app_toolbar.*
 import kotlinx.android.synthetic.main.cattle_list_activity.*
 
@@ -46,7 +47,7 @@ class CattleListActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
         when(item.itemId){
             R.id.nav_menu_account -> {
                 val userAccountIntent = Intent(this, UserAccountActivity::class.java)
-                startActivity(userAccountIntent)
+                startActivityForResult(userAccountIntent, VIEW_USER_REQUEST)
             }
         }
         return true
