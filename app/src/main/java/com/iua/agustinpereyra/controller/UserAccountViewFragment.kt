@@ -21,18 +21,24 @@ class UserAccountViewFragment : Fragment() {
 
         // Set click listeners
         view.user_account_cancel_button.setOnClickListener{
-            listener.onCancelClick()
+            listener.onCancelUserAccountViewClick()
         }
 
         view.user_account_save_button.setOnClickListener{
-            listener.onSaveClick()
+            listener.onSaveUserAccountViewClick()
+        }
+
+        view.user_account_password_edit_text.setOnTouchListener { view, motionEvent ->
+            // Navigate to the change password screen
+            listener.navigateToChangePassword()
+            true
         }
         return view
     }
 
     interface userAccountFragmentListener {
-        fun onCancelClick() : Unit
-        fun onSaveClick() : Unit
+        fun onCancelUserAccountViewClick() : Unit
+        fun onSaveUserAccountViewClick() : Unit
         fun navigateToChangePassword()
     }
 }

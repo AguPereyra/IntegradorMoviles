@@ -6,7 +6,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.iua.agustinpereyra.R
 
-class UserAccountActivity : AppCompatActivity(), UserAccountViewFragment.userAccountFragmentListener {
+class UserAccountActivity : AppCompatActivity(), UserAccountViewFragment.userAccountFragmentListener, UserAccountModifyPasswordFragment.userAccountModifyPasswordFragmentListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,19 +26,33 @@ class UserAccountActivity : AppCompatActivity(), UserAccountViewFragment.userAcc
         fragmentTransaction.commit()
     }
 
-    override fun onCancelClick() {
+    override fun onCancelUserAccountViewClick() {
         val cattleListReturnIntent = Intent()
         setResult(Activity.RESULT_OK, cattleListReturnIntent)
         finish()
     }
 
-    override fun onSaveClick() {
+    override fun onSaveUserAccountViewClick() {
         val cattleListReturnIntent = Intent()
         setResult(Activity.RESULT_OK, cattleListReturnIntent)
         finish()
     }
 
     override fun navigateToChangePassword() {
-        TODO("Not yet implemented")
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        val userAccountModifyPasswdFragment = UserAccountModifyPasswordFragment()
+        fragmentTransaction.addToBackStack(null)
+        fragmentTransaction.replace(R.id.user_account_fragment_layout, userAccountModifyPasswdFragment)
+        fragmentTransaction.commit()
+    }
+
+    override fun onCancelModifyPasswordClick() {
+        supportFragmentManager.popBackStack()
+        supportFragmentManager.popBackStack()
+    }
+
+    override fun onSaveModifyPasswordClick() {
+        supportFragmentManager.popBackStack()
+        supportFragmentManager.popBackStack()
     }
 }
