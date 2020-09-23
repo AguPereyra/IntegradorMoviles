@@ -49,6 +49,10 @@ class CattleListActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
                 val userAccountIntent = Intent(this, UserAccountActivity::class.java)
                 startActivityForResult(userAccountIntent, VIEW_USER_REQUEST)
             }
+            R.id.nav_menu_preferences -> {
+                val settingsActivityIntent = Intent(this, SettingsActivity::class.java)
+                startActivity(settingsActivityIntent)
+            }
         }
         return true
     }
