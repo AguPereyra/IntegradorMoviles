@@ -16,6 +16,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".controller.CattleListActivity"/>
+        <activity android:name=".controller.UserAccountActivity"/>
     </application>
 
 </manifest>

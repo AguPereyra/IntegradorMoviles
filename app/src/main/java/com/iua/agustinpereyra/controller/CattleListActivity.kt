@@ -1,5 +1,6 @@
 package com.iua.agustinpereyra.controller
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -42,6 +43,12 @@ class CattleListActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         drawer_layout.closeDrawer(GravityCompat.START)
+        when(item.itemId){
+            R.id.nav_menu_account -> {
+                val userAccountIntent = Intent(this, UserAccountActivity::class.java)
+                startActivity(userAccountIntent)
+            }
+        }
         return true
     }
 
@@ -66,6 +73,7 @@ class CattleListActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
     }
 
     private fun generateCattleList() : List<Cattle> {
+        //TODO: Move to Utils
         val cattleList = mutableListOf<Cattle>()
 
         // Fill with data
