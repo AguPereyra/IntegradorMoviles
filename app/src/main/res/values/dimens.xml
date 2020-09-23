@@ -21,6 +21,7 @@
     <dimen name="user_image_size">128dp</dimen>
     <dimen name="user_input_margin">@dimen/login_input_margin</dimen>
     <dimen name="user_account_button_margin">@dimen/end_button_margin</dimen>
+    <dimen name="user_text_under_image_margin">32dp</dimen>
 
     <!--Help section-->
     <dimen name="help_start_margin">64dp</dimen>
