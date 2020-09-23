@@ -1,10 +1,13 @@
 package com.iua.agustinpereyra.controller
 
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.iua.agustinpereyra.R
 import com.iua.agustinpereyra.model.Cattle
+import kotlinx.android.synthetic.main.app_toolbar.*
 import kotlinx.android.synthetic.main.cattle_list_activity.*
 
 class CattleListActivity : AppCompatActivity() {
@@ -21,6 +24,29 @@ class CattleListActivity : AppCompatActivity() {
         cattle_list_recycler.apply {
             layoutManager = viewManager
             adapter = viewAdapter
+        }
+
+        // Add toolbar
+        setSupportActionBar(app_bar)
+    }
+
+    // Set the navbar if menu is clicked
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId) {
+            R.id.home -> {
+                drawer_layout.openDrawer(GravityCompat.START)
+                return true
+            }
+
+            else -> return super.onOptionsItemSelected(item)
+        }
+    }
+
+    override fun onBackPressed() {
+        if (drawer_layout.isDrawerOpen(GravityCompat.START)){
+            drawer_layout.closeDrawer(GravityCompat.START)
+        } else {
+            super.onBackPressed()
         }
     }
 
