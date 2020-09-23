@@ -2,15 +2,17 @@ package com.iua.agustinpereyra.controller
 
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.navigation.NavigationView
 import com.iua.agustinpereyra.R
 import com.iua.agustinpereyra.model.Cattle
 import kotlinx.android.synthetic.main.app_toolbar.*
 import kotlinx.android.synthetic.main.cattle_list_activity.*
 
-class CattleListActivity : AppCompatActivity() {
+class CattleListActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +30,19 @@ class CattleListActivity : AppCompatActivity() {
 
         // Add toolbar
         setSupportActionBar(app_bar)
+
+        // Tie together drawer layout and action bar
+        val toggle = ActionBarDrawerToggle(this, drawer_layout, app_bar, 0, 0)
+        drawer_layout.addDrawerListener(toggle)
+        toggle.syncState()
+
+        // Set item click listener
+        navigation_view.setNavigationItemSelectedListener(this)
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        drawer_layout.closeDrawer(GravityCompat.START)
+        return true
     }
 
     // Set the navbar if menu is clicked
