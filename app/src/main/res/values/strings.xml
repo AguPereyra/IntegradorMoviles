@@ -51,4 +51,7 @@
 
     <!--Help section-->
     <string name="contact_us">Contactenos</string>
+    <!--Contact us options-->
+    <string name="email_sendto">mailto:el@creador.app</string>
+    <string name="send_email_intent_text">Enviar con</string>
 </resources>
