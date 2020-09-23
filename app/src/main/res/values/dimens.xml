@@ -11,7 +11,7 @@
     <dimen name="new_account_question_margin_bottom">8dp</dimen>
 
     <!--Cattle Card-->
-    <dimen name="cattle_card_height">160dp</dimen>
+    <dimen name="cattle_card_height">64dp</dimen>
     <dimen name="cattle_card_padding">4dp</dimen>
     <dimen name="cattle_card_text_margin">8dp</dimen>
 

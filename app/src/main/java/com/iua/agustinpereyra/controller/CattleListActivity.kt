@@ -6,6 +6,7 @@ import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.navigation.NavigationView
 import com.iua.agustinpereyra.R
@@ -40,6 +41,9 @@ class CattleListActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
 
         // Set item click listener
         navigation_view.setNavigationItemSelectedListener(this)
+
+        val dividerItemDecoration = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
+        cattle_list_recycler.addItemDecoration(dividerItemDecoration)
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
