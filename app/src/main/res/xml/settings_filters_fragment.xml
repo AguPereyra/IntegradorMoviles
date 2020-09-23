@@ -9,6 +9,7 @@
 
         <ListPreference
             app:key="settings_filter_by_sex"
+            app:title="@string/filter_by_female"
             app:entries="@array/filter_by_entries"
             app:entryValues="@array/filter_by_values"
             app:defaultValue="@string/filter_by_female"
