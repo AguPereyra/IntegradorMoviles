@@ -16,11 +16,10 @@ class RegisterFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.login_fragment, container, false)
+        val view = inflater.inflate(R.layout.register_fragment, container, false)
 
         // Get listener from parent activity
         val listener = activity as registerFragmentListener
-        // TODO: Add funcionality to two buttons
 
         // Set error if password is not between 8 and 16 chars
         view.register_button.setOnClickListener({

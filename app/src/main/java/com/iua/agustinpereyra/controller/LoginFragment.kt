@@ -9,6 +9,7 @@ import com.iua.agustinpereyra.R
 import com.iua.agustinpereyra.utils.PasswordManager
 import kotlinx.android.synthetic.main.login_fragment.*
 import kotlinx.android.synthetic.main.login_fragment.view.*
+import kotlinx.android.synthetic.main.register_fragment.view.*
 
 class LoginFragment : Fragment() {
     override fun onCreateView(
@@ -20,7 +21,6 @@ class LoginFragment : Fragment() {
 
         // Get listener from parent activity
         val listener = activity as loginFragmentListener
-        //TODO: Implement functionality to register button
 
         // Set error if password is not between 8 and 16 chars
         view.login_button.setOnClickListener({
@@ -43,6 +43,11 @@ class LoginFragment : Fragment() {
             }
             false
         })
+
+        // Set register button onclick
+        view.login_register_button.setOnClickListener{
+            listener.nagivateToRegisterPage()
+        }
         return view
     }
 
