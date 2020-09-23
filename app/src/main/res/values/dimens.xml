@@ -4,7 +4,7 @@
     <dimen name="welcome_brand_image_width">64dp</dimen>
     <dimen name="welcome_brand_image_height">64dp</dimen>
     <dimen name="welcome_brand_image_margin_top">48dp</dimen>
-    <dimen name="welcome_brand_image_margin_bottom">48dp</dimen>
+    <dimen name="welcome_brand_image_margin_bottom">16dp</dimen>
     <dimen name="login_input_margin">8dp</dimen>
     <dimen name="end_button_margin">8dp</dimen>
     <dimen name="new_account_question_margin_top">16dp</dimen>
