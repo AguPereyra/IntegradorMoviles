@@ -1,3 +1,57 @@
 <resources>
     <string name="app_name">Integrador</string>
+    <!--Generic-->
+    <string name="save">Guardar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="brand_name">Vacas Locas</string>
+    <string name="email">Email</string>
+
+    <!--Login & Register-->
+    <string name="hint_username">Usuario</string>
+    <string name="hint_password">Contraseña</string>
+    <string name="hint_email">Email</string>
+    <string name="login_button">Iniciar sesión</string>
+    <string name="register_button">Registrarse</string>
+    <string name="back_button">Volver</string>
+    <string name="password_error">Mínimo 8 caracteres</string>
+    <string name="new_user_question">¿Nuevo?</string>
+
+    <!--Cattle Card-->
+    <string name="cattle_caravan">A34B8-09</string>
+    <string name="cattle_weight">680Kg</string>
+
+    <!--User-->
+    <string name="user_name">El Usuario</string>
+    <string name="user_email">un@email.random</string>
+    
+    <!--Settings-->
+    <!--Order by-->
+    <string name="order_by_settings_title">Ordenar ganado por</string>
+    <string name="order_by_settings_sum">Sexo</string>
+    <string name="order_by_sex">Sexo</string>
+    <string name="order_by_weight_asc">Peso ascendente</string>
+    <string name="order_by_weight_des">Peso descendente</string>
+    <!--Filter-->
+    <string name="filter_title">Filtrar ganado</string>
+    <string name="filter_sum">Filtrar ganado por sexo y peso</string>
+    <string name="filter_by_sex_title">Filtrar por sexo</string>
+    <string name="filter_by_male">Macho</string>
+    <string name="filter_by_female">Hembra</string>
+    <string name="filter_by_weight_title">Filtrar por peso</string>
+
+    <!--User account-->
+    <string name="old_password">Contraseña actual</string>
+    <string name="new_password">Nueva contraseña</string>
+    <string name="validate_password">Confirmar contraseña</string>
+
+    <!--Navigation Menu-->
+    <string name="nav_preferences">Preferencias</string>
+    <string name="nav_account">Cuenta</string>
+    <string name="nav_help">Ayuda</string>
+
+    <!--Help section-->
+    <string name="contact_us">Contactenos</string>
+    <!--Contact us options-->
+    <string name="email_sendto">mailto:el@creador.app</string>
+    <string name="send_email_intent_text">Enviar con</string>
 </resources>

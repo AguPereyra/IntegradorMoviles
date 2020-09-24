@@ -1,6 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
+<!--?xml version="1.0" encoding="UTF-8"?-->
 <resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
+  <!--Theme based on brand Color Palette-->
+  <color name="primaryColor">#4caf50</color>
+  <color name="primaryLightColor">#80e27e</color>
+  <color name="primaryDarkColor">#087f23</color>
+  <color name="secondaryColor">#d5a021</color>
+  <color name="secondaryLightColor">#ffd156</color>
+  <color name="secondaryDarkColor">#9f7200</color>
+  <color name="primaryTextColor">#000000</color>
+  <color name="secondaryTextColor">#000000</color>
 </resources>
