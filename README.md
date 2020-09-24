@@ -14,7 +14,7 @@ In order to be able to run the app, the following software is needed:
 The Apk file can be found at *githubStuff/app-VacasLocas-TP_Integrador_PEREYRA.apk*
 
 ## App working
-![](githubStuff/media/appSample.gif)
+<img src="githubStuff/media/appSample.gif" width=25% height=25% />
 
 ## App requirements
 
