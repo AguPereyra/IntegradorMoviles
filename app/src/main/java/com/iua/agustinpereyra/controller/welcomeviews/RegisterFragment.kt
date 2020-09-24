@@ -1,4 +1,4 @@
-package com.iua.agustinpereyra.controller
+package com.iua.agustinpereyra.controller.welcomeviews
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,7 +10,6 @@ import com.iua.agustinpereyra.utils.PasswordManager
 import com.iua.agustinpereyra.utils.STATE_EMAIL
 import com.iua.agustinpereyra.utils.STATE_PASSWORD
 import com.iua.agustinpereyra.utils.STATE_USERNAME
-import kotlinx.android.synthetic.main.login_fragment.view.*
 import kotlinx.android.synthetic.main.register_fragment.*
 import kotlinx.android.synthetic.main.register_fragment.view.*
 

@@ -9,15 +9,15 @@
         android:supportsRtl="true"
         android:theme="@style/CattleTheme">
         
-        <activity android:name=".controller.WelcomeActivity">
+        <activity android:name=".controller.welcomeviews.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".controller.CattleListActivity"/>
-        <activity android:name=".controller.UserAccountActivity"/>
-        <activity android:name=".controller.SettingsActivity"/>
-        <activity android:name=".controller.HelpActivity"/>
+        <activity android:name=".controller.cattleviews.CattleListActivity"/>
+        <activity android:name=".controller.userviews.UserAccountActivity"/>
+        <activity android:name=".controller.settingsviews.SettingsActivity"/>
+        <activity android:name=".controller.helpviews.HelpActivity"/>
     </application>
 </manifest>

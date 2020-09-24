@@ -1,14 +1,16 @@
-package com.iua.agustinpereyra.controller
+package com.iua.agustinpereyra.controller.welcomeviews
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.iua.agustinpereyra.R
-import com.iua.agustinpereyra.controller.LoginFragment.loginFragmentListener
+import com.iua.agustinpereyra.controller.cattleviews.CattleListActivity
+import com.iua.agustinpereyra.controller.welcomeviews.LoginFragment.loginFragmentListener
 import com.iua.agustinpereyra.utils.USERNAME
 import kotlinx.android.synthetic.main.login_fragment.*
 
-class WelcomeActivity : AppCompatActivity(), loginFragmentListener, RegisterFragment.registerFragmentListener{
+class WelcomeActivity : AppCompatActivity(), loginFragmentListener,
+    RegisterFragment.registerFragmentListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,9 +36,7 @@ class WelcomeActivity : AppCompatActivity(), loginFragmentListener, RegisterFrag
 
     override fun navigateToMainPage() {
         // Get username (TODO: Change this when persistence is implemented)
-        val username = username_input_edit_text.text
         val mainPageIntent = Intent(this, CattleListActivity::class.java)
-        mainPageIntent.putExtra(USERNAME, username)
         startActivity(mainPageIntent)
     }
 

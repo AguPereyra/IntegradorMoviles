@@ -1,4 +1,4 @@
-package com.iua.agustinpereyra.controller
+package com.iua.agustinpereyra.controller.userviews
 
 import android.app.Activity
 import android.content.Intent
@@ -6,7 +6,9 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.iua.agustinpereyra.R
 
-class UserAccountActivity : AppCompatActivity(), UserAccountViewFragment.userAccountFragmentListener, UserAccountModifyPasswordFragment.userAccountModifyPasswordFragmentListener {
+class UserAccountActivity : AppCompatActivity(),
+    UserAccountViewFragment.userAccountFragmentListener,
+    UserAccountModifyPasswordFragment.userAccountModifyPasswordFragmentListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

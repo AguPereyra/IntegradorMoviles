@@ -1,4 +1,4 @@
-package com.iua.agustinpereyra.controller
+package com.iua.agustinpereyra.controller.helpviews
 
 import android.content.Intent
 import android.net.Uri
