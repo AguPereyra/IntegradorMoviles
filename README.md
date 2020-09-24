@@ -10,6 +10,12 @@ In order to be able to run the app, the following software is needed:
 * JVM
 * Gradle
 
+### Apk file
+The Apk file can be found at *githubStuff/app-VacasLocas-TP_Integrador_PEREYRA.apk*
+
+## App working
+![](githubStuff/media/appSample.gif)
+
 ## App requirements
 
 ### Non functional
