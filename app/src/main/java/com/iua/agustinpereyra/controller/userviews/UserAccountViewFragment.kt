@@ -1,4 +1,4 @@
-package com.iua.agustinpereyra.controller
+package com.iua.agustinpereyra.controller.userviews
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,9 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.iua.agustinpereyra.R
 import com.iua.agustinpereyra.utils.STATE_EMAIL
-import com.iua.agustinpereyra.utils.STATE_PASSWORD
 import com.iua.agustinpereyra.utils.STATE_USERNAME
-import kotlinx.android.synthetic.main.login_fragment.view.*
 import kotlinx.android.synthetic.main.user_account_view_fragment.view.*
 
 class UserAccountViewFragment : Fragment() {
@@ -39,8 +37,10 @@ class UserAccountViewFragment : Fragment() {
         }
 
         // Check if data was stored and rewrite in that case
-        view.user_account_username_edit_text.setText(savedInstanceState?.getString(STATE_USERNAME))
-        view.user_account_email_edit_text.setText(savedInstanceState?.getString(STATE_EMAIL))
+        if (savedInstanceState != null) {
+            view.user_account_username_edit_text.setText(savedInstanceState.getString(STATE_USERNAME))
+            view.user_account_email_edit_text.setText(savedInstanceState.getString(STATE_EMAIL))
+        }
 
         return view
     }

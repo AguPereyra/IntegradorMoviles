@@ -1,4 +1,4 @@
-package com.iua.agustinpereyra.controller
+package com.iua.agustinpereyra.controller.userviews
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import com.iua.agustinpereyra.R
 import com.iua.agustinpereyra.utils.*
 import kotlinx.android.synthetic.main.user_account_modify_password_fragment.view.*
-import kotlinx.android.synthetic.main.user_account_view_fragment.view.*
 
 class UserAccountModifyPasswordFragment : Fragment() {
 

@@ -1,4 +1,4 @@
-package com.iua.agustinpereyra.controller
+package com.iua.agustinpereyra.controller.settingsviews
 
 import android.os.Bundle
 import androidx.preference.PreferenceFragmentCompat

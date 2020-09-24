@@ -1,4 +1,4 @@
-package com.iua.agustinpereyra.controller
+package com.iua.agustinpereyra.controller.cattleviews
 
 import android.view.LayoutInflater
 import android.view.View

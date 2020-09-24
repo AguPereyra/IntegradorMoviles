@@ -1,7 +1,6 @@
-package com.iua.agustinpereyra.controller
+package com.iua.agustinpereyra.controller.welcomeviews
 
 import android.os.Bundle
-import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +11,6 @@ import com.iua.agustinpereyra.utils.STATE_PASSWORD
 import com.iua.agustinpereyra.utils.STATE_USERNAME
 import kotlinx.android.synthetic.main.login_fragment.*
 import kotlinx.android.synthetic.main.login_fragment.view.*
-import kotlinx.android.synthetic.main.register_fragment.view.*
 
 class LoginFragment : Fragment() {
 
