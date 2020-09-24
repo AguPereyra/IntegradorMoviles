@@ -16,10 +16,10 @@
     <string name="password_error">Mínimo 8 caracteres</string>
     <string name="new_user_question">¿Nuevo?</string>
 
-    <!--Sample static data-->
-    <!--Cattle-->
+    <!--Cattle Card-->
     <string name="cattle_caravan">A34B8-09</string>
     <string name="cattle_weight">680Kg</string>
+
     <!--User-->
     <string name="user_name">El Usuario</string>
     <string name="user_email">un@email.random</string>

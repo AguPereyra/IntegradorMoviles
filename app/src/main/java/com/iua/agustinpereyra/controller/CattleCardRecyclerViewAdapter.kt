@@ -20,7 +20,7 @@ class CattleCardRecyclerViewAdapter(private val cattleList: List<Cattle>) : Recy
         if (position < cattleList.size) {
             val bovine = cattleList[position]
             holder.caravan.text = bovine.caravan
-            holder.weight.text = bovine.weight.toString()
+            holder.weight.text = bovine.weight.toString() + " Kg"
             holder.image.setImageResource(bovine.imageId)
         }
     }

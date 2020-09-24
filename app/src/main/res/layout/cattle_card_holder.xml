@@ -17,7 +17,7 @@
             android:id="@+id/cattle_card_image"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_gravity="start"
+            android:layout_gravity="center_vertical"
             android:scaleType="fitStart"
             android:src="@drawable/sample_cow_1"/>
 

@@ -3,7 +3,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/brand_cow_icon"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/brand_cow_icon_round"
         android:supportsRtl="true"
