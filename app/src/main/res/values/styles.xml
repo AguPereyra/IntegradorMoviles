@@ -8,11 +8,6 @@
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
     </style>
 
-    <style name="Widget.BrandStyle.Toolbar" parent="Widget.AppCompat.Toolbar">
-        <item name="android:background">?attr/colorAccent</item>
-        <item name="android:theme">?theme</item>
-    </style>
-
     <style name="Widget.BrandStyle.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="hintTextAppearance">@style/TextAppearance.TextInputLayout.HintText</item>
         <item name="hintTextColor">@color/primaryTextColor</item>

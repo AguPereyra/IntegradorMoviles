@@ -6,6 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.iua.agustinpereyra.R
+import com.iua.agustinpereyra.utils.STATE_EMAIL
+import com.iua.agustinpereyra.utils.STATE_PASSWORD
+import com.iua.agustinpereyra.utils.STATE_USERNAME
+import kotlinx.android.synthetic.main.login_fragment.view.*
 import kotlinx.android.synthetic.main.user_account_view_fragment.view.*
 
 class UserAccountViewFragment : Fragment() {
@@ -33,8 +37,23 @@ class UserAccountViewFragment : Fragment() {
             listener.navigateToChangePassword()
             true
         }
+
+        // Check if data was stored and rewrite in that case
+        view.user_account_username_edit_text.setText(savedInstanceState?.getString(STATE_USERNAME))
+        view.user_account_email_edit_text.setText(savedInstanceState?.getString(STATE_EMAIL))
+
         return view
     }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        // Save username and password
+        outState.run {
+            putString(STATE_USERNAME, view?.user_account_username_edit_text?.text.toString())
+            putString(STATE_EMAIL, view?.user_account_email_edit_text?.text.toString())
+        }
+        super.onSaveInstanceState(outState)
+    }
+
 
     interface userAccountFragmentListener {
         fun onCancelUserAccountViewClick() : Unit

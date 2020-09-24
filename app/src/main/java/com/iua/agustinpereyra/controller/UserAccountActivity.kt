@@ -12,18 +12,24 @@ class UserAccountActivity : AppCompatActivity(), UserAccountViewFragment.userAcc
         super.onCreate(savedInstanceState)
         setContentView(R.layout.user_account_activity)
 
-        // Set fragment dinamically
-        //1. Get a reference to fragment manager
-        val fragmentManager = supportFragmentManager
+        // Check whether we are re-initiating (after rotaion for example) or brand-new
+        if (savedInstanceState == null) {
+            // Set fragment dinamically
+            //1. Get a reference to fragment manager
+            val fragmentManager = supportFragmentManager
 
-        //2. Start a fragment transaction
-        val fragmentTransaction = fragmentManager.beginTransaction()
+            //2. Start a fragment transaction
+            val fragmentTransaction = fragmentManager.beginTransaction()
 
-        //3. Add the fragment to the container
-        fragmentTransaction.replace(R.id.user_account_fragment_layout, UserAccountViewFragment())
+            //3. Add the fragment to the container
+            fragmentTransaction.replace(
+                R.id.user_account_fragment_layout,
+                UserAccountViewFragment()
+            )
 
-        //4. Commit transaction
-        fragmentTransaction.commit()
+            //4. Commit transaction
+            fragmentTransaction.commit()
+        }
     }
 
     override fun onCancelUserAccountViewClick() {

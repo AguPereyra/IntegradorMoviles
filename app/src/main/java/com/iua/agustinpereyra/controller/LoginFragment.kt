@@ -1,17 +1,21 @@
 package com.iua.agustinpereyra.controller
 
 import android.os.Bundle
+import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.iua.agustinpereyra.R
 import com.iua.agustinpereyra.utils.PasswordManager
+import com.iua.agustinpereyra.utils.STATE_PASSWORD
+import com.iua.agustinpereyra.utils.STATE_USERNAME
 import kotlinx.android.synthetic.main.login_fragment.*
 import kotlinx.android.synthetic.main.login_fragment.view.*
 import kotlinx.android.synthetic.main.register_fragment.view.*
 
 class LoginFragment : Fragment() {
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -48,7 +52,21 @@ class LoginFragment : Fragment() {
         view.login_register_button.setOnClickListener{
             listener.nagivateToRegisterPage()
         }
+
+        // Check if data was stored and rewrite in that case
+        view.username_input_edit_text.setText(savedInstanceState?.getString(STATE_USERNAME))
+        view.password_edit_text.setText(savedInstanceState?.getString(STATE_PASSWORD))
+
         return view
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        // Save username and password
+        outState.run {
+            putString(STATE_USERNAME, view?.username_input_edit_text?.text.toString())
+            putString(STATE_PASSWORD, view?.password_edit_text?.text.toString())
+        }
+        super.onSaveInstanceState(outState)
     }
 
     interface loginFragmentListener {

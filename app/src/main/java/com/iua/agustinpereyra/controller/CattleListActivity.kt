@@ -18,6 +18,7 @@ import kotlinx.android.synthetic.main.cattle_list_activity.*
 class CattleListActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        //TODO: Check why navbar is not showing elsewhere
         super.onCreate(savedInstanceState)
         setContentView(R.layout.cattle_list_activity)
 
