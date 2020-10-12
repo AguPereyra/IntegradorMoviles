@@ -5,10 +5,10 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.iua.agustinpereyra.R
 import com.iua.agustinpereyra.view.cattleviews.CattleListActivity
-import com.iua.agustinpereyra.view.welcomeviews.LoginFragment.loginFragmentListener
+import com.iua.agustinpereyra.view.welcomeviews.LoginFragment.LoginFragmentListener
 
-class WelcomeActivity : AppCompatActivity(), loginFragmentListener,
-    RegisterFragment.registerFragmentListener {
+class WelcomeActivity : AppCompatActivity(), LoginFragmentListener,
+    RegisterFragment.RegisterFragmentListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

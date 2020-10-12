@@ -19,7 +19,7 @@ class UserAccountViewFragment : Fragment() {
         val view = inflater.inflate(R.layout.user_account_view_fragment, container, false)
 
         // Get listener
-        val listener = activity as userAccountFragmentListener
+        val listener = activity as UserAccountFragmentListener
 
         // Set click listeners
         view.user_account_cancel_button.setOnClickListener{
@@ -33,6 +33,7 @@ class UserAccountViewFragment : Fragment() {
         view.user_account_password_edit_text.setOnTouchListener { view, motionEvent ->
             // Navigate to the change password screen
             listener.navigateToChangePassword()
+            view.performClick()
             true
         }
 
@@ -55,7 +56,7 @@ class UserAccountViewFragment : Fragment() {
     }
 
 
-    interface userAccountFragmentListener {
+    interface UserAccountFragmentListener {
         fun onCancelUserAccountViewClick() : Unit
         fun onSaveUserAccountViewClick() : Unit
         fun navigateToChangePassword()

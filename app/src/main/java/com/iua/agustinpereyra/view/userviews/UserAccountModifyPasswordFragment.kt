@@ -19,7 +19,7 @@ class UserAccountModifyPasswordFragment : Fragment() {
         val view = inflater.inflate(R.layout.user_account_modify_password_fragment, container, false)
 
         // Get listener
-        val listener = activity as userAccountModifyPasswordFragmentListener
+        val listener = activity as UserAccountModifyPasswordFragmentListener
 
         // Set click listener
         view.user_account_modify_passwd_cancel_button.setOnClickListener {
@@ -50,7 +50,7 @@ class UserAccountModifyPasswordFragment : Fragment() {
         super.onSaveInstanceState(outState)
     }
 
-    interface userAccountModifyPasswordFragmentListener {
+    interface UserAccountModifyPasswordFragmentListener {
         fun onCancelModifyPasswordClick() : Unit
         fun onSaveModifyPasswordClick() : Unit
     }

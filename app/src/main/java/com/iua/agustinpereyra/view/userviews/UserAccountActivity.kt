@@ -7,8 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.iua.agustinpereyra.R
 
 class UserAccountActivity : AppCompatActivity(),
-    UserAccountViewFragment.userAccountFragmentListener,
-    UserAccountModifyPasswordFragment.userAccountModifyPasswordFragmentListener {
+    UserAccountViewFragment.UserAccountFragmentListener,
+    UserAccountModifyPasswordFragment.UserAccountModifyPasswordFragmentListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

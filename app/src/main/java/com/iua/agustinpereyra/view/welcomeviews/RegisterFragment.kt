@@ -22,10 +22,10 @@ class RegisterFragment : Fragment() {
         val view = inflater.inflate(R.layout.register_fragment, container, false)
 
         // Get listener from parent activity
-        val listener = activity as registerFragmentListener
+        val listener = activity as RegisterFragmentListener
 
-        // Set error if password is not between 8 and 16 chars
-        view.register_button.setOnClickListener({
+        // Set error if password is not valid
+        view.register_button.setOnClickListener {
             if (!PasswordManager.isPasswordValid(register_password_edit_text.text)) {
                 register_password_input_container.error = getString(R.string.password_error)
             } else {
@@ -35,16 +35,16 @@ class RegisterFragment : Fragment() {
                 // Navigate
                 listener.navigateToMainPage()
             }
-        })
+        }
 
         // Clear the error when the right amount of chars is set
-        view.register_password_edit_text.setOnKeyListener({_, _, _ ->
+        view.register_password_edit_text.setOnKeyListener { _, _, _ ->
             if (PasswordManager.isPasswordValid(register_password_edit_text.text)) {
                 // Clear the error message
                 register_password_input_container.error = null
             }
             false
-        })
+        }
 
         // Set on click function for Back button
         view.back_button.setOnClickListener{
@@ -68,7 +68,7 @@ class RegisterFragment : Fragment() {
         super.onSaveInstanceState(outState)
     }
 
-    interface registerFragmentListener {
+    interface RegisterFragmentListener {
         fun navigateToMainPage() : Unit
         fun nagivateToLoginPage() : Unit
     }

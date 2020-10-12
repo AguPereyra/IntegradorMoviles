@@ -11,7 +11,7 @@ class SettingsMainFragment : PreferenceFragmentCompat() {
         setPreferencesFromResource(R.xml.settings_main_fragment, rootKey)
 
         // Get listener
-        val listener = activity as mainSettingsFragmentListener
+        val listener = activity as MainSettingsFragmentListener
 
         // Set on click actions
         val settingsFilter = findPreference<Preference>("settings_filter")
@@ -21,7 +21,7 @@ class SettingsMainFragment : PreferenceFragmentCompat() {
         }
     }
 
-    interface mainSettingsFragmentListener {
+    interface MainSettingsFragmentListener {
         fun onFilterClick() : Unit
     }
 }

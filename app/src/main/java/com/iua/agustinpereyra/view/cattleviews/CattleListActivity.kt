@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.navigation.NavigationView
 import com.iua.agustinpereyra.R
+import com.iua.agustinpereyra.controller.StaticDataGenerator
 import com.iua.agustinpereyra.view.helpviews.HelpActivity
 import com.iua.agustinpereyra.view.settingsviews.SettingsActivity
 import com.iua.agustinpereyra.view.userviews.UserAccountActivity
@@ -26,7 +27,7 @@ class CattleListActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
         setContentView(R.layout.cattle_list_activity)
 
         // Set up the recycler
-        val cattleList = generateCattleList()
+        val cattleList = StaticDataGenerator.generateCattleList()
         val viewManager = LinearLayoutManager(this)
         val viewAdapter = CattleCardRecyclerViewAdapter(cattleList)
 
@@ -50,6 +51,7 @@ class CattleListActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
         cattle_list_recycler.addItemDecoration(dividerItemDecoration)
     }
 
+    // Navigation logic inside navbar
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         drawer_layout.closeDrawer(GravityCompat.START)
         when(item.itemId){
@@ -83,37 +85,12 @@ class CattleListActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
         }
     }
 
+    // Close navbar if open on back pressed
     override fun onBackPressed() {
         if (drawer_layout.isDrawerOpen(GravityCompat.START)){
             drawer_layout.closeDrawer(GravityCompat.START)
         } else {
             super.onBackPressed()
         }
-    }
-
-    private fun generateCattleList() : List<Cattle> {
-        //TODO: Move to Utils
-        val cattleList = mutableListOf<Cattle>()
-
-        // Fill with data
-        for (i in 0..40) {
-            val cattle = Cattle(caravan = generateRandomCaravan(), weight = (300..1000).random(), imageId = generateCattleImageId(i))
-            cattleList.add(cattle)
-        }
-        return cattleList
-    }
-
-    private fun generateRandomCaravan() : String {
-        return ('A'..'Z').random().toString() + (10..99).random() + ('A'..'Z').random().toString()
-    }
-
-    private fun generateCattleImageId(run: Int) : Int {
-        when (run % 4) {
-            0 -> return R.drawable.sample_cow_1
-            1 -> return R.drawable.sample_cow_2
-            2 -> return R.drawable.sample_cow_3
-            3 -> return R.drawable.sample_cow_4
-        }
-        return R.drawable.sample_cow_1
     }
 }

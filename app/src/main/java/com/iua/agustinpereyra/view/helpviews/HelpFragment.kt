@@ -12,18 +12,19 @@ class HelpFragment : PreferenceFragmentCompat() {
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.help_page, rootKey)
 
+        // Get listener from parent
+        val listener = activity as HelpFragmentListener
+
         // Set send email feedback action
         val contactUsEmail = findPreference<Preference>("help_contact_us_email")
         contactUsEmail?.setOnPreferenceClickListener {
-            sendEmail()
+            listener.sendEmail()
             true
         }
     }
 
-    private fun sendEmail () : Unit {
-        val emailIntent = Intent(Intent.ACTION_SENDTO)
-        emailIntent.setData(Uri.parse(getString(R.string.email_sendto)))
-        startActivity(Intent.createChooser(emailIntent, getString(R.string.send_email_intent_text)))
+    interface HelpFragmentListener {
+        fun sendEmail() : Unit
     }
 
 }
