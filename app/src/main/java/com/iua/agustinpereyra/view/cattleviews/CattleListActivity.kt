@@ -1,4 +1,4 @@
-package com.iua.agustinpereyra.controller.cattleviews
+package com.iua.agustinpereyra.view.cattleviews
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,11 +10,11 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.navigation.NavigationView
 import com.iua.agustinpereyra.R
-import com.iua.agustinpereyra.controller.helpviews.HelpActivity
-import com.iua.agustinpereyra.controller.settingsviews.SettingsActivity
-import com.iua.agustinpereyra.controller.userviews.UserAccountActivity
+import com.iua.agustinpereyra.view.helpviews.HelpActivity
+import com.iua.agustinpereyra.view.settingsviews.SettingsActivity
+import com.iua.agustinpereyra.view.userviews.UserAccountActivity
 import com.iua.agustinpereyra.model.Cattle
-import com.iua.agustinpereyra.utils.VIEW_USER_REQUEST
+import com.iua.agustinpereyra.controller.VIEW_USER_REQUEST
 import kotlinx.android.synthetic.main.app_toolbar.*
 import kotlinx.android.synthetic.main.cattle_list_activity.*
 

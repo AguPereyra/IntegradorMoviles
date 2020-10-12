@@ -1,4 +1,4 @@
-package com.iua.agustinpereyra.controller.helpviews
+package com.iua.agustinpereyra.view.helpviews
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

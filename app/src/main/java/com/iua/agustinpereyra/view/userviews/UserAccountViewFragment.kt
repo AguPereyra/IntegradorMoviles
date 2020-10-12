@@ -1,4 +1,4 @@
-package com.iua.agustinpereyra.controller.userviews
+package com.iua.agustinpereyra.view.userviews
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.iua.agustinpereyra.R
-import com.iua.agustinpereyra.utils.STATE_EMAIL
-import com.iua.agustinpereyra.utils.STATE_USERNAME
+import com.iua.agustinpereyra.controller.STATE_EMAIL
+import com.iua.agustinpereyra.controller.STATE_USERNAME
 import kotlinx.android.synthetic.main.user_account_view_fragment.view.*
 
 class UserAccountViewFragment : Fragment() {

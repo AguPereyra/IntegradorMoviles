@@ -1,4 +1,4 @@
-package com.iua.agustinpereyra.controller.userviews
+package com.iua.agustinpereyra.view.userviews
 
 import android.app.Activity
 import android.content.Intent

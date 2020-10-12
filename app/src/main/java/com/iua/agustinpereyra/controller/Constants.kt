@@ -1,4 +1,4 @@
-package com.iua.agustinpereyra.utils
+package com.iua.agustinpereyra.controller
 
 const val USERNAME = "USERNAME"
 const val VIEW_USER_REQUEST = 1
