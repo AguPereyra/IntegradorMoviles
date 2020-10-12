@@ -36,6 +36,8 @@ class WelcomeActivity : AppCompatActivity(), loginFragmentListener,
         // Get username (TODO: Change this when persistence is implemented)
         val mainPageIntent = Intent(this, CattleListActivity::class.java)
         startActivity(mainPageIntent)
+        // Not returning here
+        finish()
     }
 
     override fun nagivateToRegisterPage() {
