@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import com.iua.agustinpereyra.R
 import com.iua.agustinpereyra.controller.PasswordManager
@@ -38,7 +39,7 @@ class RegisterFragment : Fragment() {
         }
 
         // Clear the error when the right amount of chars is set
-        view.register_password_edit_text.setOnKeyListener { _, _, _ ->
+        view.register_password_edit_text.doOnTextChanged { text, start, before, count ->
             if (PasswordManager.isPasswordValid(register_password_edit_text.text)) {
                 // Clear the error message
                 register_password_input_container.error = null
@@ -52,9 +53,12 @@ class RegisterFragment : Fragment() {
         }
 
         // Check if data was stored and rewrite in that case
-        view.register_username_edit_text.setText(savedInstanceState?.getString(STATE_USERNAME))
-        view.register_password_edit_text.setText(savedInstanceState?.getString(STATE_PASSWORD))
-        view.register_email_edit_text.setText(savedInstanceState?.getString(STATE_EMAIL))
+        if (savedInstanceState != null) {
+            view.register_username_edit_text.setText(savedInstanceState.getString(STATE_USERNAME))
+            view.register_password_edit_text.setText(savedInstanceState.getString(STATE_PASSWORD))
+            view.register_email_edit_text.setText(savedInstanceState.getString(STATE_EMAIL))
+        }
+
         return view
     }
 
