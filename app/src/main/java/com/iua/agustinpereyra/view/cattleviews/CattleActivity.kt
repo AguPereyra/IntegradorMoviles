@@ -15,25 +15,23 @@ import com.iua.agustinpereyra.controller.VIEW_USER_REQUEST
 import kotlinx.android.synthetic.main.app_toolbar.*
 import kotlinx.android.synthetic.main.activity_cattle.*
 
-class CattleActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class CattleActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, CattleListFragment.CattleListFragmentListener {
+
+    lateinit var toggle : ActionBarDrawerToggle
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cattle)
 
-        // TODO: Change code to use toolbar by default
-        // Add toolbar
-        //setSupportActionBar(app_bar)
-
         // Tie together drawer layout and action bar
-        val toggle = ActionBarDrawerToggle(this, drawer_layout, app_bar, 0, 0)
+        toggle = ActionBarDrawerToggle(this, drawer_layout, 0, 0)
         drawer_layout.addDrawerListener(toggle)
-        toggle.syncState()
+
 
         // Set item click listener
         navigation_view.setNavigationItemSelectedListener(this)
 
-        // Check whether we are re-initiating (after rotaion for example) or brand-new
+        // Check whether we are re-initiating (after rotation for example) or brand-new
         // and add fragment if needed
         if (savedInstanceState == null) {
             // Set fragment dinamically
@@ -52,6 +50,11 @@ class CattleActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
             //4. Commit transaction
             fragmentTransaction.commit()
         }
+    }
+
+    override fun onPostCreate(savedInstanceState: Bundle?) {
+        toggle.syncState()
+        super.onPostCreate(savedInstanceState)
     }
 
     // Navigation logic inside navbar
@@ -96,4 +99,17 @@ class CattleActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
             super.onBackPressed()
         }
     }
+
+
+    // ActionBarModifier functions
+    override fun setActionBarTitle(title: String) {
+        //supportActionBar?.title = title
+    }
+
+
+    // Cattle List needed functions
+    override fun navigateToSpecificBovine() {
+        TODO("Not yet implemented")
+    }
+
 }

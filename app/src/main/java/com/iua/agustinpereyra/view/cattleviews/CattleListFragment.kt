@@ -1,14 +1,27 @@
 package com.iua.agustinpereyra.view.cattleviews
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.navigation.NavigationView
 import com.iua.agustinpereyra.R
 import com.iua.agustinpereyra.controller.StaticDataGenerator
+import com.iua.agustinpereyra.controller.VIEW_USER_REQUEST
+import com.iua.agustinpereyra.view.ActionBarModifier
+import com.iua.agustinpereyra.view.helpviews.HelpActivity
+import com.iua.agustinpereyra.view.settingsviews.SettingsActivity
+import com.iua.agustinpereyra.view.userviews.UserAccountActivity
+import kotlinx.android.synthetic.main.app_toolbar.*
+import kotlinx.android.synthetic.main.fragment_cattle_list.*
 
 class CattleListFragment : Fragment() {
     override fun onCreateView(
@@ -29,10 +42,16 @@ class CattleListFragment : Fragment() {
             adapter = viewAdapter
         }
 
+        // Get Activity with needed functions
+        val listener = activity as CattleListFragmentListener
+
+        // Set up the toolbar corresponding title and back button
+        listener.setActionBarTitle(getString(R.string.cattle_list_title))
+
         return view
     }
 
-    interface CattleListFragmentListener {
+    interface CattleListFragmentListener : ActionBarModifier {
         fun navigateToSpecificBovine() : Unit
     }
 }

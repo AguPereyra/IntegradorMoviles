@@ -23,8 +23,13 @@
     <!--User-->
     <string name="user_name">El Usuario</string>
     <string name="user_email">un@email.random</string>
+
+    <!--Cattle-->
+    <!--Cattle List-->
+    <string name="cattle_list_title">Ganado</string>
     
     <!--Settings-->
+    <string name="settings_title">Preferencias</string>
     <!--Order by-->
     <string name="order_by_settings_title">Ordenar ganado por</string>
     <string name="order_by_settings_sum">Sexo</string>
@@ -32,6 +37,7 @@
     <string name="order_by_weight_asc">Peso ascendente</string>
     <string name="order_by_weight_des">Peso descendente</string>
     <!--Filter-->
+    <string name="settings_filter_title">Filtros</string>
     <string name="filter_title">Filtrar ganado</string>
     <string name="filter_sum">Filtrar ganado por sexo y peso</string>
     <string name="filter_by_sex_title">Filtrar por sexo</string>
@@ -40,16 +46,21 @@
     <string name="filter_by_weight_title">Filtrar por peso</string>
 
     <!--User account-->
+    <string name="user_account_title">Cuenta</string>
+    <!--User account passwod-->
+    <string name="user_account_passwd_title">Contraseña</string>
     <string name="old_password">Contraseña actual</string>
     <string name="new_password">Nueva contraseña</string>
     <string name="validate_password">Confirmar contraseña</string>
 
     <!--Navigation Menu-->
+    <!--TODO:Change this with more generic section_title, and review if name changes are necessary-->
     <string name="nav_preferences">Preferencias</string>
     <string name="nav_account">Cuenta</string>
     <string name="nav_help">Ayuda</string>
 
     <!--Help section-->
+    <string name="help_title">Ayuda</string>
     <string name="contact_us">Contactenos</string>
     <!--Contact us options-->
     <string name="email_sendto">mailto:el@creador.app</string>
