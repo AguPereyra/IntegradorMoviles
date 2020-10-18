@@ -13,7 +13,7 @@ import com.iua.agustinpereyra.view.settingsviews.SettingsActivity
 import com.iua.agustinpereyra.view.userviews.UserAccountActivity
 import com.iua.agustinpereyra.controller.VIEW_USER_REQUEST
 import kotlinx.android.synthetic.main.activity_cattle.*
-import kotlinx.android.synthetic.main.app_toolbar.*
+import kotlinx.android.synthetic.main.app_main_toolbar.*
 
 class CattleActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, CattleListFragment.CattleListFragmentListener {
 

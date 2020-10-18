@@ -11,7 +11,7 @@
         android:layout_height="wrap_content">
 
         <include
-            layout="@layout/app_toolbar"
+            layout="@layout/app_main_toolbar"
             app:layout_constraintTop_toTopOf="parent"/>
 
         <FrameLayout

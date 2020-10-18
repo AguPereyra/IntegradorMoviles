@@ -20,7 +20,7 @@ import com.iua.agustinpereyra.view.ActionBarModifier
 import com.iua.agustinpereyra.view.helpviews.HelpActivity
 import com.iua.agustinpereyra.view.settingsviews.SettingsActivity
 import com.iua.agustinpereyra.view.userviews.UserAccountActivity
-import kotlinx.android.synthetic.main.app_toolbar.*
+import kotlinx.android.synthetic.main.app_main_toolbar.*
 import kotlinx.android.synthetic.main.fragment_cattle_list.*
 
 class CattleListFragment : Fragment() {
