@@ -6,33 +6,20 @@ import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.navigation.NavigationView
 import com.iua.agustinpereyra.R
-import com.iua.agustinpereyra.controller.StaticDataGenerator
 import com.iua.agustinpereyra.view.helpviews.HelpActivity
 import com.iua.agustinpereyra.view.settingsviews.SettingsActivity
 import com.iua.agustinpereyra.view.userviews.UserAccountActivity
 import com.iua.agustinpereyra.controller.VIEW_USER_REQUEST
 import kotlinx.android.synthetic.main.app_toolbar.*
-import kotlinx.android.synthetic.main.activity_cattle_list.*
+import kotlinx.android.synthetic.main.activity_cattle.*
 
-class CattleListActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class CattleActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_cattle_list)
-
-        // Set up the recycler
-        val cattleList = StaticDataGenerator.generateCattleList()
-        val viewManager = LinearLayoutManager(this)
-        val viewAdapter = CattleCardRecyclerViewAdapter(cattleList)
-
-        cattle_list_recycler.apply {
-            layoutManager = viewManager
-            adapter = viewAdapter
-        }
+        setContentView(R.layout.activity_cattle)
 
         // TODO: Change code to use toolbar by default
         // Add toolbar
@@ -46,8 +33,25 @@ class CattleListActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
         // Set item click listener
         navigation_view.setNavigationItemSelectedListener(this)
 
-        val dividerItemDecoration = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
-        cattle_list_recycler.addItemDecoration(dividerItemDecoration)
+        // Check whether we are re-initiating (after rotaion for example) or brand-new
+        // and add fragment if needed
+        if (savedInstanceState == null) {
+            // Set fragment dinamically
+            //1. Get a reference to fragment manager
+            val fragmentManager = supportFragmentManager
+
+            //2. Start a fragment transaction
+            val fragmentTransaction = fragmentManager.beginTransaction()
+
+            //3. Add the fragment to the container
+            fragmentTransaction.replace(
+                R.id.cattle_fragment_layout,
+                CattleListFragment()
+            )
+
+            //4. Commit transaction
+            fragmentTransaction.commit()
+        }
     }
 
     // Navigation logic inside navbar

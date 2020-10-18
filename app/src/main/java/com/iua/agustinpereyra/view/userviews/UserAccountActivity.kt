@@ -14,7 +14,7 @@ class UserAccountActivity : AppCompatActivity(),
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_account)
 
-        // Check whether we are re-initiating (after rotaion for example) or brand-new
+        // Check whether we are re-initiating (after rotation for example) or brand-new
         if (savedInstanceState == null) {
             // Set fragment dinamically
             //1. Get a reference to fragment manager

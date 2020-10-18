@@ -15,7 +15,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".view.cattleviews.CattleListActivity"/>
+        <activity android:name=".view.cattleviews.CattleActivity"/>
         <activity android:name=".view.userviews.UserAccountActivity"/>
         <activity android:name=".view.settingsviews.SettingsActivity"/>
         <activity android:name=".view.helpviews.HelpActivity"/>

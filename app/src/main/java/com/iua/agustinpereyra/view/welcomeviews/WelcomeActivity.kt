@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.iua.agustinpereyra.R
-import com.iua.agustinpereyra.view.cattleviews.CattleListActivity
+import com.iua.agustinpereyra.view.cattleviews.CattleActivity
 import com.iua.agustinpereyra.view.welcomeviews.LoginFragment.LoginFragmentListener
 
 class WelcomeActivity : AppCompatActivity(), LoginFragmentListener,
@@ -34,7 +34,7 @@ class WelcomeActivity : AppCompatActivity(), LoginFragmentListener,
 
     override fun navigateToMainPage() {
         // Get username (TODO: Change this when persistence is implemented)
-        val mainPageIntent = Intent(this, CattleListActivity::class.java)
+        val mainPageIntent = Intent(this, CattleActivity::class.java)
         startActivity(mainPageIntent)
         // Not returning here
         finish()
