@@ -5,8 +5,9 @@ import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.iua.agustinpereyra.R
+import com.iua.agustinpereyra.view.BaseActivity
 
-class HelpActivity : AppCompatActivity(), HelpFragment.HelpFragmentListener {
+class HelpActivity : BaseActivity(), HelpFragment.HelpFragmentListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

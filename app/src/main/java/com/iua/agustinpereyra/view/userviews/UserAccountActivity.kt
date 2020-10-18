@@ -5,8 +5,9 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.iua.agustinpereyra.R
+import com.iua.agustinpereyra.view.BaseActivity
 
-class UserAccountActivity : AppCompatActivity(),
+class UserAccountActivity : BaseActivity(),
     UserAccountViewFragment.UserAccountFragmentListener,
     UserAccountModifyPasswordFragment.UserAccountModifyPasswordFragmentListener {
 

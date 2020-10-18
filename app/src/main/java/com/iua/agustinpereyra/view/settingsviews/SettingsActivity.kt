@@ -3,8 +3,9 @@ package com.iua.agustinpereyra.view.settingsviews
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.iua.agustinpereyra.R
+import com.iua.agustinpereyra.view.BaseActivity
 
-class SettingsActivity : AppCompatActivity(), SettingsMainFragment.MainSettingsFragmentListener {
+class SettingsActivity : BaseActivity(), SettingsMainFragment.MainSettingsFragmentListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
