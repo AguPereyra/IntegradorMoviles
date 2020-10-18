@@ -12,8 +12,8 @@ import com.iua.agustinpereyra.view.helpviews.HelpActivity
 import com.iua.agustinpereyra.view.settingsviews.SettingsActivity
 import com.iua.agustinpereyra.view.userviews.UserAccountActivity
 import com.iua.agustinpereyra.controller.VIEW_USER_REQUEST
-import kotlinx.android.synthetic.main.app_toolbar.*
 import kotlinx.android.synthetic.main.activity_cattle.*
+import kotlinx.android.synthetic.main.app_toolbar.*
 
 class CattleActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, CattleListFragment.CattleListFragmentListener {
 
@@ -21,10 +21,14 @@ class CattleActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_cattle)
 
+        // Set toolbar as support action bar
+        setSupportActionBar(app_bar)
+
         // Tie together drawer layout and action bar
-        toggle = ActionBarDrawerToggle(this, drawer_layout, 0, 0)
+        toggle = ActionBarDrawerToggle(this, drawer_layout, app_bar,0, 0)
         drawer_layout.addDrawerListener(toggle)
 
 
@@ -53,8 +57,8 @@ class CattleActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
-        toggle.syncState()
         super.onPostCreate(savedInstanceState)
+        toggle.syncState()
     }
 
     // Navigation logic inside navbar
@@ -103,7 +107,7 @@ class CattleActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
 
     // ActionBarModifier functions
     override fun setActionBarTitle(title: String) {
-        //supportActionBar?.title = title
+        supportActionBar?.title = title
     }
 
 
