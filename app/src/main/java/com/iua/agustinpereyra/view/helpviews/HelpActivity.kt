@@ -10,7 +10,7 @@ class HelpActivity : AppCompatActivity(), HelpFragment.HelpFragmentListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.help_activity)
+        setContentView(R.layout.activity_help)
 
         // Set fragment dinamically
         //1. Get a reference to fragment manager

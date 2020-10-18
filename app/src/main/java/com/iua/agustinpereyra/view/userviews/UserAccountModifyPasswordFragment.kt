@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.iua.agustinpereyra.R
 import com.iua.agustinpereyra.controller.*
-import kotlinx.android.synthetic.main.user_account_modify_password_fragment.view.*
+import kotlinx.android.synthetic.main.fragment_user_account_modify_password.view.*
 
 class UserAccountModifyPasswordFragment : Fragment() {
 
@@ -16,7 +16,7 @@ class UserAccountModifyPasswordFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.user_account_modify_password_fragment, container, false)
+        val view = inflater.inflate(R.layout.fragment_user_account_modify_password, container, false)
 
         // Get listener
         val listener = activity as UserAccountModifyPasswordFragmentListener

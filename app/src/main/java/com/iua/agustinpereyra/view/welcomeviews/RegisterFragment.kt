@@ -11,8 +11,8 @@ import com.iua.agustinpereyra.controller.PasswordManager
 import com.iua.agustinpereyra.controller.STATE_EMAIL
 import com.iua.agustinpereyra.controller.STATE_PASSWORD
 import com.iua.agustinpereyra.controller.STATE_USERNAME
-import kotlinx.android.synthetic.main.register_fragment.*
-import kotlinx.android.synthetic.main.register_fragment.view.*
+import kotlinx.android.synthetic.main.fragment_register.*
+import kotlinx.android.synthetic.main.fragment_register.view.*
 
 class RegisterFragment : Fragment() {
     override fun onCreateView(
@@ -20,7 +20,7 @@ class RegisterFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.register_fragment, container, false)
+        val view = inflater.inflate(R.layout.fragment_register, container, false)
 
         // Get listener from parent activity
         val listener = activity as RegisterFragmentListener

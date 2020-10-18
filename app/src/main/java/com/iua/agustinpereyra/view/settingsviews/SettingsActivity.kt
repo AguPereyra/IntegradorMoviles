@@ -8,7 +8,7 @@ class SettingsActivity : AppCompatActivity(), SettingsMainFragment.MainSettingsF
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.settings_activity)
+        setContentView(R.layout.activity_settings)
 
         // Set fragment dinamically
         //1. Get a reference to fragment manager

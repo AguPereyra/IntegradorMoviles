@@ -14,17 +14,15 @@ import com.iua.agustinpereyra.controller.StaticDataGenerator
 import com.iua.agustinpereyra.view.helpviews.HelpActivity
 import com.iua.agustinpereyra.view.settingsviews.SettingsActivity
 import com.iua.agustinpereyra.view.userviews.UserAccountActivity
-import com.iua.agustinpereyra.model.Cattle
 import com.iua.agustinpereyra.controller.VIEW_USER_REQUEST
 import kotlinx.android.synthetic.main.app_toolbar.*
-import kotlinx.android.synthetic.main.cattle_list_activity.*
+import kotlinx.android.synthetic.main.activity_cattle_list.*
 
 class CattleListActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        //TODO: Check why navbar is not showing elsewhere
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.cattle_list_activity)
+        setContentView(R.layout.activity_cattle_list)
 
         // Set up the recycler
         val cattleList = StaticDataGenerator.generateCattleList()
@@ -36,8 +34,9 @@ class CattleListActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
             adapter = viewAdapter
         }
 
+        // TODO: Change code to use toolbar by default
         // Add toolbar
-        setSupportActionBar(app_bar)
+        //setSupportActionBar(app_bar)
 
         // Tie together drawer layout and action bar
         val toggle = ActionBarDrawerToggle(this, drawer_layout, app_bar, 0, 0)

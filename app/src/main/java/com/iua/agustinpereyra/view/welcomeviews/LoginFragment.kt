@@ -10,9 +10,8 @@ import com.iua.agustinpereyra.R
 import com.iua.agustinpereyra.controller.PasswordManager
 import com.iua.agustinpereyra.controller.STATE_PASSWORD
 import com.iua.agustinpereyra.controller.STATE_USERNAME
-import kotlinx.android.synthetic.main.login_fragment.*
-import kotlinx.android.synthetic.main.login_fragment.view.*
-import kotlinx.android.synthetic.main.register_fragment.*
+import kotlinx.android.synthetic.main.fragment_login.*
+import kotlinx.android.synthetic.main.fragment_login.view.*
 
 class LoginFragment : Fragment() {
 
@@ -21,7 +20,7 @@ class LoginFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.login_fragment, container, false)
+        val view = inflater.inflate(R.layout.fragment_login, container, false)
 
         // Get listener from parent activity
         val listener = activity as LoginFragmentListener

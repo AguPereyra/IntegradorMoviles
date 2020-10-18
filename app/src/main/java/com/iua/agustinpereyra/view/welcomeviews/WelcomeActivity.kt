@@ -12,7 +12,7 @@ class WelcomeActivity : AppCompatActivity(), LoginFragmentListener,
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.welcome_activity)
+        setContentView(R.layout.activity_welcome)
 
         // Check whether we are re-initiating (after rotaion for example) or brand-new
         if (savedInstanceState == null) {

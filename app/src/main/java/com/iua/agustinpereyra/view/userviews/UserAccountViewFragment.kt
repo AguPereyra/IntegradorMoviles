@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import com.iua.agustinpereyra.R
 import com.iua.agustinpereyra.controller.STATE_EMAIL
 import com.iua.agustinpereyra.controller.STATE_USERNAME
-import kotlinx.android.synthetic.main.user_account_view_fragment.view.*
+import kotlinx.android.synthetic.main.fragment_user_account.view.*
 
 class UserAccountViewFragment : Fragment() {
     override fun onCreateView(
@@ -16,7 +16,7 @@ class UserAccountViewFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.user_account_view_fragment, container, false)
+        val view = inflater.inflate(R.layout.fragment_user_account, container, false)
 
         // Get listener
         val listener = activity as UserAccountFragmentListener

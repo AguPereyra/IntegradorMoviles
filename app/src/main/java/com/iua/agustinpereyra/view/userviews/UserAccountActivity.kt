@@ -12,7 +12,7 @@ class UserAccountActivity : AppCompatActivity(),
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.user_account_activity)
+        setContentView(R.layout.activity_user_account)
 
         // Check whether we are re-initiating (after rotaion for example) or brand-new
         if (savedInstanceState == null) {
