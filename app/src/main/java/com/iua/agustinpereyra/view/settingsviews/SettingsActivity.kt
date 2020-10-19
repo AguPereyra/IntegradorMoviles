@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.iua.agustinpereyra.R
 import com.iua.agustinpereyra.view.BaseActivity
 
-class SettingsActivity : BaseActivity(), SettingsMainFragment.MainSettingsFragmentListener {
+class SettingsActivity : BaseActivity(), SettingsMainFragment.MainSettingsFragmentListener, SettingsFiltersFragment.SettingsFilterFragmentListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

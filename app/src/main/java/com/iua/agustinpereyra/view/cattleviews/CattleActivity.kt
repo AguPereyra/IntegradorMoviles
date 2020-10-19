@@ -25,15 +25,16 @@ class CattleActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         setContentView(R.layout.activity_cattle)
 
         // Set toolbar as support action bar
-        setSupportActionBar(app_bar)
+        setSupportActionBar(main_toolbar)
 
         // Tie together drawer layout and action bar
-        toggle = ActionBarDrawerToggle(this, drawer_layout, app_bar,0, 0)
+        toggle = ActionBarDrawerToggle(this, drawer_layout, main_toolbar, 0, 0)
         drawer_layout.addDrawerListener(toggle)
 
 
         // Set item click listener
         navigation_view.setNavigationItemSelectedListener(this)
+
 
         // Check whether we are re-initiating (after rotation for example) or brand-new
         // and add fragment if needed
@@ -110,6 +111,9 @@ class CattleActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         supportActionBar?.title = title
     }
 
+    override fun setActionBarHomeButtonAsUp() {
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
 
     // Cattle List needed functions
     override fun navigateToSpecificBovine() {

@@ -45,7 +45,7 @@ class CattleListFragment : Fragment() {
         // Get Activity with needed functions
         val listener = activity as CattleListFragmentListener
 
-        // Set up the toolbar corresponding title and back button
+        // Set up the toolbar corresponding title
         listener.setActionBarTitle(getString(R.string.cattle_list_title))
 
         return view

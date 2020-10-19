@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import com.iua.agustinpereyra.R
 import com.iua.agustinpereyra.controller.STATE_EMAIL
 import com.iua.agustinpereyra.controller.STATE_USERNAME
+import com.iua.agustinpereyra.view.ActionBarModifier
 import kotlinx.android.synthetic.main.fragment_user_account.view.*
 
 class UserAccountViewFragment : Fragment() {
@@ -20,6 +21,10 @@ class UserAccountViewFragment : Fragment() {
 
         // Get listener
         val listener = activity as UserAccountFragmentListener
+
+        // Set toolbar title and back button
+        listener.setActionBarTitle(getString(R.string.user_account_title))
+        listener.setActionBarHomeButtonAsUp()
 
         // Set click listeners
         view.user_account_cancel_button.setOnClickListener{
@@ -56,7 +61,7 @@ class UserAccountViewFragment : Fragment() {
     }
 
 
-    interface UserAccountFragmentListener {
+    interface UserAccountFragmentListener : ActionBarModifier {
         fun onCancelUserAccountViewClick() : Unit
         fun onSaveUserAccountViewClick() : Unit
         fun navigateToChangePassword()

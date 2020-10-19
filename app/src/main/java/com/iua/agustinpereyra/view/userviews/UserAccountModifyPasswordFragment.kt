@@ -1,5 +1,6 @@
 package com.iua.agustinpereyra.view.userviews
 
+import android.app.ActionBar
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.iua.agustinpereyra.R
 import com.iua.agustinpereyra.controller.*
+import com.iua.agustinpereyra.view.ActionBarModifier
 import kotlinx.android.synthetic.main.fragment_user_account_modify_password.view.*
 
 class UserAccountModifyPasswordFragment : Fragment() {
@@ -20,6 +22,11 @@ class UserAccountModifyPasswordFragment : Fragment() {
 
         // Get listener
         val listener = activity as UserAccountModifyPasswordFragmentListener
+
+        // Set toolbar title and back button
+        // TODO: Ask if there is a better way to do this
+        listener.setActionBarTitle(getString(R.string.user_account_passwd_title))
+        listener.setActionBarHomeButtonAsUp()
 
         // Set click listener
         view.user_account_modify_passwd_cancel_button.setOnClickListener {
@@ -50,7 +57,7 @@ class UserAccountModifyPasswordFragment : Fragment() {
         super.onSaveInstanceState(outState)
     }
 
-    interface UserAccountModifyPasswordFragmentListener {
+    interface UserAccountModifyPasswordFragmentListener : ActionBarModifier {
         fun onCancelModifyPasswordClick() : Unit
         fun onSaveModifyPasswordClick() : Unit
     }
