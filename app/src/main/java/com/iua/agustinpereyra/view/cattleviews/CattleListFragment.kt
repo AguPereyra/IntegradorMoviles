@@ -2,10 +2,7 @@ package com.iua.agustinpereyra.view.cattleviews
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -31,6 +28,9 @@ class CattleListFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_cattle_list, container, false)
 
+        // Inform that it will handle option menu icons
+        setHasOptionsMenu(true)
+
         // Set up the recycler
         val cattleList = StaticDataGenerator.generateCattleList()
         val viewManager = LinearLayoutManager(context)
@@ -41,7 +41,6 @@ class CattleListFragment : Fragment() {
             layoutManager = viewManager
             adapter = viewAdapter
         }
-
         // Get Activity with needed functions
         val listener = activity as CattleListFragmentListener
 
@@ -51,7 +50,24 @@ class CattleListFragment : Fragment() {
         return view
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.main_top_app_bar, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId) {
+            R.id.main_top_app_bar_search -> {
+                // TODO: Implement search with filterable interface
+                return true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
     interface CattleListFragmentListener : ActionBarModifier {
         fun navigateToSpecificBovine() : Unit
     }
+
+
 }

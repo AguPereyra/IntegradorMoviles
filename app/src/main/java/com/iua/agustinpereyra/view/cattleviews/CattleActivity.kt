@@ -2,6 +2,7 @@ package com.iua.agustinpereyra.view.cattleviews
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -84,14 +85,13 @@ class CattleActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         return true
     }
 
-    // Set the navbar if menu is clicked
+    // Set the navbar if menu is clicked or handle as appropriate
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId) {
             R.id.home -> {
                 drawer_layout.openDrawer(GravityCompat.START)
                 return true
             }
-
             else -> return super.onOptionsItemSelected(item)
         }
     }

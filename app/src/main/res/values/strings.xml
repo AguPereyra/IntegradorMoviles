@@ -59,6 +59,9 @@
     <string name="nav_account">Cuenta</string>
     <string name="nav_help">Ayuda</string>
 
+    <!--Top App Bar Menu-->
+    <string name="top_menu_search">Buscar</string>
+
     <!--Help section-->
     <string name="help_title">Ayuda</string>
     <string name="contact_us">Contactenos</string>
