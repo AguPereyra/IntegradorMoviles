@@ -4,11 +4,11 @@
 
     <PreferenceCategory>
         <SwitchPreferenceCompat
-            app:key="switch_sex_filter"
+            app:key="@string/sex_filter_switch_key"
             app:title="@string/filter_by_sex_title"/>
 
         <ListPreference
-            app:key="settings_filter_by_sex"
+            app:key="@string/sex_filter_list_key"
             app:title="@string/filter_by_female"
             app:entries="@array/filter_by_entries"
             app:entryValues="@array/filter_by_values"
@@ -17,11 +17,11 @@
     </PreferenceCategory>
     <PreferenceCategory>
         <SwitchPreferenceCompat
-            app:key="switch_weight_filter"
+            app:key="@string/weight_filter_switch_key"
             app:title="@string/filter_by_weight_title"/>
 
         <SeekBarPreference
-            app:key="weight_filter_seek_bar"
+            app:key="@string/weight_filter_value_key"
             app:showSeekBarValue="true"
             app:dependency="switch_weight_filter"
             app:adjustable="true"/>

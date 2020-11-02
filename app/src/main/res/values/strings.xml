@@ -31,12 +31,17 @@
     <!--Settings-->
     <string name="settings_title">Preferencias</string>
     <!--Order by-->
+    <string name="order_by_settings_key">settings_order_by</string>
     <string name="order_by_settings_title">Ordenar ganado por</string>
     <string name="order_by_settings_sum">Sexo</string>
     <string name="order_by_sex">Sexo</string>
     <string name="order_by_weight_asc">Peso ascendente</string>
     <string name="order_by_weight_des">Peso descendente</string>
     <!--Filter-->
+    <string name="sex_filter_switch_key">switch_sex_filter</string>
+    <string name="sex_filter_list_key">settings_filter_by_sex</string>
+    <string name="weight_filter_switch_key">switch_weight_filter</string>
+    <string name="weight_filter_value_key">weight_filter_seek_bar</string>
     <string name="settings_filter_title">Filtros</string>
     <string name="filter_title">Filtrar ganado</string>
     <string name="filter_sum">Filtrar ganado por sexo y peso</string>
