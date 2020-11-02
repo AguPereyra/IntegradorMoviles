@@ -10,7 +10,7 @@ class StaticDataGenerator {
 
             // Fill with data
             for (i in 0..40) {
-                val cattle = Cattle(caravan = generateRandomCaravan(), weight = (300..1000).random(), imageId = generateCattleImageId(i))
+                val cattle = Cattle(caravan = generateRandomCaravan(), weight = (300..1000).random(), imageId = generateCattleImageId(i), i%2 == 0)
                 cattleList.add(cattle)
             }
             return cattleList
