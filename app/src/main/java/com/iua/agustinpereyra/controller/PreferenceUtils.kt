@@ -4,12 +4,19 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.preference.PreferenceManager
 import com.iua.agustinpereyra.R
+import java.lang.NullPointerException
 
+//TODO: Analyze if it is not better as Singleton
 class PreferenceUtils {
+
     private lateinit var context : Context
     private lateinit var defaultSharedPreferences : SharedPreferences
 
-    constructor(context: Context) {
+    constructor(context: Context?) {
+        //TODO: Improve exeption handling
+        if (context == null) {
+            throw NullPointerException("Context passed to PrecerenceUtils shouldn't be null")
+        }
         this.context = context
         this.defaultSharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
     }

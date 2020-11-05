@@ -33,7 +33,6 @@
     <!--Order by-->
     <string name="order_by_settings_key">settings_order_by</string>
     <string name="order_by_settings_title">Ordenar ganado por</string>
-    <string name="order_by_settings_sum">Sexo</string>
     <string name="order_by_sex">Sexo</string>
     <string name="order_by_weight_asc">Peso ascendente</string>
     <string name="order_by_weight_des">Peso descendente</string>

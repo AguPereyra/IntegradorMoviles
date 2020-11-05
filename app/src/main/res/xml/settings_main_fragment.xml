@@ -4,7 +4,7 @@
     <ListPreference
         app:key="@string/order_by_settings_key"
         app:title="@string/order_by_settings_title"
-        app:summary="@string/order_by_settings_sum"
+        app:summary="@string/order_by_sex"
         app:entries="@array/order_by_entries"
         app:entryValues="@array/order_by_values"
         app:defaultValue="@string/order_by_sex"/>

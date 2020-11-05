@@ -9,10 +9,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.iua.agustinpereyra.R
 import com.iua.agustinpereyra.model.Cattle
 
-class CattleCardRecyclerViewAdapter(private val cattleList: List<Cattle>) : RecyclerView.Adapter<CattleCardRecyclerViewAdapter.CattleCardViewHolder>(){
+class CattleCardRecyclerViewAdapter(private var cattleList: List<Cattle>) : RecyclerView.Adapter<CattleCardRecyclerViewAdapter.CattleCardViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CattleCardViewHolder {
-        val layoutView = LayoutInflater.from(parent.context).inflate(R.layout.cattle_card_item_view, parent, false)
+        val layoutView = LayoutInflater.from(parent.context)
+            .inflate(R.layout.cattle_card_item_view, parent, false)
         return CattleCardViewHolder(layoutView)
     }
 
