@@ -76,18 +76,11 @@ class CattleListFragment : Fragment(){
 
     override fun onResume() {
         super.onResume()
-        // TODO: Is it okay to put it here or at controller?
+        // TODO: Is it okay to put it here or should go at controller?
         var cattleList = baseCattleList
         val preferenceUtils = PreferenceUtils(context)
-        // Based on order
-        val orderCriteria = preferenceUtils.getOrderBy()
-        // Reorder list
-        cattleList = when (orderCriteria) {
-            ORDER_BY_SEX -> cattleList.sortedBy { it.sex }
-            ORDER_BY_WEIGHT_ASC -> cattleList.sortedBy { it.weight }
-            ORDER_BY_WEIGHT_DESC -> cattleList.sortedByDescending { it.weight }
-            else -> cattleList
-        }
+
+        // Filtering
         // Check sex filter
         val sexFilterStatus = preferenceUtils.getSexFilter()
         if (sexFilterStatus != null) {
@@ -95,19 +88,22 @@ class CattleListFragment : Fragment(){
                 MALE -> cattleList.filter { it.sex }
                 else -> cattleList.filter { !it.sex }
             }
-        } else {
-            // TODO: Suboptimal, improve
-            // If deactivated, restore
-            cattleList = baseCattleList
         }
 
         // Check weight filter
         val weightFilterStatus = preferenceUtils.getWeightFilter()
         if (weightFilterStatus != null) {
             cattleList = cattleList.filter { it.weight < weightFilterStatus }
-        } else {
-            // If deactivated, restore
-            cattleList = baseCattleList
+        }
+
+        // Order resulting list
+        val orderCriteria = preferenceUtils.getOrderBy()
+        // Reorder list
+        cattleList = when (orderCriteria) {
+            ORDER_BY_SEX -> cattleList.sortedBy { it.sex }
+            ORDER_BY_WEIGHT_ASC -> cattleList.sortedBy { it.weight }
+            ORDER_BY_WEIGHT_DESC -> cattleList.sortedByDescending { it.weight }
+            else -> cattleList
         }
 
         // Swap to new adapter with updated data
