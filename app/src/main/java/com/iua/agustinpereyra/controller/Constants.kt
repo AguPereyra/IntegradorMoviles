@@ -22,6 +22,7 @@ const val ORDER_BY_SEX = "sexo"
 const val ORDER_BY_WEIGHT_DESC = "peso_des"
 const val ORDER_BY_WEIGHT_ASC = "peso_asc"
 const val KEY_ORDER_BY = "settings_order_by"
+const val KEY_SEX_FILTER = "settings_filter_by_sex"
 const val FEMALE = "hembra"
 const val MALE = "macho"
 const val BOOLEAN_FEMALE = false
