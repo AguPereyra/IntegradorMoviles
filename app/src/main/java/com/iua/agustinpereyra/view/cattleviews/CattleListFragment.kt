@@ -1,11 +1,14 @@
 package com.iua.agustinpereyra.view.cattleviews
 
+import android.app.SearchManager
+import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.SearchView
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.view.GravityCompat
 import androidx.core.view.MenuItemCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -69,6 +72,9 @@ class CattleListFragment : Fragment(), SearchView.OnQueryTextListener{
         val searchItem = menu.findItem(R.id.main_top_app_bar_search)
         val searchView = searchItem.actionView as SearchView
         searchView.setOnQueryTextListener(this)
+
+        // Set searchable hint
+        searchView.queryHint = getString(R.string.search_hint)
     }
 
 
