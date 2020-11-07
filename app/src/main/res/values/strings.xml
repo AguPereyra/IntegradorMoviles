@@ -64,7 +64,7 @@
     <string name="nav_help">Ayuda</string>
 
     <!--Top App Bar Menu-->
-    <string name="top_menu_search">Buscar</string>
+    <string name="search_hint">Buscar caravana</string>
 
     <!--Help section-->
     <string name="help_title">Ayuda</string>

@@ -5,7 +5,9 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.widget.SearchView
 import androidx.core.view.GravityCompat
+import androidx.core.view.MenuItemCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,9 +23,12 @@ import com.iua.agustinpereyra.view.userviews.UserAccountActivity
 import kotlinx.android.synthetic.main.app_main_toolbar.*
 import kotlinx.android.synthetic.main.fragment_cattle_list.*
 
-class CattleListFragment : Fragment(){
+class CattleListFragment : Fragment(), SearchView.OnQueryTextListener{
 
+    // Base list of data
     private lateinit var baseCattleList : List<Cattle>
+    // Currently showing list of data
+    private lateinit var currentCattleList : List<Cattle>
     private lateinit var recyclerView : RecyclerView
 
     override fun onCreateView(
@@ -38,6 +43,7 @@ class CattleListFragment : Fragment(){
 
         // Set up the recycler
         baseCattleList = StaticDataGenerator.generateCattleList()
+        currentCattleList = baseCattleList
         val viewManager = LinearLayoutManager(context)
         val viewAdapter = CattleCardRecyclerViewAdapter(baseCattleList)
 
@@ -58,21 +64,13 @@ class CattleListFragment : Fragment(){
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.main_top_app_bar, menu)
+
+        // Set this fragment as the QueryTextListener
+        val searchItem = menu.findItem(R.id.main_top_app_bar_search)
+        val searchView = searchItem.actionView as SearchView
+        searchView.setOnQueryTextListener(this)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId) {
-            R.id.main_top_app_bar_search -> {
-                // TODO: Implement search with filterable interface
-                return true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
-
-    interface CattleListFragmentListener : ActionBarModifier {
-        fun navigateToSpecificBovine() : Unit
-    }
 
     override fun onResume() {
         super.onResume()
@@ -107,9 +105,39 @@ class CattleListFragment : Fragment(){
         }
 
         // Swap to new adapter with updated data
-        //  TODO: Is this optimal?
+        //  TODO: Is this optimal? Maybe a method to insert and pop all data in Adapter is better
+        currentCattleList = cattleList
         val newAdapter = CattleCardRecyclerViewAdapter(cattleList)
-        recyclerView.swapAdapter(newAdapter, false)
+        recyclerView.swapAdapter(newAdapter, true)
     }
 
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        // Don't do anything special
+        return true
+    }
+
+    override fun onQueryTextChange(newText: String?): Boolean {
+        // Search if something is to be searched
+        if (newText != null) {
+            val searchedList = searchItem(newText)
+            val newAdapter = CattleCardRecyclerViewAdapter(searchedList)
+            recyclerView.swapAdapter(newAdapter, true)
+        }
+        return true
+    }
+
+    private fun searchItem(text : String) : List<Cattle> {
+        // TODO: Should go here?
+        val searchedList = mutableListOf<Cattle>()
+        for (bovine in currentCattleList) {
+            if (bovine.caravan.contains(text, ignoreCase = true)) {
+                searchedList.add(bovine)
+            }
+        }
+        return searchedList
+    }
+
+    interface CattleListFragmentListener : ActionBarModifier {
+        fun navigateToSpecificBovine() : Unit
+    }
 }
