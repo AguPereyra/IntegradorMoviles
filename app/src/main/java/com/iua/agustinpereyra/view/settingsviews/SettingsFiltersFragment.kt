@@ -7,7 +7,7 @@ import androidx.preference.ListPreference
 import androidx.preference.PreferenceFragmentCompat
 import com.iua.agustinpereyra.R
 import com.iua.agustinpereyra.controller.KEY_SEX_FILTER
-import com.iua.agustinpereyra.view.ActionBarModifier
+import com.iua.agustinpereyra.view.base.ActionBarModifier
 
 class SettingsFiltersFragment : PreferenceFragmentCompat(), SharedPreferences.OnSharedPreferenceChangeListener {
 

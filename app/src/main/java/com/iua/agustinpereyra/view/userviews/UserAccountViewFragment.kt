@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import com.iua.agustinpereyra.R
 import com.iua.agustinpereyra.controller.STATE_EMAIL
 import com.iua.agustinpereyra.controller.STATE_USERNAME
-import com.iua.agustinpereyra.view.ActionBarModifier
+import com.iua.agustinpereyra.view.base.ActionBarModifier
 import kotlinx.android.synthetic.main.fragment_user_account.view.*
 
 class UserAccountViewFragment : Fragment() {

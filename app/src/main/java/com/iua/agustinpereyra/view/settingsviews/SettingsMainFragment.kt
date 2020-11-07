@@ -8,8 +8,7 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.iua.agustinpereyra.R
 import com.iua.agustinpereyra.controller.KEY_ORDER_BY
-import com.iua.agustinpereyra.controller.PREF_ORDER_BY_DEF
-import com.iua.agustinpereyra.view.ActionBarModifier
+import com.iua.agustinpereyra.view.base.ActionBarModifier
 
 class SettingsMainFragment : PreferenceFragmentCompat(), SharedPreferences.OnSharedPreferenceChangeListener {
 
@@ -45,7 +44,7 @@ class SettingsMainFragment : PreferenceFragmentCompat(), SharedPreferences.OnSha
         onSharedPreferenceChanged(null, KEY_ORDER_BY)
     }
 
-    interface MainSettingsFragmentListener : ActionBarModifier{
+    interface MainSettingsFragmentListener : ActionBarModifier {
         fun onFilterClick() : Unit
     }
 

@@ -1,9 +1,8 @@
 package com.iua.agustinpereyra.view.settingsviews
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import com.iua.agustinpereyra.R
-import com.iua.agustinpereyra.view.BaseActivity
+import com.iua.agustinpereyra.view.base.BaseActivity
 
 class SettingsActivity : BaseActivity(), SettingsMainFragment.MainSettingsFragmentListener, SettingsFiltersFragment.SettingsFilterFragmentListener {
 

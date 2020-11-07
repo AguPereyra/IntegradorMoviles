@@ -1,4 +1,4 @@
-package com.iua.agustinpereyra.view
+package com.iua.agustinpereyra.view.base
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar

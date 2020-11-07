@@ -1,12 +1,10 @@
 package com.iua.agustinpereyra.view.helpviews
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.iua.agustinpereyra.R
-import com.iua.agustinpereyra.view.ActionBarModifier
+import com.iua.agustinpereyra.view.base.ActionBarModifier
 
 class HelpFragment : PreferenceFragmentCompat() {
 
@@ -28,7 +26,7 @@ class HelpFragment : PreferenceFragmentCompat() {
         }
     }
 
-    interface HelpFragmentListener : ActionBarModifier{
+    interface HelpFragmentListener : ActionBarModifier {
         fun sendEmail() : Unit
     }
 

@@ -1,4 +1,4 @@
-package com.iua.agustinpereyra.view
+package com.iua.agustinpereyra.view.base
 
 // Used by Fragments to access and modify Activity's action bar
 interface ActionBarModifier {
