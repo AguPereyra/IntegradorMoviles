@@ -48,27 +48,19 @@ abstract class FilterableCattleRecyclerFragment : Fragment(), SearchView.OnQuery
         // Check sex filter
         val sexFilterStatus = preferenceUtils.getSexFilter()
         if (sexFilterStatus != null) {
-            cattleList = when (sexFilterStatus) {
-                MALE -> cattleList.filter { it.sex }
-                else -> cattleList.filter { !it.sex }
-            }
+            cattleList = CattleManager.filterListBySex(sexFilterStatus, cattleList)
         }
 
         // Check weight filter
         val weightFilterStatus = preferenceUtils.getWeightFilter()
         if (weightFilterStatus != null) {
-            cattleList = cattleList.filter { it.weight < weightFilterStatus }
+            cattleList = CattleManager.filterListByWeight(weightFilterStatus, cattleList)
         }
 
         // Order resulting list
         val orderCriteria = preferenceUtils.getOrderBy()
         // Reorder list
-        cattleList = when (orderCriteria) {
-            ORDER_BY_SEX -> cattleList.sortedBy { it.sex }
-            ORDER_BY_WEIGHT_ASC -> cattleList.sortedBy { it.weight }
-            ORDER_BY_WEIGHT_DESC -> cattleList.sortedByDescending { it.weight }
-            else -> cattleList
-        }
+        cattleList = CattleManager.orderListBy(orderCriteria, cattleList)
 
         // Swap to new adapter with updated data
         //  TODO: Is this optimal? Maybe a method to insert and pop all data in Adapter is better
@@ -103,7 +95,4 @@ abstract class FilterableCattleRecyclerFragment : Fragment(), SearchView.OnQuery
         return searchedList
     }
 
-    interface CattleListFragmentListener : ActionBarModifier {
-        fun navigateToSpecificBovine() : Unit
-    }
 }

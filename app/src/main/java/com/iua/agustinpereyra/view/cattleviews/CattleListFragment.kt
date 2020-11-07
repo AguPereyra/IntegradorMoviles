@@ -43,4 +43,8 @@ class CattleListFragment : FilterableCattleRecyclerFragment(){
 
         return view
     }
+
+    interface CattleListFragmentListener : ActionBarModifier {
+        fun navigateToSpecificBovine() : Unit
+    }
 }
