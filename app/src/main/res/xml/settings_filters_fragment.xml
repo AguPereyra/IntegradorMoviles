@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory>
         <SwitchPreferenceCompat
@@ -24,7 +24,9 @@
             app:key="@string/weight_filter_value_key"
             app:showSeekBarValue="true"
             app:dependency="switch_weight_filter"
-            app:adjustable="true"/>
+            app:adjustable="true"
+            app:min="@integer/min_weight"
+            android:max="@integer/max_weight"/>
 
     </PreferenceCategory>
 </PreferenceScreen>
