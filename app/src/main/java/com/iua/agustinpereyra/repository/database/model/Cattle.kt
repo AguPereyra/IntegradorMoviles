@@ -1,6 +1,4 @@
-package com.iua.agustinpereyra.model
-
-import android.media.Image
+package com.iua.agustinpereyra.repository.database.model
 
 /*
 * Sex: False female, True male*/

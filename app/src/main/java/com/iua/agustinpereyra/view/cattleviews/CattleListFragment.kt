@@ -2,13 +2,10 @@ package com.iua.agustinpereyra.view.cattleviews
 
 import android.os.Bundle
 import android.view.*
-import androidx.appcompat.widget.SearchView
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.iua.agustinpereyra.R
 import com.iua.agustinpereyra.controller.*
-import com.iua.agustinpereyra.model.Cattle
 import com.iua.agustinpereyra.view.base.ActionBarModifier
 import com.iua.agustinpereyra.view.base.FilterableCattleRecyclerFragment
 

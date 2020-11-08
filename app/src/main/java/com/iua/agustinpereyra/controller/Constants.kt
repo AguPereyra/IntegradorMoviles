@@ -3,6 +3,7 @@ package com.iua.agustinpereyra.controller
 import com.iua.agustinpereyra.R
 
 const val USERNAME = "USERNAME"
+const val PASSWD = "PASSWD"
 const val VIEW_USER_REQUEST = 1
 const val STATE_USERNAME = "STATE_USERNAME"
 const val STATE_PASSWORD = "STATE_PASSWORD"
@@ -26,3 +27,4 @@ const val KEY_SEX_FILTER = "settings_filter_by_sex"
 const val FEMALE = "hembra"
 const val MALE = "macho"
 const val BOOLEAN_FEMALE = false
+const val OWN_PREFS_NAME = "com.iua.agustinpereyra.prefs"

@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.iua.agustinpereyra.R
-import com.iua.agustinpereyra.model.Cattle
+import com.iua.agustinpereyra.repository.database.model.Cattle
 
 class CattleCardRecyclerViewAdapter(private var cattleList: List<Cattle>) : RecyclerView.Adapter<CattleCardRecyclerViewAdapter.CattleCardViewHolder>() {
 

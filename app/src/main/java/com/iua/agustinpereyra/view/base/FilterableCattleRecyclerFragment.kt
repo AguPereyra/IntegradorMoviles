@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.iua.agustinpereyra.R
 import com.iua.agustinpereyra.controller.*
-import com.iua.agustinpereyra.model.Cattle
+import com.iua.agustinpereyra.repository.database.model.Cattle
 import com.iua.agustinpereyra.view.cattleviews.CattleCardRecyclerViewAdapter
 
 /*

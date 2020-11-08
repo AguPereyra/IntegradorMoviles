@@ -9,8 +9,9 @@ import java.lang.NullPointerException
 //TODO: Analyze if it is not better as Singleton
 class PreferenceUtils {
 
-    private lateinit var context : Context
-    private lateinit var defaultSharedPreferences : SharedPreferences
+    private var context : Context
+    private var defaultSharedPreferences : SharedPreferences
+    private var ownSharedPreferences : SharedPreferences
 
     constructor(context: Context?) {
         //TODO: Improve exeption handling
@@ -19,6 +20,7 @@ class PreferenceUtils {
         }
         this.context = context
         this.defaultSharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+        this.ownSharedPreferences = context.getSharedPreferences(OWN_PREFS_NAME, Context.MODE_PRIVATE)
     }
 
     public fun getOrderBy() : String {
@@ -68,5 +70,13 @@ class PreferenceUtils {
         } else {
             return null
         }
+    }
+
+    /*
+    * Save login data of logged user Password should be encrypted!
+    * */
+    public fun saveLoggedUser(username : String, passwd : String) {
+        ownSharedPreferences.edit().putString(USERNAME, username)
+        ownSharedPreferences.edit().putString(PASSWD, passwd)
     }
 }

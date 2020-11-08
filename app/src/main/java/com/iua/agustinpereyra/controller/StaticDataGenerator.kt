@@ -1,7 +1,7 @@
 package com.iua.agustinpereyra.controller
 
 import com.iua.agustinpereyra.R
-import com.iua.agustinpereyra.model.Cattle
+import com.iua.agustinpereyra.repository.database.model.Cattle
 
 class StaticDataGenerator {
     companion object {
