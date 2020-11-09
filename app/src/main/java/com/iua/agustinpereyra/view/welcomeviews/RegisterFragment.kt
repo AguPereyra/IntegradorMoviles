@@ -7,10 +7,7 @@ import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import com.iua.agustinpereyra.R
-import com.iua.agustinpereyra.controller.LoginManager
-import com.iua.agustinpereyra.controller.STATE_EMAIL
-import com.iua.agustinpereyra.controller.STATE_PASSWORD
-import com.iua.agustinpereyra.controller.STATE_USERNAME
+import com.iua.agustinpereyra.controller.*
 import kotlinx.android.synthetic.main.fragment_register.*
 import kotlinx.android.synthetic.main.fragment_register.view.*
 
@@ -27,12 +24,17 @@ class RegisterFragment : Fragment() {
 
         // Set error if password is not valid
         view.register_button.setOnClickListener {
-            if (!LoginManager.isPasswordValid(register_password_edit_text.text)) {
+            if (!AccountManager.isPasswordValid(register_password_edit_text.text)) {
                 register_password_input_container.error = getString(R.string.password_error)
             } else {
                 // Clear the error
                 register_password_input_container.error = null
-
+                // Register
+                val preferenceUtils = PreferenceUtils(context)
+                val email = view?.register_email_edit_text?.text.toString()
+                val username = view?.register_username_edit_text?.text.toString()
+                val passwd = view?.register_password_edit_text?.text.toString()
+                preferenceUtils.saveRegisteredUser(email, username, passwd)
                 // Navigate
                 listener.navigateToMainPage()
             }
@@ -40,7 +42,7 @@ class RegisterFragment : Fragment() {
 
         // Clear the error when the right amount of chars is set
         view.register_password_edit_text.doOnTextChanged { text, start, before, count ->
-            if (LoginManager.isPasswordValid(register_password_edit_text.text)) {
+            if (AccountManager.isPasswordValid(register_password_edit_text.text)) {
                 // Clear the error message
                 register_password_input_container.error = null
             }

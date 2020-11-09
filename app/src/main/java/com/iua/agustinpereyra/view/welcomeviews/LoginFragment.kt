@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import com.iua.agustinpereyra.R
-import com.iua.agustinpereyra.controller.LoginManager
+import com.iua.agustinpereyra.controller.AccountManager
 import com.iua.agustinpereyra.controller.PreferenceUtils
 import com.iua.agustinpereyra.controller.STATE_PASSWORD
 import com.iua.agustinpereyra.controller.STATE_USERNAME
@@ -28,13 +28,18 @@ class LoginFragment : Fragment() {
 
         // Set error if password is not valid
         view.login_button.setOnClickListener {
-            //TODO:Implement logic to check user
-            // Save to preferences
-            val preferenceUtils = PreferenceUtils(context)
+            // TODO: Shouldn't go elsewhere?
             val email = view?.login_username_input_edit_text?.text.toString()
             val passwd = view?.login_password_edit_text?.text.toString()
-            preferenceUtils.saveLoggedUser(email, passwd)
-            listener.navigateToMainPage()
+            if(AccountManager.isLoginValid(email, passwd, context)) {
+                // Save to preferences
+                val preferenceUtils = PreferenceUtils(context)
+                preferenceUtils.saveLoggedUser(email, passwd)
+                listener.navigateToMainPage()
+            } else {
+                // Show login error message
+                login_password_input_container.error = getString(R.string.wrong_login)
+            }
         }
 
         // Clear the error when the right amount of chars is set

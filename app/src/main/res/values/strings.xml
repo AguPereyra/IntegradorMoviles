@@ -56,7 +56,8 @@
     <string name="old_password">Contraseña actual</string>
     <string name="new_password">Nueva contraseña</string>
     <string name="validate_password">Confirmar contraseña</string>
-
+    <string name="wrong_login">Email o contraseña incorrectos</string>
+    <string name="error_change_passwd">Contraseñas no coinciden o vieja contraseña incorrecta</string>
     <!--Navigation Menu-->
     <!--TODO:Change this with more generic section_title, and review if name changes are necessary-->
     <string name="nav_preferences">Preferencias</string>

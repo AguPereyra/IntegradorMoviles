@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.preference.PreferenceManager
 import com.iua.agustinpereyra.R
-import com.iua.agustinpereyra.repository.database.entities.User
+import com.iua.agustinpereyra.model.User
 import java.lang.NullPointerException
 
 //TODO: Analyze if it is not better as Singleton
@@ -73,24 +73,58 @@ class PreferenceUtils {
         }
     }
 
-    /*
+    /**
     * Save login data of logged user Password should be encrypted!
-    * */
+    */
     public fun saveLoggedUser(email: String, passwd : String) {
-        ownSharedPreferences.edit().putString(PASSWD, passwd).commit()
-        ownSharedPreferences.edit().putString(EMAIL, email).commit()
+        ownSharedPreferences.edit().putString(EMAIL, email).apply()
+        // TODO: Only as poc, should be different
+        ownSharedPreferences.edit().putString(USERNAME, ownSharedPreferences.getString(
+            REGISTRED_USER_NAME, "")).apply()
     }
 
-    /*
-    * Returns null if no user was logged*/
+    /**
+    * Returns null if no user was logged
+    * */
     public fun getLoggedUser(): User? {
         val email = ownSharedPreferences.getString(EMAIL, "")
-        val passwd = ownSharedPreferences.getString(PASSWD, "")
-        if (email != null && passwd != null) {
-            // TODO: Maybe use DTO object?
-            return User(email, "", passwd)
+        val username = ownSharedPreferences.getString(USERNAME, "")
+        if (email != null && username != null) {
+            return User(email, username, "")
         } else {
             return null
         }
+    }
+
+    /**
+     * Only creates one user, overrides if already exists
+    */
+    public fun saveRegisteredUser(email: String, username: String, passwd: String) {
+        ownSharedPreferences.edit().putString(REGISTRED_USER_EMAIL, email).apply()
+        ownSharedPreferences.edit().putString(REGISTRED_USER_NAME, username).apply()
+        ownSharedPreferences.edit().putString(REGISTRED_USER_PASSWD, passwd).apply()
+    }
+
+    /**
+     * Returned registered user
+     */
+    public fun getRegisteredUser(): User? {
+        val email = ownSharedPreferences.getString(REGISTRED_USER_EMAIL, "")
+        val username = ownSharedPreferences.getString(REGISTRED_USER_EMAIL, "")
+        val passwd = ownSharedPreferences.getString(REGISTRED_USER_PASSWD, "")
+        if (email != null && username != null && passwd != null) {
+            return User(email, username, passwd)
+        } else {
+            return null
+        }
+    }
+
+    public fun changeRegisteredUsername(username: String) {
+        ownSharedPreferences.edit().putString(REGISTRED_USER_NAME, username).apply()
+        ownSharedPreferences.edit().putString(USERNAME, username).apply()
+    }
+
+    public fun changeRegisteredPasswd(passwd: String) {
+        ownSharedPreferences.edit().putString(REGISTRED_USER_PASSWD, passwd).apply()
     }
 }

@@ -11,15 +11,11 @@ import com.iua.agustinpereyra.R
 import com.iua.agustinpereyra.controller.PreferenceUtils
 import com.iua.agustinpereyra.controller.STATE_EMAIL
 import com.iua.agustinpereyra.controller.STATE_USERNAME
-import com.iua.agustinpereyra.controller.viewmodel.UserViewModel
-import com.iua.agustinpereyra.repository.database.entities.User
 import com.iua.agustinpereyra.view.base.ActionBarModifier
 import kotlinx.android.synthetic.main.fragment_user_account.view.*
 import java.lang.Exception
 
 class UserAccountViewFragment : Fragment() {
-
-    private lateinit var accountUserViewModel: UserViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,6 +23,9 @@ class UserAccountViewFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_user_account, container, false)
+
+        // Preference manager used below
+        val preferenceUtils = PreferenceUtils(context)
 
         // Get listener
         val listener = activity as UserAccountFragmentListener
@@ -39,23 +38,11 @@ class UserAccountViewFragment : Fragment() {
         if (savedInstanceState != null) {
             view.user_account_username_edit_text.setText(savedInstanceState.getString(STATE_USERNAME))
             view.user_account_email_edit_text.setText(savedInstanceState.getString(STATE_EMAIL))
+        } else {
+            val currentUser = preferenceUtils.getLoggedUser()
+            view.user_account_username_edit_text.setText(currentUser?.username)
+            view.user_account_email_edit_text.setText(currentUser?.email)
         }
-
-        // Initialize viewModel
-        accountUserViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
-
-        // Set the current user based on preferences
-        val preferenceUtils = PreferenceUtils(context)
-        val prefCurrentUser = preferenceUtils.getLoggedUser()
-            ?: throw Exception("There is no logged user registry while at user account view!")
-
-        accountUserViewModel.setCurrentUser(prefCurrentUser.email)
-        // Observe currentUser
-        accountUserViewModel.currentUser.observe(viewLifecycleOwner, Observer { user ->
-            // Update user data
-            view?.user_account_email_edit_text?.setText(user.email)
-            view?.user_account_username_edit_text?.setText(user.username)
-        })
 
         // Set click listeners
         view.user_account_cancel_button.setOnClickListener{
@@ -63,10 +50,9 @@ class UserAccountViewFragment : Fragment() {
         }
 
         view.user_account_save_button.setOnClickListener{
-            // Persist and then change screen
-
+            // Save new username, don't edit email
             val username = view?.user_account_username_edit_text?.text.toString()
-            accountUserViewModel.updateUsername(username, prefCurrentUser.email)
+            preferenceUtils.changeRegisteredUsername(username)
             listener.onSaveUserAccountViewClick()
         }
 

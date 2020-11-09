@@ -33,7 +33,16 @@ class UserAccountModifyPasswordFragment : Fragment() {
         }
 
         view.user_account_modify_passwd_save_button.setOnClickListener {
-            listener.onSaveModifyPasswordClick()
+            // Change passwd if possible
+            val oldPasswd = view.user_account_modify_passwd_old_edit_text.text.toString()
+            val newPasswd = view.user_account_modify_passwd_new_edit_text.text.toString()
+            val confirmPasswd = view.user_account_modify_passwd_validate_edit_text.text.toString()
+            if (AccountManager.changePasswd(oldPasswd, newPasswd, confirmPasswd, context)) {
+                listener.onSaveModifyPasswordClick()
+            } else {
+                view.user_account_modify_passwd_validate_container.error = getString(R.string.error_change_passwd)
+            }
+
         }
 
         // Check if there is save state and replace

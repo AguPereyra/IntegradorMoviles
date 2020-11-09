@@ -4,7 +4,7 @@ import com.iua.agustinpereyra.R
 
 const val USERNAME = "USERNAME"
 const val PASSWD = "PASSWD"
-const val EMAIL = "EMAIL`"
+const val EMAIL = "EMAIL"
 const val VIEW_USER_REQUEST = 1
 const val STATE_USERNAME = "STATE_USERNAME"
 const val STATE_PASSWORD = "STATE_PASSWORD"
@@ -29,3 +29,8 @@ const val FEMALE = "hembra"
 const val MALE = "macho"
 const val BOOLEAN_FEMALE = false
 const val OWN_PREFS_NAME = "com.iua.agustinpereyra.prefs"
+
+/* Register user */
+const val REGISTRED_USER_EMAIL = "REGISTRED_USER_EMAIL"
+const val REGISTRED_USER_PASSWD = "REGISTRED_USER_PASSWD"
+const val REGISTRED_USER_NAME = "REGISTRED_USER_NAME"
