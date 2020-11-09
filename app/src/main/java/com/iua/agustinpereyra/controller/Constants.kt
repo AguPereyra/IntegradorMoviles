@@ -4,6 +4,7 @@ import com.iua.agustinpereyra.R
 
 const val USERNAME = "USERNAME"
 const val PASSWD = "PASSWD"
+const val EMAIL = "EMAIL`"
 const val VIEW_USER_REQUEST = 1
 const val STATE_USERNAME = "STATE_USERNAME"
 const val STATE_PASSWORD = "STATE_PASSWORD"

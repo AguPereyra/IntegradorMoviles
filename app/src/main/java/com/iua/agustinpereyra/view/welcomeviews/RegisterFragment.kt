@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import com.iua.agustinpereyra.R
-import com.iua.agustinpereyra.controller.PasswordManager
+import com.iua.agustinpereyra.controller.LoginManager
 import com.iua.agustinpereyra.controller.STATE_EMAIL
 import com.iua.agustinpereyra.controller.STATE_PASSWORD
 import com.iua.agustinpereyra.controller.STATE_USERNAME
@@ -27,7 +27,7 @@ class RegisterFragment : Fragment() {
 
         // Set error if password is not valid
         view.register_button.setOnClickListener {
-            if (!PasswordManager.isPasswordValid(register_password_edit_text.text)) {
+            if (!LoginManager.isPasswordValid(register_password_edit_text.text)) {
                 register_password_input_container.error = getString(R.string.password_error)
             } else {
                 // Clear the error
@@ -40,7 +40,7 @@ class RegisterFragment : Fragment() {
 
         // Clear the error when the right amount of chars is set
         view.register_password_edit_text.doOnTextChanged { text, start, before, count ->
-            if (PasswordManager.isPasswordValid(register_password_edit_text.text)) {
+            if (LoginManager.isPasswordValid(register_password_edit_text.text)) {
                 // Clear the error message
                 register_password_input_container.error = null
             }

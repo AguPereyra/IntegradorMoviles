@@ -10,11 +10,14 @@ import com.iua.agustinpereyra.repository.database.entities.User
 @Dao
 interface UserDAO {
     @Insert
-    fun insert(user : User) : LiveData<User>
+    fun insert(user : User)
 
     @Update
-    fun update(user : User) : LiveData<User>
+    fun update(user : User)
 
-    @Query("SELECT * FROM user WHERE email = :email")
+    @Query("UPDATE user SET username = :username WHERE email LIKE :email")
+    fun updateUsername(username: String, email: String)
+
+    @Query("SELECT * FROM user WHERE email LIKE :email")
     fun getUser(email : String) : LiveData<User>
 }

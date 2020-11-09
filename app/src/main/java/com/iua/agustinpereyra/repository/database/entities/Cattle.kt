@@ -4,14 +4,14 @@ import androidx.annotation.NonNull
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "user")
-class User (
-
+/*
+* Sex: False female, True male*/
+@Entity(tableName = "cattle")
+data class Cattle(
     @PrimaryKey
-    val email : String,
+    val caravan: String,
     @NonNull
-    val username : String,
-    @NonNull
-    val passwd : String,
+    val weight: Int,
 
-)
+    @NonNull
+    val sex: Boolean)

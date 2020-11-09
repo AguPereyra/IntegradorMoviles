@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.preference.PreferenceManager
 import com.iua.agustinpereyra.R
+import com.iua.agustinpereyra.repository.database.entities.User
 import java.lang.NullPointerException
 
 //TODO: Analyze if it is not better as Singleton
@@ -75,8 +76,21 @@ class PreferenceUtils {
     /*
     * Save login data of logged user Password should be encrypted!
     * */
-    public fun saveLoggedUser(username : String, passwd : String) {
-        ownSharedPreferences.edit().putString(USERNAME, username)
-        ownSharedPreferences.edit().putString(PASSWD, passwd)
+    public fun saveLoggedUser(email: String, passwd : String) {
+        ownSharedPreferences.edit().putString(PASSWD, passwd).commit()
+        ownSharedPreferences.edit().putString(EMAIL, email).commit()
+    }
+
+    /*
+    * Returns null if no user was logged*/
+    public fun getLoggedUser(): User? {
+        val email = ownSharedPreferences.getString(EMAIL, "")
+        val passwd = ownSharedPreferences.getString(PASSWD, "")
+        if (email != null && passwd != null) {
+            // TODO: Maybe use DTO object?
+            return User(email, "", passwd)
+        } else {
+            return null
+        }
     }
 }
