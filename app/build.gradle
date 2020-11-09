@@ -53,4 +53,7 @@ dependencies {
     // Lifecycle components
     implementation "android.arch.lifecycle:extensions:$archLifecycleVersion"
     annotationProcessor "android.arch.lifecycle:compiler:$archLifecycleVersion"
+
+    // Debug db
+    debugImplementation 'com.amitshekhar.android:debug-db:1.0.6'
 }

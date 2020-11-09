@@ -5,6 +5,7 @@ import android.os.AsyncTask
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.iua.agustinpereyra.controller.StaticDataGenerator
 import com.iua.agustinpereyra.repository.database.dao.CattleDAO
 import com.iua.agustinpereyra.repository.database.entities.Cattle
@@ -15,11 +16,17 @@ abstract class AppDatabase : RoomDatabase() {
 
     abstract fun cattleDao(): CattleDAO
 
-
     companion object {
 
         @Volatile
         private var INSTANCE : AppDatabase? = null
+
+        private class AppDatabaseCallback : RoomDatabase.Callback() {
+            override fun onOpen(db: SupportSQLiteDatabase) {
+                super.onOpen(db)
+                PopulateDbAsync(INSTANCE).execute()
+            }
+        }
 
         /*
         * Singleton way of getting Room DB*/
@@ -29,7 +36,8 @@ abstract class AppDatabase : RoomDatabase() {
                     context.applicationContext,
                     AppDatabase::class.java,
                     "app_db"
-                )
+                ).fallbackToDestructiveMigration()
+                .addCallback(AppDatabaseCallback())
                 .build()
                 INSTANCE = instance
                 instance
@@ -40,13 +48,14 @@ abstract class AppDatabase : RoomDatabase() {
     /**
      * Populate the database in the background.
      */
-    private class PopulateDbAsync internal constructor(db: AppDatabase) :
+    private class PopulateDbAsync internal constructor(db: AppDatabase?) :
         AsyncTask<Void?, Void?, Void?>() {
-        private val mCattleDao: CattleDAO
-        var words = arrayOf("dolphin", "crocodile", "cobra")
+        private lateinit var mCattleDao: CattleDAO
 
         init {
-            mCattleDao = db.cattleDao()
+            if (db != null) {
+                mCattleDao = db.cattleDao()
+            }
         }
 
         override fun doInBackground(vararg p0: Void?): Void? {
