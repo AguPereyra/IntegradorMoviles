@@ -22,12 +22,16 @@ class CattleCardRecyclerViewAdapter(private var cattleList: List<Cattle>) : Recy
             val bovine = cattleList[position]
             holder.caravan.text = bovine.caravan
             holder.weight.text = bovine.weight.toString() + " Kg"
-            holder.image.setImageResource(bovine.imageId)
         }
     }
 
     override fun getItemCount(): Int {
         return cattleList.size
+    }
+
+    fun setCattle(newList: List<Cattle>) {
+        cattleList = newList
+        notifyDataSetChanged()
     }
 
     class CattleCardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

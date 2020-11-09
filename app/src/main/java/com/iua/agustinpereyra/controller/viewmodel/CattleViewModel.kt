@@ -12,13 +12,15 @@ import com.iua.agustinpereyra.repository.database.entities.Cattle
 class CattleViewModel(application: Application) : AndroidViewModel(application) {
     private val cattleRepository: CattleRepository
 
-    var cattleList: LiveData<List<Cattle>>
+    private var cattleList: LiveData<List<Cattle>>
 
     init {
-        val cattleDao = AppDatabase.getDatabase(application, viewModelScope).cattleDao()
-        cattleRepository = CattleRepository(cattleDao)
+        cattleRepository = CattleRepository(application)
         cattleList = cattleRepository.getAll()
     }
 
+    fun getCattleList() : LiveData<List<Cattle>> {
+        return cattleList
+    }
 
 }
