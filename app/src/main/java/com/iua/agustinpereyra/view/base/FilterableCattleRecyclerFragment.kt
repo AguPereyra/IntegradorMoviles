@@ -22,7 +22,7 @@ abstract class FilterableCattleRecyclerFragment : Fragment(), SearchView.OnQuery
     protected lateinit var baseCattleList : List<Cattle>
     // Currently showing list of data, used for searches
     protected lateinit var currentCattleList : List<Cattle>
-    protected lateinit var recyclerView : RecyclerView
+    protected lateinit var recyclerViewAdapter : CattleCardRecyclerViewAdapter
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
@@ -41,6 +41,8 @@ abstract class FilterableCattleRecyclerFragment : Fragment(), SearchView.OnQuery
     override fun onResume() {
         super.onResume()
         // TODO: Is it okay to put it here or should go at controller?
+        // Do only if already initiallized
+        // TODO: Is it right?
         var cattleList = baseCattleList
         val preferenceUtils = PreferenceUtils(context)
 
@@ -65,8 +67,7 @@ abstract class FilterableCattleRecyclerFragment : Fragment(), SearchView.OnQuery
         // Swap to new adapter with updated data
         //  TODO: Is this optimal? Maybe a method to insert and pop all data in Adapter is better
         currentCattleList = cattleList
-        val newAdapter = CattleCardRecyclerViewAdapter(cattleList)
-        recyclerView.swapAdapter(newAdapter, true)
+        recyclerViewAdapter.setCattle(cattleList)
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
@@ -78,8 +79,7 @@ abstract class FilterableCattleRecyclerFragment : Fragment(), SearchView.OnQuery
         // Search if something is to be searched
         if (newText != null) {
             val searchedList = searchItem(newText)
-            val newAdapter = CattleCardRecyclerViewAdapter(searchedList)
-            recyclerView.swapAdapter(newAdapter, true)
+            recyclerViewAdapter.setCattle(searchedList)
         }
         return true
     }

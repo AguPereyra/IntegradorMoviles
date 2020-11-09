@@ -2,19 +2,17 @@ package com.iua.agustinpereyra.view.cattleviews
 
 import android.os.Bundle
 import android.view.*
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.iua.agustinpereyra.R
-import com.iua.agustinpereyra.controller.*
 import com.iua.agustinpereyra.controller.viewmodel.CattleViewModel
 import com.iua.agustinpereyra.repository.database.entities.Cattle
 import com.iua.agustinpereyra.view.base.ActionBarModifier
 import com.iua.agustinpereyra.view.base.FilterableCattleRecyclerFragment
 
-class CattleListFragment : Fragment(){
+class CattleListFragment : FilterableCattleRecyclerFragment(){
 
     private lateinit var cattleViewModel: CattleViewModel
 
@@ -32,20 +30,21 @@ class CattleListFragment : Fragment(){
         cattleViewModel = ViewModelProvider(this).get(CattleViewModel::class.java)
 
         // Set up the recycler
-        val baseCattleList = listOf<Cattle>()
-        val currentCattleList = baseCattleList
+        baseCattleList = listOf<Cattle>()
+        currentCattleList = baseCattleList
         val viewManager = LinearLayoutManager(context)
-        val viewAdapter = CattleCardRecyclerViewAdapter(baseCattleList)
+        recyclerViewAdapter = CattleCardRecyclerViewAdapter(baseCattleList)
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.cattle_list_recycler)
         recyclerView.apply {
             layoutManager = viewManager
-            adapter = viewAdapter
+            adapter = recyclerViewAdapter
         }
 
-        // Observe
+        // Observe and update UI and local variable
         cattleViewModel.getCattleList().observe(viewLifecycleOwner, Observer { newCattle ->
-            viewAdapter.setCattle(newCattle)
+            baseCattleList = newCattle
+            recyclerViewAdapter.setCattle(newCattle)
         })
 
         // Get Activity with needed functions
