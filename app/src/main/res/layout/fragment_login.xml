@@ -10,12 +10,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/login_input_margin"
-        android:hint="@string/hint_username">
+        android:hint="@string/hint_email">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/login_username_input_edit_text"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
