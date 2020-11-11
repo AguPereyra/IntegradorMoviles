@@ -1,7 +1,9 @@
 package com.iua.agustinpereyra.repository.networking
 
 import android.net.Uri
+import androidx.core.net.toUri
 import com.iua.agustinpereyra.repository.database.entities.Cattle
+import org.json.JSONObject
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStream
@@ -11,15 +13,21 @@ import java.net.URL
 
 
 // Base URL for Books API.
-private const val BASE_URL = "https://www.googleapis.com/books/v1/volumes?"
+private const val BASE_URL = "https://randomuser.me/api/?"
 private const val RESULTS_PARAM = "results"
 private const val RESULTS_VALUE = "500"
 private const val FIELDS_INC_PARAM = "inc"
-private const val FIELDS_VALUE = "gender,cell,picture,email"
+private const val RESULTS = "results"
+private const val GENDER_FIELD = "gender"
+private const val CELL_FIELD = "cell"
+private const val PICTURE_FIELD = "picture"
+private const val EMAIL_FIELD = "email"
+private const val FIELDS_VALUE = "$GENDER_FIELD,$CELL_FIELD,$PICTURE_FIELD,$EMAIL_FIELD"
+
 
 class ApiConnection {
     companion object {
-        fun getRawData() : String {
+        fun getRawRandomuserData() : String {
             lateinit var cattleListJsonString : String
             lateinit var urlConnection : HttpURLConnection
             try {
@@ -43,12 +51,27 @@ class ApiConnection {
             return cattleListJsonString
         }
 
-        /*
-        fun getListCattle() : List<Cattle> {
-            jsonString = getRawData()
-            // Pass to List<Cattle>
 
-        }*/
+        fun getCattleList() : List<Cattle> {
+            val jsonString = getRawRandomuserData()
+            // Pass to List<Cattle>
+            val cattleList = mutableListOf<Cattle>()
+            val jsonResponse = JSONObject(jsonString)
+            val jsonArray = jsonResponse.getJSONArray(RESULTS)
+            var jsonArrayItem : JSONObject
+            for (i in 0..jsonArray.length()) {
+                jsonArrayItem = jsonArray.getJSONObject(i)
+                cattleList.add(
+                    Cattle(
+                        jsonArrayItem.getString(EMAIL_FIELD).slice(0..3) + (i % 5).toString(),
+                        jsonArrayItem.getString(CELL_FIELD).slice(0..3).toInt(),
+                        jsonArrayItem.getString(PICTURE_FIELD),
+                        jsonArrayItem.getBoolean(GENDER_FIELD)
+                    )
+                )
+            }
+            return cattleList
+        }
 
         private fun convertStreamToString(inputStream: InputStream) : String {
             val buffReader = BufferedReader(InputStreamReader(inputStream))

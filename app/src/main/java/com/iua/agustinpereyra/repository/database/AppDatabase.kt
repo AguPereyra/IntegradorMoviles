@@ -11,7 +11,7 @@ import com.iua.agustinpereyra.repository.database.dao.CattleDAO
 import com.iua.agustinpereyra.repository.database.entities.Cattle
 
 
-@Database(entities = arrayOf(Cattle::class), version = 2)
+@Database(entities = arrayOf(Cattle::class), version = 3)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun cattleDao(): CattleDAO

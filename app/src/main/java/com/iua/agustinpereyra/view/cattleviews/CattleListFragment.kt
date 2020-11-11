@@ -42,7 +42,7 @@ class CattleListFragment : FilterableCattleRecyclerFragment(){
         }
 
         // Observe and update UI and local variable
-        cattleViewModel.getCattleList().observe(viewLifecycleOwner, Observer { newCattle ->
+        cattleViewModel.cattleList.observe(viewLifecycleOwner, Observer { newCattle ->
             baseCattleList = newCattle
             recyclerViewAdapter.setCattle(newCattle)
         })

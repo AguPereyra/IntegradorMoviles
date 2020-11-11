@@ -1,26 +1,24 @@
 package com.iua.agustinpereyra.controller.viewmodel
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.iua.agustinpereyra.repository.CattleRepository
 import com.iua.agustinpereyra.repository.database.AppDatabase
 import com.iua.agustinpereyra.repository.database.entities.Cattle
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlin.coroutines.coroutineContext
 
 class CattleViewModel(application: Application) : AndroidViewModel(application) {
-    private val cattleRepository: CattleRepository
+    private val cattleRepository: CattleRepository = CattleRepository(application)
 
-    private var cattleList: LiveData<List<Cattle>>
-
-    init {
-        cattleRepository = CattleRepository(application)
-        cattleList = cattleRepository.getAll()
-    }
-
-    fun getCattleList() : LiveData<List<Cattle>> {
-        return cattleList
+    // Get asynchronously
+    val cattleList: LiveData<List<Cattle>> = liveData {
+        val list = cattleRepository.getAll().value
+        if (list != null) {
+            //TODO: Is this right?
+            emit(list)
+        }
     }
 
 }
