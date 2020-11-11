@@ -11,9 +11,6 @@ class CattleViewModel(application: Application) : AndroidViewModel(application) 
     private val cattleRepository: CattleRepository = CattleRepository(application)
 
     // Get asynchronously
-    val cattleList: LiveData<List<Cattle>> = liveData {
-        val list = cattleRepository.getAll()
-        emit(list)
-    }
+    val cattleList: LiveData<List<Cattle>> = cattleRepository.allCattle
 
 }
