@@ -34,3 +34,6 @@ const val OWN_PREFS_NAME = "com.iua.agustinpereyra.prefs"
 const val REGISTRED_USER_EMAIL = "REGISTRED_USER_EMAIL"
 const val REGISTRED_USER_PASSWD = "REGISTRED_USER_PASSWD"
 const val REGISTRED_USER_NAME = "REGISTRED_USER_NAME"
+
+/*API Logic*/
+const val RANDOMUSER_API_FEMALE = "female"

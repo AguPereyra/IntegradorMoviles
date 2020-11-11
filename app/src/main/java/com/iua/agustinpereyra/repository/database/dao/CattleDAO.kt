@@ -10,7 +10,7 @@ import com.iua.agustinpereyra.repository.database.entities.Cattle
 @Dao
 interface CattleDAO {
     @Query("SELECT * FROM cattle")
-    fun getAll() : LiveData<List<Cattle>>
+    fun getAll() : List<Cattle>
 
     @Query("DELETE FROM cattle")
     fun deleteAll()

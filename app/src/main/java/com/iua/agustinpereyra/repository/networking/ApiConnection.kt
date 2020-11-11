@@ -1,7 +1,7 @@
 package com.iua.agustinpereyra.repository.networking
 
 import android.net.Uri
-import androidx.core.net.toUri
+import com.iua.agustinpereyra.controller.RANDOMUSER_API_FEMALE
 import com.iua.agustinpereyra.repository.database.entities.Cattle
 import org.json.JSONObject
 import java.io.BufferedReader
@@ -12,7 +12,7 @@ import java.net.HttpURLConnection
 import java.net.URL
 
 
-// Base URL for Books API.
+// Base URL for API.
 private const val BASE_URL = "https://randomuser.me/api/?"
 private const val RESULTS_PARAM = "results"
 private const val RESULTS_VALUE = "500"
@@ -27,8 +27,7 @@ private const val FIELDS_VALUE = "$GENDER_FIELD,$CELL_FIELD,$PICTURE_FIELD,$EMAI
 
 class ApiConnection {
     companion object {
-        fun getRawRandomuserData() : String {
-            lateinit var cattleListJsonString : String
+        private fun getRawRandomuserData() : String? {
             lateinit var urlConnection : HttpURLConnection
             try {
                 val builtURI = Uri.parse(BASE_URL).buildUpon()
@@ -41,36 +40,50 @@ class ApiConnection {
                 urlConnection.connect()
 
                 // Read response
-                cattleListJsonString = convertStreamToString(urlConnection.inputStream)
+                return convertStreamToString(urlConnection.inputStream)
             } catch (e: IOException) {
                 e.printStackTrace()
             } finally {
                 urlConnection.disconnect()
             }
-
-            return cattleListJsonString
+            return null
         }
 
-
+        /**
+         * getCattleList returns an empty list if no response was matched
+         */
         fun getCattleList() : List<Cattle> {
             val jsonString = getRawRandomuserData()
             // Pass to List<Cattle>
             val cattleList = mutableListOf<Cattle>()
-            val jsonResponse = JSONObject(jsonString)
-            val jsonArray = jsonResponse.getJSONArray(RESULTS)
-            var jsonArrayItem : JSONObject
-            for (i in 0..jsonArray.length()) {
-                jsonArrayItem = jsonArray.getJSONObject(i)
-                cattleList.add(
-                    Cattle(
-                        jsonArrayItem.getString(EMAIL_FIELD).slice(0..3) + (i % 5).toString(),
-                        jsonArrayItem.getString(CELL_FIELD).slice(0..3).toInt(),
-                        jsonArrayItem.getString(PICTURE_FIELD),
-                        jsonArrayItem.getBoolean(GENDER_FIELD)
+            if (jsonString != null) {
+                val jsonResponse = JSONObject(jsonString)
+                val jsonArray = jsonResponse.getJSONArray(RESULTS)
+                var jsonArrayItem : JSONObject
+                for (i in 0 until jsonArray.length()) {
+                    //TODO: Refactor
+                    jsonArrayItem = jsonArray.getJSONObject(i)
+                    // Special treatment to get a value usable as a caravan (must be unique) from API
+                    var caravan = (10..99).random().toString() + jsonArrayItem.getString(EMAIL_FIELD).slice(0..3).toUpperCase() + (10..99).random().toString()
+                    // Special treatement to get a value usable as a weight from a cell number
+                    var cell = jsonArrayItem.getString(CELL_FIELD).trim()
+                    cell = cell.replace(" ", "").replace("-", "")
+                    val weight = cell.slice(cell.length-3 until cell.length).toInt()
+                    // Get sex as boolean
+                    val sex = jsonArrayItem.getString(GENDER_FIELD) == RANDOMUSER_API_FEMALE
+                    // Add to DB
+                    cattleList.add(
+                        Cattle(
+                            caravan,
+                            weight,
+                            jsonArrayItem.getString(PICTURE_FIELD),
+                            sex
+                        )
                     )
-                )
+                }
+                return cattleList
             }
-            return cattleList
+            return listOf<Cattle>()
         }
 
         private fun convertStreamToString(inputStream: InputStream) : String {
