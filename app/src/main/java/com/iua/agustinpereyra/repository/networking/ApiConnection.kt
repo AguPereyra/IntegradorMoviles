@@ -17,6 +17,7 @@ private const val BASE_URL = "https://randomuser.me/api/?"
 private const val RESULTS_PARAM = "results"
 private const val RESULTS_VALUE = "50"
 private const val FIELDS_INC_PARAM = "inc"
+private const val SEED_PARAM = "seed"
 private const val RESULTS = "results"
 private const val GENDER_FIELD = "gender"
 private const val CELL_FIELD = "cell"
@@ -24,6 +25,7 @@ private const val PICTURE_FIELD = "picture"
 private const val EMAIL_FIELD = "email"
 private const val IMG_LARGE = "large"
 private const val FIELDS_VALUE = "$GENDER_FIELD,$CELL_FIELD,$PICTURE_FIELD,$EMAIL_FIELD"
+private const val SEED_VALUE = "cattle_app"
 
 
 class ApiConnection {
@@ -34,6 +36,7 @@ class ApiConnection {
                 val builtURI = Uri.parse(BASE_URL).buildUpon()
                     .appendQueryParameter(RESULTS_PARAM, RESULTS_VALUE)
                     .appendQueryParameter(FIELDS_INC_PARAM, FIELDS_VALUE)
+                    .appendQueryParameter(SEED_PARAM, SEED_VALUE)
                     .build()
                 val requestURL = URL(builtURI.toString())
                 urlConnection = requestURL.openConnection() as HttpURLConnection
