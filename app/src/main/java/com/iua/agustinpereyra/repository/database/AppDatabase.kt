@@ -21,13 +21,6 @@ abstract class AppDatabase : RoomDatabase() {
         @Volatile
         private var INSTANCE : AppDatabase? = null
 
-        private class AppDatabaseCallback : RoomDatabase.Callback() {
-            override fun onOpen(db: SupportSQLiteDatabase) {
-                super.onOpen(db)
-                PopulateDbAsync(INSTANCE).execute()
-            }
-        }
-
         /*
         * Singleton way of getting Room DB*/
         fun getDatabase(context: Context): AppDatabase {
@@ -37,39 +30,11 @@ abstract class AppDatabase : RoomDatabase() {
                     AppDatabase::class.java,
                     "app_db"
                 ).fallbackToDestructiveMigration()
-                .addCallback(AppDatabaseCallback())
                 .build()
                 INSTANCE = instance
                 instance
             }
         }
     }
-
-    /**
-     * Populate the database in the background.
-     */
-    private class PopulateDbAsync internal constructor(db: AppDatabase?) :
-        AsyncTask<Void?, Void?, Void?>() {
-        private lateinit var mCattleDao: CattleDAO
-
-        init {
-            if (db != null) {
-                mCattleDao = db.cattleDao()
-            }
-        }
-
-        override fun doInBackground(vararg p0: Void?): Void? {
-            // Start the app with a clean database every time.
-            // Not needed if you only populate the database
-            // when it is first created
-            mCattleDao.deleteAll()
-            val populationList = StaticDataGenerator.generateCattleList()
-            for (cattle in populationList) {
-                mCattleDao.insert(cattle)
-            }
-            return null
-        }
-    }
-
 
 }
