@@ -73,4 +73,9 @@
     <!--Contact us options-->
     <string name="email_sendto">mailto:el@creador.app</string>
     <string name="send_email_intent_text">Enviar con</string>
+    
+    <!--Notification-->
+    <string name="notification_msg">¡Ven! Tenemos muuucho para mostrarte</string>
+    <string name="channel_daily">Recordatorios diarios</string>
+    <string name="channel_daily_description">Se realizan recordatorios una vez al dia para usar la app</string>
 </resources>

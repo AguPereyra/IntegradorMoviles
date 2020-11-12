@@ -3,6 +3,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE"/>
 
     <application
         android:allowBackup="true"
@@ -22,5 +23,7 @@
         <activity android:name=".view.userviews.UserAccountActivity"/>
         <activity android:name=".view.settingsviews.SettingsActivity"/>
         <activity android:name=".view.helpviews.HelpActivity"/>
+        
+        <receiver android:name=".controller.AppBroadcastReceiver"/>
     </application>
 </manifest>
