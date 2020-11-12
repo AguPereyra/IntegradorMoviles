@@ -27,6 +27,8 @@ const val KEY_ORDER_BY = "settings_order_by"
 const val KEY_SEX_FILTER = "settings_filter_by_sex"
 const val FEMALE = "hembra"
 const val MALE = "macho"
+const val MALE_FIRST_CAP = "Macho"
+const val FEMALE_FIRST_CAP = "Hembra"
 const val BOOLEAN_FEMALE = false
 const val OWN_PREFS_NAME = "com.iua.agustinpereyra.prefs"
 

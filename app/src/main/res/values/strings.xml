@@ -5,6 +5,7 @@
     <string name="cancel">Cancelar</string>
     <string name="brand_name">Vacas Locas</string>
     <string name="email">Email</string>
+    <string name="kilogram">Kg</string>
 
     <!--Login & Register-->
     <string name="hint_username">Usuario</string>
@@ -37,6 +38,8 @@
     <string name="order_by_weight_asc">Peso ascendente</string>
     <string name="order_by_weight_des">Peso descendente</string>
     <!--Filter-->
+    <string name="female">Hembra</string>
+    <string name="male">Macho</string>
     <string name="sex_filter_switch_key">switch_sex_filter</string>
     <string name="sex_filter_list_key">settings_filter_by_sex</string>
     <string name="weight_filter_switch_key">switch_weight_filter</string>
@@ -45,8 +48,8 @@
     <string name="filter_title">Filtrar ganado</string>
     <string name="filter_sum">Filtrar ganado por sexo y peso</string>
     <string name="filter_by_sex_title">Filtrar por sexo</string>
-    <string name="filter_by_male">Macho</string>
-    <string name="filter_by_female">Hembra</string>
+    <string name="filter_by_male">@string/male</string>
+    <string name="filter_by_female">@string/female</string>
     <string name="filter_by_weight_title">Filtrar por peso</string>
 
     <!--User account-->

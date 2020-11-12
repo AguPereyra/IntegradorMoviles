@@ -22,6 +22,7 @@ class CattleCardRecyclerViewAdapter(private var cattleList: List<Cattle>) : Recy
             val bovine = cattleList[position]
             holder.caravan.text = bovine.caravan
             holder.weight.text = bovine.weight.toString() + " Kg"
+            holder.sex.text = bovine.getSexAsString()
         }
     }
 
@@ -38,5 +39,6 @@ class CattleCardRecyclerViewAdapter(private var cattleList: List<Cattle>) : Recy
         val caravan = itemView.findViewById<TextView>(R.id.cattle_caravan)
         val weight = itemView.findViewById<TextView>(R.id.cattle_weight)
         val image = itemView.findViewById<ImageView>(R.id.cattle_card_image)
+        val sex = itemView.findViewById<TextView>(R.id.cattle_sex)
     }
 }
