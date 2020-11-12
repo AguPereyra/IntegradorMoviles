@@ -4,6 +4,7 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:fitsSystemWindows="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -11,15 +12,15 @@
         android:layout_height="wrap_content">
 
         <include
+            android:id="@+id/app_main_toolbar"
             layout="@layout/app_main_toolbar"
             app:layout_constraintTop_toTopOf="parent"/>
 
         <FrameLayout
             android:id="@+id/cattle_fragment_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/main_toolbar"/>
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/app_main_toolbar"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
     <!--Navigation Bar-->
