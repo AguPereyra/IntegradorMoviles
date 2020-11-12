@@ -5,6 +5,7 @@
     <string name="cancel">Cancelar</string>
     <string name="brand_name">Vacas Locas</string>
     <string name="email">Email</string>
+    <string name="kilogram">Kg</string>
 
     <!--Login & Register-->
     <string name="hint_username">Usuario</string>
@@ -23,35 +24,67 @@
     <!--User-->
     <string name="user_name">El Usuario</string>
     <string name="user_email">un@email.random</string>
+
+    <!--Cattle-->
+    <!--Cattle List-->
+    <string name="cattle_list_title">Ganado</string>
     
     <!--Settings-->
+    <string name="settings_title">Preferencias</string>
     <!--Order by-->
+    <string name="order_by_settings_key">settings_order_by</string>
     <string name="order_by_settings_title">Ordenar ganado por</string>
-    <string name="order_by_settings_sum">Sexo</string>
     <string name="order_by_sex">Sexo</string>
     <string name="order_by_weight_asc">Peso ascendente</string>
     <string name="order_by_weight_des">Peso descendente</string>
     <!--Filter-->
+    <string name="female">Hembra</string>
+    <string name="male">Macho</string>
+    <string name="sex_filter_switch_key">switch_sex_filter</string>
+    <string name="sex_filter_list_key">settings_filter_by_sex</string>
+    <string name="weight_filter_switch_key">switch_weight_filter</string>
+    <string name="weight_filter_value_key">weight_filter_seek_bar</string>
+    <string name="settings_filter_title">Filtros</string>
     <string name="filter_title">Filtrar ganado</string>
     <string name="filter_sum">Filtrar ganado por sexo y peso</string>
     <string name="filter_by_sex_title">Filtrar por sexo</string>
-    <string name="filter_by_male">Macho</string>
-    <string name="filter_by_female">Hembra</string>
+    <string name="filter_by_male">@string/male</string>
+    <string name="filter_by_female">@string/female</string>
     <string name="filter_by_weight_title">Filtrar por peso</string>
 
     <!--User account-->
+    <string name="user_account_title">Cuenta</string>
+    <!--User account passwod-->
+    <string name="user_account_passwd_title">Contraseña</string>
     <string name="old_password">Contraseña actual</string>
     <string name="new_password">Nueva contraseña</string>
     <string name="validate_password">Confirmar contraseña</string>
-
+    <string name="wrong_login">Email o contraseña incorrectos</string>
+    <string name="error_change_passwd">Contraseñas no coinciden o vieja contraseña incorrecta</string>
     <!--Navigation Menu-->
+    <!--TODO:Change this with more generic section_title, and review if name changes are necessary-->
     <string name="nav_preferences">Preferencias</string>
     <string name="nav_account">Cuenta</string>
     <string name="nav_help">Ayuda</string>
 
+    <!--Top App Bar Menu-->
+    <string name="search_hint">Buscar caravana</string>
+    <string name="menu_refresh">Actualizar</string>
+
     <!--Help section-->
+    <string name="help_title">Ayuda</string>
     <string name="contact_us">Contactenos</string>
     <!--Contact us options-->
     <string name="email_sendto">mailto:el@creador.app</string>
     <string name="send_email_intent_text">Enviar con</string>
+    
+    <!--Notification-->
+    <string name="notification_msg">¡Ven! Tenemos muuucho para mostrarte</string>
+    <string name="channel_daily">Recordatorios diarios</string>
+    <string name="channel_daily_description">Se realizan recordatorios una vez al dia para usar la app</string>
+
+    <!--Dialogs-->
+    <string name="no_internet_title">Sin conexión</string>
+    <string name="no_internet_msg">Revisa tu conexión a Internet, los datos mostrados no se pueden actualizar</string>
+    <string name="no_internet_positive_btn">Aceptar</string>
 </resources>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="max_weight">1200</integer>
+    <integer name="min_weight">150</integer>
+</resources>

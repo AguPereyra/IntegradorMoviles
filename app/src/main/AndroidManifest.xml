@@ -1,6 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.iua.agustinpereyra">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/brand_cow_icon"
@@ -9,15 +13,17 @@
         android:supportsRtl="true"
         android:theme="@style/CattleTheme">
         
-        <activity android:name=".controller.welcomeviews.WelcomeActivity">
+        <activity android:name=".view.welcomeviews.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".controller.cattleviews.CattleListActivity"/>
-        <activity android:name=".controller.userviews.UserAccountActivity"/>
-        <activity android:name=".controller.settingsviews.SettingsActivity"/>
-        <activity android:name=".controller.helpviews.HelpActivity"/>
+        <activity android:name=".view.cattleviews.CattleActivity"/>
+        <activity android:name=".view.userviews.UserAccountActivity"/>
+        <activity android:name=".view.settingsviews.SettingsActivity"/>
+        <activity android:name=".view.helpviews.HelpActivity"/>
+        
+        <receiver android:name=".controller.AppBroadcastReceiver"/>
     </application>
 </manifest>
