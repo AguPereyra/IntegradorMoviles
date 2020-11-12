@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.iua.agustinpereyra.R
 import com.iua.agustinpereyra.controller.NetworkHelper
+import com.iua.agustinpereyra.controller.NotificationHelper
 import com.iua.agustinpereyra.controller.viewmodel.CattleViewModel
 import com.iua.agustinpereyra.repository.database.entities.Cattle
 import com.iua.agustinpereyra.view.base.ActionBarModifier
@@ -16,6 +17,7 @@ import com.iua.agustinpereyra.view.base.FilterableCattleRecyclerFragment
 class CattleListFragment : FilterableCattleRecyclerFragment(){
 
     private lateinit var cattleViewModel: CattleViewModel
+    private lateinit var listener: CattleListFragmentListener
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,7 +51,7 @@ class CattleListFragment : FilterableCattleRecyclerFragment(){
         })
 
         // Get Activity with needed functions
-        val listener = activity as CattleListFragmentListener
+        listener = activity as CattleListFragmentListener
 
         // Set up the toolbar corresponding title
         listener.setActionBarTitle(getString(R.string.cattle_list_title))
@@ -60,6 +62,21 @@ class CattleListFragment : FilterableCattleRecyclerFragment(){
         }
 
         return view
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            R.id.menu_refresh -> {
+                // Check if there is connection
+                if (NetworkHelper.isNetworkConnected(context)) {
+                    cattleViewModel.updateCattleList()
+                } else {
+                    listener.notifyNoInternet()
+                }
+
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     interface CattleListFragmentListener : ActionBarModifier {
