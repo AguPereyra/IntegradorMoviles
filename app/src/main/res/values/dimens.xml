@@ -14,7 +14,7 @@
     <dimen name="cattle_card_height">64dp</dimen>
     <dimen name="cattle_card_padding">4dp</dimen>
     <dimen name="cattle_card_text_margin">8dp</dimen>
-    <dimen name="cattle_card_margin">16dp</dimen>
+    <dimen name="cattle_card_margin">8dp</dimen>
 
     <!--User account-->
     <dimen name="user_image_margin_top">48dp</dimen>
