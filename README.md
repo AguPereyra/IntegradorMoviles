@@ -5,13 +5,19 @@ Integrative work for the subject Tecnologías Móviles (Mobile Technologies).
 The goal is to develop an individual application on the Android platform that allows the user to visualize their cattle and its data.
 
 ## To run
-In order to be able to run the app, the following software is needed:
+In order to be able to build the app, the following software is needed:
 * Kotlin
 * JVM
 * Gradle
 
 ### Apk file
 The Apk file can be found at *githubStuff/app-VacasLocas-TP_Integrador_PEREYRA.apk*
+
+To run from an Android device:
+* Android 6.0 or higher
+
+## Login data
+You can go to the register screen and create a brand new user. It will be registered and you will be able to reuse it for next logins.
 
 ## App working
 <img src="githubStuff/media/appSample.gif" width=25% height=25% />
@@ -28,12 +34,11 @@ The Apk file can be found at *githubStuff/app-VacasLocas-TP_Integrador_PEREYRA.a
 6. Design material may be used: https://material.io/
 7. Some activity must incorporate fragments.
 
-### First delivery requirements
-1. The first delivery must include:
-a. Screen navigation: Login, Registration, Main Screen, Settings. Static information should be displayed.
-b. Delivery date: 24/9/2020
-c. Delivery method: Upload repository to GitHub.
-d. To your GitHub add a gif of the application and the compiled application (.apk)
+### Second delivery requirements
+1. Networking, use of SQLite, menus, dialogs.
+2. Delivery date: 12/11/2020
+3. Delivery method: Upload repository to GitHub.
+4. Add a gif of the application and the compiled application (.apk)
 
 ## Workgroup
 * Members: Pereyra Agustín Ezequiel.
