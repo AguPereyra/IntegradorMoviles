@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.iua.agustinpereyra.R
 import com.iua.agustinpereyra.repository.database.entities.Cattle
 
@@ -23,6 +24,12 @@ class CattleCardRecyclerViewAdapter(private var cattleList: List<Cattle>) : Recy
             holder.caravan.text = bovine.caravan
             holder.weight.text = bovine.weight.toString() + " Kg"
             holder.sex.text = bovine.getSexAsString()
+
+            // Load image
+            Glide
+                .with(holder.itemView.context)
+                .load(bovine.imgUrl)
+                .into(holder.image)
         }
     }
 

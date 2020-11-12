@@ -1,7 +1,7 @@
 package com.iua.agustinpereyra.repository.networking
 
 import android.net.Uri
-import com.iua.agustinpereyra.controller.RANDOMUSER_API_FEMALE
+import com.iua.agustinpereyra.controller.RANDOMUSER_API_MALE
 import com.iua.agustinpereyra.repository.database.entities.Cattle
 import org.json.JSONObject
 import java.io.BufferedReader
@@ -15,13 +15,14 @@ import java.net.URL
 // Base URL for API.
 private const val BASE_URL = "https://randomuser.me/api/?"
 private const val RESULTS_PARAM = "results"
-private const val RESULTS_VALUE = "500"
+private const val RESULTS_VALUE = "50"
 private const val FIELDS_INC_PARAM = "inc"
 private const val RESULTS = "results"
 private const val GENDER_FIELD = "gender"
 private const val CELL_FIELD = "cell"
 private const val PICTURE_FIELD = "picture"
 private const val EMAIL_FIELD = "email"
+private const val IMG_LARGE = "large"
 private const val FIELDS_VALUE = "$GENDER_FIELD,$CELL_FIELD,$PICTURE_FIELD,$EMAIL_FIELD"
 
 
@@ -70,13 +71,15 @@ class ApiConnection {
                     cell = cell.replace(" ", "").replace("-", "")
                     val weight = cell.slice(cell.length-3 until cell.length).toInt()
                     // Get sex as boolean
-                    val sex = jsonArrayItem.getString(GENDER_FIELD) == RANDOMUSER_API_FEMALE
+                    val sex = jsonArrayItem.getString(GENDER_FIELD) == RANDOMUSER_API_MALE
+                    // Get image URL
+                    val image = jsonArrayItem.getJSONObject(PICTURE_FIELD).getString(IMG_LARGE)
                     // Add to DB
                     cattleList.add(
                         Cattle(
                             caravan,
                             weight,
-                            jsonArrayItem.getString(PICTURE_FIELD),
+                            image,
                             sex
                         )
                     )
