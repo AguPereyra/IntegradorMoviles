@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.iua.agustinpereyra.R
+import com.iua.agustinpereyra.controller.NetworkHelper
 import com.iua.agustinpereyra.controller.viewmodel.CattleViewModel
 import com.iua.agustinpereyra.repository.database.entities.Cattle
 import com.iua.agustinpereyra.view.base.ActionBarModifier
@@ -53,10 +54,16 @@ class CattleListFragment : FilterableCattleRecyclerFragment(){
         // Set up the toolbar corresponding title
         listener.setActionBarTitle(getString(R.string.cattle_list_title))
 
+        // Check for Internet and notify no conection available
+        if (!NetworkHelper.isNetworkConnected(context)) {
+            listener.notifyNoInternet()
+        }
+
         return view
     }
 
     interface CattleListFragmentListener : ActionBarModifier {
         fun navigateToSpecificBovine() : Unit
+        fun notifyNoInternet()
     }
 }

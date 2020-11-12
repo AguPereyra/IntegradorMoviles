@@ -81,4 +81,9 @@
     <string name="notification_msg">¡Ven! Tenemos muuucho para mostrarte</string>
     <string name="channel_daily">Recordatorios diarios</string>
     <string name="channel_daily_description">Se realizan recordatorios una vez al dia para usar la app</string>
+
+    <!--Dialogs-->
+    <string name="no_internet_title">Sin conexión</string>
+    <string name="no_internet_msg">Revisa tu conexión a Internet, los datos mostrados no se pueden actualizar</string>
+    <string name="no_internet_positive_btn">Aceptar</string>
 </resources>

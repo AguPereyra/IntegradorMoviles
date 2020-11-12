@@ -3,6 +3,7 @@ package com.iua.agustinpereyra.repository
 import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
+import com.iua.agustinpereyra.controller.NetworkHelper
 import com.iua.agustinpereyra.repository.database.AppDatabase
 import com.iua.agustinpereyra.repository.database.dao.CattleDAO
 import com.iua.agustinpereyra.repository.database.entities.Cattle
@@ -18,10 +19,13 @@ class CattleRepository(private val application: Application) {
         var list = getFromDB()
         emit(list)
         // Then search on the API
-        list = getFromNetwork()
-        emit(list)
-        // Finally update the DB
-        emit(updateDB(list))
+        // only if there is network connection
+        if (NetworkHelper.isNetworkConnected(application.applicationContext)) {
+            list = getFromNetwork()
+            emit(list)
+            // Finally update the DB
+            emit(updateDB(list))
+        }
     }
 
     init {

@@ -13,6 +13,7 @@ import com.iua.agustinpereyra.view.helpviews.HelpActivity
 import com.iua.agustinpereyra.view.settingsviews.SettingsActivity
 import com.iua.agustinpereyra.view.userviews.UserAccountActivity
 import com.iua.agustinpereyra.controller.VIEW_USER_REQUEST
+import com.iua.agustinpereyra.view.NotificationGenerator
 import kotlinx.android.synthetic.main.activity_cattle.*
 import kotlinx.android.synthetic.main.app_main_toolbar.*
 
@@ -113,6 +114,10 @@ class CattleActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
 
     override fun setActionBarHomeButtonAsUp() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    override fun notifyNoInternet() {
+        NotificationGenerator.noInternetConnectionAlert(this)
     }
 
     // Cattle List needed functions
