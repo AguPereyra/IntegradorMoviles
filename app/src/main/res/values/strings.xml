@@ -69,6 +69,7 @@
 
     <!--Top App Bar Menu-->
     <string name="search_hint">Buscar caravana</string>
+    <string name="menu_refresh">Actualizar</string>
 
     <!--Help section-->
     <string name="help_title">Ayuda</string>

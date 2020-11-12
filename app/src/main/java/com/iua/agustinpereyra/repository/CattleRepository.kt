@@ -2,6 +2,7 @@ package com.iua.agustinpereyra.repository
 
 import android.app.Application
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
 import com.iua.agustinpereyra.controller.NetworkHelper
 import com.iua.agustinpereyra.repository.database.AppDatabase
@@ -14,23 +15,12 @@ import kotlinx.coroutines.Dispatchers
 class CattleRepository(private val application: Application) {
 
     private var cattleDao: CattleDAO
-    val allCattle: LiveData<List<Cattle>> = liveData {
-        // First get DB data
-        var list = getFromDB()
-        emit(list)
-        // Then search on the API
-        // only if there is network connection
-        if (NetworkHelper.isNetworkConnected(application.applicationContext)) {
-            list = getFromNetwork()
-            emit(list)
-            // Finally update the DB
-            emit(updateDB(list))
-        }
-    }
+    val allCattle: LiveData<List<Cattle>>
 
     init {
         val db = AppDatabase.getDatabase(application)
         cattleDao = db.cattleDao()
+        allCattle = cattleDao.getAll()
     }
 
     /**
@@ -47,20 +37,23 @@ class CattleRepository(private val application: Application) {
     }
 
     /**
-     * getFromDB gets the cattle list that is at the DB
+     * updateCattleList updates DB with data from API. Doesn't return anything as we are
+     * working with LiveData on DAO
      */
-    private suspend fun getFromDB(): List<Cattle> = withContext(Dispatchers.IO) {
-        cattleDao.getAll()
-    }
-
-    /**
-     * updateDB updates DB with data from API
-     */
-    private suspend fun updateDB(cattleList: List<Cattle>): List<Cattle> = withContext(Dispatchers.IO) {
+    private suspend fun updateDB(cattleList: List<Cattle>) = withContext(Dispatchers.IO) {
         cattleDao.deleteAll()
         for (cattle in cattleList) {
             cattleDao.insert(cattle)
         }
-        cattleDao.getAll()
+    }
+
+    /**
+     * refreshCattleList tries to get data from network and update DB
+     */
+    suspend fun refreshCattleList() = withContext(Dispatchers.IO) {
+        if (NetworkHelper.isNetworkConnected(application.applicationContext)) {
+            val list = getFromNetwork()
+            updateDB(list)
+        }
     }
 }
