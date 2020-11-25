@@ -5,11 +5,10 @@ import android.view.*
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.iua.agustinpereyra.R
 import com.iua.agustinpereyra.controller.NetworkHelper
-import com.iua.agustinpereyra.controller.NotificationHelper
 import com.iua.agustinpereyra.controller.viewmodel.CattleViewModel
+import com.iua.agustinpereyra.databinding.FragmentCattleListBinding
 import com.iua.agustinpereyra.repository.database.entities.Cattle
 import com.iua.agustinpereyra.view.base.ActionBarModifier
 import com.iua.agustinpereyra.view.base.FilterableCattleRecyclerFragment
@@ -24,7 +23,7 @@ class CattleListFragment : FilterableCattleRecyclerFragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_cattle_list, container, false)
+        val fragmentBinding = FragmentCattleListBinding.inflate(inflater, container, false)
 
         // Inform that it will handle option menu icons
         setHasOptionsMenu(true)
@@ -38,7 +37,7 @@ class CattleListFragment : FilterableCattleRecyclerFragment(){
         val viewManager = LinearLayoutManager(context)
         recyclerViewAdapter = CattleCardRecyclerViewAdapter(baseCattleList)
 
-        val recyclerView = view.findViewById<RecyclerView>(R.id.cattle_list_recycler)
+        val recyclerView = fragmentBinding.cattleListRecycler
         recyclerView.apply {
             layoutManager = viewManager
             adapter = recyclerViewAdapter
@@ -61,7 +60,7 @@ class CattleListFragment : FilterableCattleRecyclerFragment(){
             listener.notifyNoInternet()
         }
 
-        return view
+        return fragmentBinding.root
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

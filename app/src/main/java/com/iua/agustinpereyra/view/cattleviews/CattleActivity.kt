@@ -2,7 +2,6 @@ package com.iua.agustinpereyra.view.cattleviews
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -13,29 +12,33 @@ import com.iua.agustinpereyra.view.helpviews.HelpActivity
 import com.iua.agustinpereyra.view.settingsviews.SettingsActivity
 import com.iua.agustinpereyra.view.userviews.UserAccountActivity
 import com.iua.agustinpereyra.controller.VIEW_USER_REQUEST
+import com.iua.agustinpereyra.databinding.ActivityCattleBinding
+import com.iua.agustinpereyra.databinding.AppMainToolbarBinding
 import com.iua.agustinpereyra.view.NotificationGenerator
-import kotlinx.android.synthetic.main.activity_cattle.*
-import kotlinx.android.synthetic.main.app_main_toolbar.*
 
 class CattleActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, CattleListFragment.CattleListFragmentListener {
 
     lateinit var toggle : ActionBarDrawerToggle
 
+    private lateinit var activityCattleBinding: ActivityCattleBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        activityCattleBinding = ActivityCattleBinding.inflate(layoutInflater)
 
-        setContentView(R.layout.activity_cattle)
+        setContentView(activityCattleBinding.root)
 
         // Set toolbar as support action bar
-        setSupportActionBar(main_toolbar)
+        val appMainToolbarBinding = activityCattleBinding.appMainToolbar
+        setSupportActionBar(appMainToolbarBinding.mainToolbar)
 
         // Tie together drawer layout and action bar
-        toggle = ActionBarDrawerToggle(this, drawer_layout, main_toolbar, 0, 0)
-        drawer_layout.addDrawerListener(toggle)
+        toggle = ActionBarDrawerToggle(this, activityCattleBinding.drawerLayout, appMainToolbarBinding.mainToolbar, 0, 0)
+        activityCattleBinding.drawerLayout.addDrawerListener(toggle)
 
 
         // Set item click listener
-        navigation_view.setNavigationItemSelectedListener(this)
+        activityCattleBinding.navigationView.setNavigationItemSelectedListener(this)
 
 
         // Check whether we are re-initiating (after rotation for example) or brand-new
@@ -66,7 +69,7 @@ class CattleActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
 
     // Navigation logic inside navbar
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        drawer_layout.closeDrawer(GravityCompat.START)
+        activityCattleBinding.drawerLayout.closeDrawer(GravityCompat.START)
         when(item.itemId){
             R.id.nav_menu_account -> {
                 val userAccountIntent = Intent(this, UserAccountActivity::class.java)
@@ -90,17 +93,17 @@ class CattleActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId) {
             R.id.home -> {
-                drawer_layout.openDrawer(GravityCompat.START)
-                return true
+                activityCattleBinding.drawerLayout.openDrawer(GravityCompat.START)
+                true
             }
-            else -> return super.onOptionsItemSelected(item)
+            else -> super.onOptionsItemSelected(item)
         }
     }
 
     // Close navbar if open on back pressed
     override fun onBackPressed() {
-        if (drawer_layout.isDrawerOpen(GravityCompat.START)){
-            drawer_layout.closeDrawer(GravityCompat.START)
+        if (activityCattleBinding.drawerLayout.isDrawerOpen(GravityCompat.START)){
+            activityCattleBinding.drawerLayout.closeDrawer(GravityCompat.START)
         } else {
             super.onBackPressed()
         }

@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.iua.agustinpereyra.R
 import com.iua.agustinpereyra.controller.AppBroadcastReceiver
+import com.iua.agustinpereyra.databinding.ActivityWelcomeBinding
 import com.iua.agustinpereyra.view.cattleviews.CattleActivity
 import com.iua.agustinpereyra.view.welcomeviews.LoginFragment.LoginFragmentListener
 import java.util.*
@@ -18,7 +19,8 @@ class WelcomeActivity : AppCompatActivity(), LoginFragmentListener,
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_welcome)
+        val activityBinding = ActivityWelcomeBinding.inflate(layoutInflater)
+        setContentView(activityBinding.root)
 
         // TODO: Should be here?
         // Register daily notification

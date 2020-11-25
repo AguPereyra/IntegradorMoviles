@@ -1,8 +1,11 @@
 package com.iua.agustinpereyra.view.base
 
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.iua.agustinpereyra.R
+import com.iua.agustinpereyra.databinding.AppMainToolbarBinding
+import com.iua.agustinpereyra.databinding.AppSimpleToolbarBinding
 
 abstract class BaseActivity : AppCompatActivity(), ActionBarModifier {
 
@@ -10,8 +13,15 @@ abstract class BaseActivity : AppCompatActivity(), ActionBarModifier {
     override fun setContentView(layoutResID: Int) {
         super.setContentView(layoutResID)
         // Set bar as actionbar
-        val appBar = findViewById<Toolbar>(R.id.simple_toolbar)
-        setSupportActionBar(appBar)
+        val appBar = AppSimpleToolbarBinding.inflate(layoutInflater)
+        setSupportActionBar(appBar.simpleToolbar)
+    }
+
+    override fun setContentView(view: View?) {
+        super.setContentView(view)
+        // Set bar as actionbar
+        val appBar = AppSimpleToolbarBinding.inflate(layoutInflater)
+        setSupportActionBar(appBar.simpleToolbar)
     }
 
     // ActionBarModifier functions

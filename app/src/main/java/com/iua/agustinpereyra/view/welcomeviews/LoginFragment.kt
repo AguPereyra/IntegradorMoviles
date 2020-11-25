@@ -11,26 +11,27 @@ import com.iua.agustinpereyra.controller.AccountManager
 import com.iua.agustinpereyra.controller.PreferenceUtils
 import com.iua.agustinpereyra.controller.STATE_PASSWORD
 import com.iua.agustinpereyra.controller.STATE_USERNAME
-import kotlinx.android.synthetic.main.fragment_login.*
-import kotlinx.android.synthetic.main.fragment_login.view.*
+import com.iua.agustinpereyra.databinding.FragmentLoginBinding
 
 class LoginFragment : Fragment() {
+
+    private var fragmentBinding: FragmentLoginBinding? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_login, container, false)
+        fragmentBinding = FragmentLoginBinding.inflate(inflater, container, false)
 
         // Get listener from parent activity
         val listener = activity as LoginFragmentListener
 
         // Set error if password is not valid
-        view.login_button.setOnClickListener {
+        fragmentBinding?.loginButton?.setOnClickListener {
             // TODO: Shouldn't go elsewhere?
-            val email = view?.login_username_input_edit_text?.text.toString()
-            val passwd = view?.login_password_edit_text?.text.toString()
+            val email = fragmentBinding?.loginUsernameInputEditText?.text.toString()
+            val passwd = fragmentBinding?.loginPasswordEditText?.text.toString()
             if(AccountManager.isLoginValid(email, passwd, context)) {
                 // Save to preferences
                 val preferenceUtils = PreferenceUtils(context)
@@ -38,37 +39,44 @@ class LoginFragment : Fragment() {
                 listener.navigateToMainPage()
             } else {
                 // Show login error message
-                login_password_input_container.error = getString(R.string.wrong_login)
+                fragmentBinding?.loginPasswordInputContainer?.error = getString(R.string.wrong_login)
             }
         }
 
         // Clear the error when the right amount of chars is set
-        view.login_password_edit_text.doOnTextChanged { text, start, before, count ->
-            login_password_input_container.error = null
+        fragmentBinding?.loginPasswordEditText?.doOnTextChanged { text, start, before, count ->
+            fragmentBinding?.loginPasswordInputContainer?.error = null
         }
 
 
         // Set register button onclick
-        view.login_register_button.setOnClickListener{
+        fragmentBinding?.loginRegisterButton?.setOnClickListener{
             listener.nagivateToRegisterPage()
         }
 
         // Check if data was stored and rewrite in that case
         if (savedInstanceState != null) {
-            view.login_username_input_edit_text.setText(savedInstanceState.getString(STATE_USERNAME))
-            view.login_password_edit_text.setText(savedInstanceState.getString(STATE_PASSWORD))
+            fragmentBinding?.loginUsernameInputEditText?.setText(savedInstanceState.getString(STATE_USERNAME))
+            fragmentBinding?.loginPasswordEditText?.setText(savedInstanceState.getString(STATE_PASSWORD))
         }
 
-        return view
+        return fragmentBinding?.root
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         // Save username and password
         outState.run {
-            putString(STATE_USERNAME, view?.login_username_input_edit_text?.text.toString())
-            putString(STATE_PASSWORD, view?.login_password_edit_text?.text.toString())
+            putString(STATE_USERNAME, fragmentBinding?.loginUsernameInputEditText?.text.toString())
+            putString(STATE_PASSWORD, fragmentBinding?.loginUsernameInputEditText?.text.toString())
         }
         super.onSaveInstanceState(outState)
+    }
+
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        // Cleaning up any references to the binding class
+        fragmentBinding = null
     }
 
     interface LoginFragmentListener {

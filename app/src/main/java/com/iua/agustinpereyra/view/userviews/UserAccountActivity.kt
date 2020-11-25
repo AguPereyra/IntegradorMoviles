@@ -4,15 +4,19 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import com.iua.agustinpereyra.R
+import com.iua.agustinpereyra.databinding.ActivityUserAccountBinding
 import com.iua.agustinpereyra.view.base.BaseActivity
 
 class UserAccountActivity : BaseActivity(),
     UserAccountViewFragment.UserAccountFragmentListener,
     UserAccountModifyPasswordFragment.UserAccountModifyPasswordFragmentListener {
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_user_account)
+        val activityBinding = ActivityUserAccountBinding.inflate(layoutInflater)
+        setContentView(activityBinding.root)
 
         // Check whether we are re-initiating (after rotation for example) or brand-new
         if (savedInstanceState == null) {

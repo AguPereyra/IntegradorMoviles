@@ -28,6 +28,11 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
+
+    // Data binding
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
