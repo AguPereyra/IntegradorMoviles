@@ -12,7 +12,7 @@ const val STATE_PASSWORD_OLD = STATE_PASSWORD
 const val STATE_PASSWORD_NEW = "STATE_PASSWORD_NEW"
 const val STATE_PASSWORD_VALIDATE = "STATE_PASSWORD_VALIDATE"
 const val STATE_EMAIL = "STATE_EMAIL"
-
+const val CURRENT_USER_ID = "CURRENT_USER_ID"
 
 /* Settings/Preferences */
 //TODO:Check if can be improved/use some variable to make it be automatically modified if array changes

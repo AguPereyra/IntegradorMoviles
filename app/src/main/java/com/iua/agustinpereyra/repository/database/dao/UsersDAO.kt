@@ -16,9 +16,13 @@ interface UsersDAO {
     @Query("SELECT * FROM users WHERE id=:userId")
     fun getUserById(userId: Int): LiveData<Users>
 
+    // Variant for when LiveData is not needed
+    @Query("SELECT * FROM users WHERE id=:userId")
+    fun getUserByIdNotObservable(userId: Int): Users
+
     // Used to get user when id is not available, used to check login
-    @Query("SELECT * FROM users WHERE username=:username AND passwd=:passwd")
-    fun getUser(username: String, passwd: String): Users
+    @Query("SELECT * FROM users WHERE email=:email AND passwd=:passwd")
+    fun getUser(email: String, passwd: String): Users
 
 
     @Query("UPDATE users SET username=:username WHERE id=:userId")

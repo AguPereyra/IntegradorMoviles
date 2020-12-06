@@ -1,7 +1,8 @@
-package com.iua.agustinpereyra.repository.database
+package com.iua.agustinpereyra.repository
 
 import android.app.Application
 import androidx.lifecycle.LiveData
+import com.iua.agustinpereyra.repository.database.AppDatabase
 import com.iua.agustinpereyra.repository.database.dao.UsersDAO
 import com.iua.agustinpereyra.repository.database.entities.Users
 import kotlinx.coroutines.Dispatchers
@@ -17,7 +18,7 @@ class UsersRepository(private val application: Application) {
     }
 
     /**
-     * getUserById gets the user asynchronously gets observable data from DB as LiveData<Users>
+     * getUserById gets the user asynchronously and returns observable data from DB as LiveData<Users>
      */
     suspend fun getUserById(userId: Int): LiveData<Users> = withContext(Dispatchers.IO) {
         val user = usersDao.getUserById(userId)
@@ -25,11 +26,19 @@ class UsersRepository(private val application: Application) {
     }
 
     /**
+     * getUserById gets the user asynchronously and returns non observable data from DB
+     */
+    suspend fun getUserByIdNotObservable(userId: Int): Users = withContext(Dispatchers.IO) {
+        val user = usersDao.getUserByIdNotObservable(userId)
+        user
+    }
+
+    /**
      * getUser gets the user from database if password and username match
      * a registry from it. If no user is found, null is returned
      */
-    suspend fun getUser(username: String, passwd: String): Users? = withContext(Dispatchers.IO) {
-        usersDao.getUser(username, passwd)
+    suspend fun getUser(email: String, passwd: String): Users? = withContext(Dispatchers.IO) {
+        usersDao.getUser(email, passwd)
     }
 
     /**

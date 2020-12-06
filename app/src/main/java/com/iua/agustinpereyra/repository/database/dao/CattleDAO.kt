@@ -8,6 +8,7 @@ import com.iua.agustinpereyra.repository.database.entities.Cattle
 
 @Dao
 interface CattleDAO {
+    //TODO: Make them suspend
     @Query("SELECT * FROM cattle")
     fun getAll() : LiveData<List<Cattle>>
 
