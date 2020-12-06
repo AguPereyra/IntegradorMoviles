@@ -7,14 +7,16 @@ import com.iua.agustinpereyra.repository.UsersRepository
 import com.iua.agustinpereyra.repository.database.entities.Users
 import java.lang.Error
 
-class AccountManager(val application: Application) {
+class AccountManager(application: Application) {
 
     private val usersRepository = UsersRepository(application)
     private val preferenceUtils = PreferenceUtils(application)
 
-    fun isPasswordValid(text: Editable?) : Boolean {
-        // Check if password is bigger than 8
-        return text != null && text.length >= 8
+    companion object {
+        fun isPasswordValid(text: Editable?) : Boolean {
+            // Check if password is bigger than 8
+            return text != null && text.length >= 8
+        }
     }
 
     /**
@@ -54,5 +56,15 @@ class AccountManager(val application: Application) {
         } else {
             throw Error("Impossible to change password of current user. There is not a logged user!")
         }
+    }
+
+    /**
+     * registerUser does what is necessary to the user data before saving it
+     * in the database, and then saves it in database
+     */
+    suspend fun registerUser(email: String, username: String, password: String) {
+        // TODO: Encrypt password
+        val newUser = Users(0, email, username, password)
+        usersRepository.insertUser(newUser)
     }
 }

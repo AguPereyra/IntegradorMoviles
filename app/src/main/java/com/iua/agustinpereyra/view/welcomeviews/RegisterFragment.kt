@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.iua.agustinpereyra.R
 import com.iua.agustinpereyra.controller.*
+import com.iua.agustinpereyra.controller.viewmodel.RegisterViewModel
 import com.iua.agustinpereyra.databinding.FragmentRegisterBinding
 
 class RegisterFragment : Fragment() {
@@ -24,6 +26,9 @@ class RegisterFragment : Fragment() {
         // Get listener from parent activity
         val listener = activity as RegisterFragmentListener
 
+        // Get ViewModel
+        val registerViewModel = ViewModelProvider(this).get(RegisterViewModel::class.java)
+
         // Set error if password is not valid
         fragmentBinding?.registerButton?.setOnClickListener {
             if (!AccountManager.isPasswordValid(fragmentBinding?.registerPasswordEditText?.text)) {
@@ -36,7 +41,10 @@ class RegisterFragment : Fragment() {
                 val email = fragmentBinding?.registerEmailEditText?.text.toString()
                 val username = fragmentBinding?.registerUsernameEditText?.text.toString()
                 val passwd = fragmentBinding?.registerPasswordEditText?.text.toString()
-                preferenceUtils.saveRegisteredUser(email, username, passwd)
+
+                // Register user
+                registerViewModel.registerUser(email, username, passwd)
+
                 // Navigate
                 listener.navigateToMainPage()
             }
