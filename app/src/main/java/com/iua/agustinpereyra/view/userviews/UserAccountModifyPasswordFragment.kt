@@ -5,8 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.iua.agustinpereyra.R
 import com.iua.agustinpereyra.controller.*
+import com.iua.agustinpereyra.controller.viewmodel.UserAccountModifyPasswordViewModel
 import com.iua.agustinpereyra.databinding.FragmentUserAccountModifyPasswordBinding
 import com.iua.agustinpereyra.view.base.ActionBarModifier
 
@@ -24,6 +26,17 @@ class UserAccountModifyPasswordFragment : Fragment() {
         // Get listener
         val listener = activity as UserAccountModifyPasswordFragmentListener
 
+        // Get viewmodel
+        val passwdViewModel = ViewModelProvider(this).get(UserAccountModifyPasswordViewModel::class.java)
+
+        passwdViewModel.isPasswordUpdated.observe(viewLifecycleOwner, {isUpdated ->
+            if (isUpdated) {
+                listener.onSaveModifyPasswordClick()
+            } else {
+                fragmentBinding?.userAccountModifyPasswdValidateContainer?.error = getString(R.string.error_change_passwd)
+            }
+        })
+
         // Set toolbar title and back button
         // TODO: Ask if there is a better way to do this
         listener.setActionBarTitle(getString(R.string.user_account_passwd_title))
@@ -39,11 +52,9 @@ class UserAccountModifyPasswordFragment : Fragment() {
             val oldPasswd = fragmentBinding?.userAccountModifyPasswdOldEditText?.text.toString()
             val newPasswd = fragmentBinding?.userAccountModifyPasswdNewEditText?.text.toString()
             val confirmPasswd = fragmentBinding?.userAccountModifyPasswdValidateEditText?.text.toString()
-            if (AccountManager.changePasswd(oldPasswd, newPasswd, confirmPasswd, context)) {
-                listener.onSaveModifyPasswordClick()
-            } else {
-                fragmentBinding?.userAccountModifyPasswdValidateContainer?.error = getString(R.string.error_change_passwd)
-            }
+
+            // Asynchronously try to change password
+            passwdViewModel.changePassword(oldPasswd, newPasswd, confirmPasswd)
 
         }
 
