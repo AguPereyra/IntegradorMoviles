@@ -12,11 +12,20 @@ interface UsersDAO {
     @Insert
     fun insertUser(user: Users)
 
+    // Preferred method as is faster
     @Query("SELECT * FROM users WHERE id=:userId")
-    fun getUser(userId: Int): LiveData<Users>
+    fun getUserById(userId: Int): LiveData<Users>
+
+    // Used to get user when id is not available, used to check login
+    @Query("SELECT * FROM users WHERE username=:username AND passwd=:passwd")
+    fun getUser(username: String, passwd: String): Users
+
 
     @Query("UPDATE users SET username=:username WHERE id=:userId")
-    fun updateUser(username: String, userId: Int)
+    fun updateUsername(username: String, userId: Int)
+
+    @Query("UPDATE users SET passwd=:passwd WHERE id=:userId")
+    fun updatePasswd(passwd: String, userId: Int)
 
     @Delete
     fun deleteUser(user: Users): Int

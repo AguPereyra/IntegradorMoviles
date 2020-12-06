@@ -7,6 +7,7 @@ import androidx.lifecycle.liveData
 import com.iua.agustinpereyra.controller.NetworkHelper
 import com.iua.agustinpereyra.repository.database.AppDatabase
 import com.iua.agustinpereyra.repository.database.dao.CattleDAO
+import com.iua.agustinpereyra.repository.database.dao.UsersDAO
 import com.iua.agustinpereyra.repository.database.entities.Cattle
 import com.iua.agustinpereyra.repository.networking.ApiConnection
 import kotlinx.coroutines.withContext
@@ -29,7 +30,6 @@ class CattleRepository(private val application: Application) {
      */
     private suspend fun getFromNetwork(): List<Cattle> = withContext(Dispatchers.IO) {
         // Delete data from DB
-        //TODO: Not working because of way of implementing, follow
         cattleDao.deleteAll()
         // Get data from Web
         val cattleList = ApiConnection.getCattleList()
