@@ -57,14 +57,22 @@ class UsersRepository(private val application: Application) {
     }
 
     /**
-     * updateUser updates the user's passed data (username and/or password)
+     * updateUserPassword updates the user's password.
+     * Returns true if one password was changed, false otherwise
      */
-    suspend fun updateUser(userId: Int, username: String?, password: String?) = withContext(Dispatchers.IO) {
-        if (username != null) {
-            usersDao.updateUsername(username, userId)
-        }
-        if (password != null) {
-            usersDao.updatePasswd(password, userId)
-        }
+    suspend fun updateUserPassword(userId: Int, password: String): Boolean = withContext(Dispatchers.IO) {
+        val rowsAffected = usersDao.updatePasswd(password, userId)
+        // Check if only 1 row was affected
+        rowsAffected == 1
+    }
+
+    /**
+     * updateUserName updates the user's username.
+     * Returns true if one username was changed, false otherwise
+     */
+    suspend fun updateUserName(userId: Int, username: String): Boolean = withContext(Dispatchers.IO) {
+        val rowsAffected = usersDao.updateUsername(username, userId)
+        // Check if only 1 row was affected
+        rowsAffected == 1
     }
 }

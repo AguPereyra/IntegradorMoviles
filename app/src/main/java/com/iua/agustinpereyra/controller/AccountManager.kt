@@ -48,7 +48,7 @@ class AccountManager(application: Application) {
             val loggedUser = usersRepository.getUserByIdNotObservable(loggedUserId)
             if (loggedUser.passwd == oldPasswd) {
                 if (newPasswd == confPasswd) {
-                    usersRepository.updateUser(loggedUserId, loggedUser.username, newPasswd)
+                    usersRepository.updateUserPassword(loggedUserId, newPasswd)
                     return true
                 }
             }
@@ -57,6 +57,19 @@ class AccountManager(application: Application) {
             throw Error("Impossible to change password of current user. There is not a logged user!")
         }
     }
+
+    /**
+     * changeUsername returns true if it was able to change the username, false otherwise
+     */
+    suspend fun changeUsername(newUsername: String): Boolean {
+        val loggedUserId = preferenceUtils.getCurrentUser()
+        if (loggedUserId != null) {
+            return usersRepository.updateUserName(loggedUserId, newUsername)
+        }
+        return false
+    }
+
+
 
     /**
      * registerUser does what is necessary to the user data before saving it

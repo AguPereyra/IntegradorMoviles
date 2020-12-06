@@ -26,10 +26,10 @@ interface UsersDAO {
 
 
     @Query("UPDATE users SET username=:username WHERE id=:userId")
-    fun updateUsername(username: String, userId: Int)
+    fun updateUsername(username: String, userId: Int): Int
 
     @Query("UPDATE users SET passwd=:passwd WHERE id=:userId")
-    fun updatePasswd(passwd: String, userId: Int)
+    fun updatePasswd(passwd: String, userId: Int): Int
 
     @Delete
     fun deleteUser(user: Users): Int
