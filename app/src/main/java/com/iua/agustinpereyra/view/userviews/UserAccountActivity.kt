@@ -18,6 +18,9 @@ class UserAccountActivity : BaseActivity(),
         val activityBinding = ActivityUserAccountBinding.inflate(layoutInflater)
         setContentView(activityBinding.root)
 
+        // Set toolbar
+        setSupportActionBar(activityBinding.basicAppBar.simpleToolbar)
+
         // Check whether we are re-initiating (after rotation for example) or brand-new
         if (savedInstanceState == null) {
             // Set fragment dinamically

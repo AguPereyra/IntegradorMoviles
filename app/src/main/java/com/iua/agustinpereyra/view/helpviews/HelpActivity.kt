@@ -6,6 +6,7 @@ import android.os.Bundle
 import com.iua.agustinpereyra.R
 import com.iua.agustinpereyra.databinding.ActivityHelpBinding
 import com.iua.agustinpereyra.view.base.BaseActivity
+import kotlinx.android.synthetic.main.app_simple_toolbar.view.*
 
 class HelpActivity : BaseActivity(), HelpFragment.HelpFragmentListener {
 
@@ -13,6 +14,9 @@ class HelpActivity : BaseActivity(), HelpFragment.HelpFragmentListener {
         super.onCreate(savedInstanceState)
         val activityBinding = ActivityHelpBinding.inflate(layoutInflater)
         setContentView(activityBinding.root)
+
+        // Set toolbar
+        setSupportActionBar(activityBinding.basicAppBar.simpleToolbar)
 
         // Set fragment dinamically
         //1. Get a reference to fragment manager

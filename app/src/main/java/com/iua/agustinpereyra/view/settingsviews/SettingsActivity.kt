@@ -12,6 +12,9 @@ class SettingsActivity : BaseActivity(), SettingsMainFragment.MainSettingsFragme
         val activityBinding = ActivitySettingsBinding.inflate(layoutInflater)
         setContentView(activityBinding.root)
 
+        // Set toolbar
+        setSupportActionBar(activityBinding.basicAppBar.simpleToolbar)
+
         // Set fragment dinamically
         //1. Get a reference to fragment manager
         val fragmentManager = supportFragmentManager

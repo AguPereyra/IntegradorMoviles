@@ -21,7 +21,6 @@ class NotificationGenerator {
                         })
                     .setTitle(R.string.no_internet_title)
                     .create()
-
                 // Show
                 alertBuilder.show()
             }
