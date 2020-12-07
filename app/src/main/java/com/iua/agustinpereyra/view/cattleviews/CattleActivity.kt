@@ -7,6 +7,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import com.google.android.material.navigation.NavigationView
+import com.google.android.material.tabs.TabLayoutMediator
 import com.iua.agustinpereyra.R
 import com.iua.agustinpereyra.controller.PreferenceUtils
 import com.iua.agustinpereyra.view.helpviews.HelpActivity
@@ -43,6 +44,8 @@ class CattleActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         activityCattleBinding.navigationView.setNavigationItemSelectedListener(this)
 
 
+        // TODO: Check and clean
+        /*
         // Check whether we are re-initiating (after rotation for example) or brand-new
         // and add fragment if needed
         if (savedInstanceState == null) {
@@ -61,7 +64,19 @@ class CattleActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
 
             //4. Commit transaction
             fragmentTransaction.commit()
+        }*/
+        // Get and set Tab Swipe manager
+        val tabsAdapter = CattleTabsAdapter(supportFragmentManager, lifecycle)
+        val viewPager = activityCattleBinding.cattleViewpager
+        val cattleTabLayout = activityCattleBinding.cattleTab
+        viewPager.adapter = tabsAdapter
+        TabLayoutMediator(cattleTabLayout, viewPager) {tab, position ->
+            tab.text = when(position) {
+                1 -> getString(R.string.cattle_all)
+                else -> getString(R.string.cattle_monitoring)
+            }
         }
+
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
