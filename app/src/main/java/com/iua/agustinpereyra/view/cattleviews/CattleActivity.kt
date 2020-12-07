@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import com.google.android.material.navigation.NavigationView
 import com.iua.agustinpereyra.R
+import com.iua.agustinpereyra.controller.PreferenceUtils
 import com.iua.agustinpereyra.view.helpviews.HelpActivity
 import com.iua.agustinpereyra.view.settingsviews.SettingsActivity
 import com.iua.agustinpereyra.view.userviews.UserAccountActivity
@@ -15,6 +16,7 @@ import com.iua.agustinpereyra.controller.VIEW_USER_REQUEST
 import com.iua.agustinpereyra.databinding.ActivityCattleBinding
 import com.iua.agustinpereyra.databinding.AppMainToolbarBinding
 import com.iua.agustinpereyra.view.NotificationGenerator
+import com.iua.agustinpereyra.view.welcomeviews.WelcomeActivity
 
 class CattleActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, CattleListFragment.CattleListFragmentListener {
 
@@ -84,6 +86,17 @@ class CattleActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
             R.id.nav_menu_help -> {
                 val helpActivityIntent = Intent(this, HelpActivity::class.java)
                 startActivity(helpActivityIntent)
+            }
+
+            R.id.nav_menu_signout -> {
+                val welcomeActivityIntent = Intent(this, WelcomeActivity::class.java)
+                // Sign out user from preferences
+                val preferenceUtils = PreferenceUtils(this)
+                preferenceUtils.signOut()
+                // Clean backstack and go to Welcome page
+                finishAffinity()
+                startActivity(welcomeActivityIntent)
+                finish()
             }
         }
         return true

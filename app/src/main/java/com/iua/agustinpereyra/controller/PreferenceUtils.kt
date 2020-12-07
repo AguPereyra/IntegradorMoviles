@@ -95,7 +95,7 @@ class PreferenceUtils {
      * signOut() removes the current user saved under shared preferences
      */
     fun signOut() {
-        ownSharedPreferences.edit().putInt(CURRENT_USER_ID, -1)
+        ownSharedPreferences.edit().putInt(CURRENT_USER_ID, -1).apply()
     }
 
     /**
