@@ -32,7 +32,7 @@ class RegisterFragment : Fragment() {
         // Set error if password is not valid
         fragmentBinding?.registerButton?.setOnClickListener {
             if (!AccountManager.isPasswordValid(fragmentBinding?.registerPasswordEditText?.text)) {
-                fragmentBinding?.registerEmailInputContainer?.error = getString(R.string.password_error)
+                fragmentBinding?.registerPasswordInputContainer?.error = getString(R.string.password_error)
             } else {
                 // Clear the error
                 fragmentBinding?.registerPasswordInputContainer?.error = null
