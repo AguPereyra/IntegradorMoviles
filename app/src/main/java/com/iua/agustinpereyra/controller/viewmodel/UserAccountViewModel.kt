@@ -14,21 +14,18 @@ class UserAccountViewModel(application: Application) : AndroidViewModel(applicat
     private val preferenceUtils = PreferenceUtils(application)
     private val usersRepository = UsersRepository(application)
     private val accountManager = AccountManager(application)
-    lateinit var currentUser: LiveData<Users>
+    private val _currentUser = MutableLiveData<Users>()
 
-    init {
-        getCurrentUser()
-    }
-
-    private fun getCurrentUser() {
-        viewModelScope.launch {
-            val userId = preferenceUtils.getCurrentUser()
-            if (userId != null) {
-                currentUser = usersRepository.getUserById(userId)
-            } else {
-                throw Error("Error: While trying to get current user, no current user ID found.")
+    fun getCurrentUser(): LiveData<Users> {
+        val userId = preferenceUtils.getCurrentUser()
+        if (userId != null) {
+            viewModelScope.launch {
+                _currentUser.value = usersRepository.getUserByIdNotObservable(userId)
             }
+        } else {
+            throw Error("Error: While trying to get current user, no current user ID found.")
         }
+        return _currentUser
     }
 
     fun changeUsername(username: String) {

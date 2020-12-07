@@ -26,9 +26,6 @@ class UserAccountViewFragment : Fragment() {
     ): View? {
         fragmentBinding = FragmentUserAccountBinding.inflate(inflater, container, false)
 
-        // Preference manager used below
-        val preferenceUtils = PreferenceUtils(context)
-
         // Get listener
         val listener = activity as UserAccountFragmentListener
 
@@ -36,7 +33,7 @@ class UserAccountViewFragment : Fragment() {
         val accountViewModel = ViewModelProvider(this).get(UserAccountViewModel::class.java)
 
         // Observe current user data
-        accountViewModel.currentUser.observe(viewLifecycleOwner, {user ->
+        accountViewModel.getCurrentUser().observe(viewLifecycleOwner, {user ->
             fragmentBinding?.userAccountUsernameEditText?.setText(user.username)
             fragmentBinding?.userAccountEmailEditText?.setText(user.email)
         })
