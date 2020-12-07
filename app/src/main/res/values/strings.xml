@@ -66,6 +66,7 @@
     <string name="nav_preferences">Preferencias</string>
     <string name="nav_account">Cuenta</string>
     <string name="nav_help">Ayuda</string>
+    <string name="nav_signout">Cerrar sesión</string>
 
     <!--Top App Bar Menu-->
     <string name="search_hint">Buscar caravana</string>
