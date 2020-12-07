@@ -72,10 +72,10 @@ class CattleActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         viewPager.adapter = tabsAdapter
         TabLayoutMediator(cattleTabLayout, viewPager) {tab, position ->
             tab.text = when(position) {
-                1 -> getString(R.string.cattle_all)
+                0 -> getString(R.string.cattle_all)
                 else -> getString(R.string.cattle_monitoring)
             }
-        }
+        }.attach()
 
     }
 
