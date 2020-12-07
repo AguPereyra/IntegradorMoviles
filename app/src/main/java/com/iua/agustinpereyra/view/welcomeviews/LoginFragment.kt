@@ -31,8 +31,8 @@ class LoginFragment : Fragment() {
         val loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
 
         // Observe isUserLogged variable
-        loginViewModel.isUserLogged.observe(viewLifecycleOwner, { isLogged ->
-            if (isLogged) {
+        loginViewModel.isUserLogged.observe(viewLifecycleOwner, { couldLog ->
+            if (couldLog) {
                 listener.navigateToMainPage()
             } else {
                 // Show login error message

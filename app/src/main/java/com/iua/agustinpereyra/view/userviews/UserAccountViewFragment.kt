@@ -60,7 +60,7 @@ class UserAccountViewFragment : Fragment() {
             listener.onSaveUserAccountViewClick()
         }
 
-        fragmentBinding?.userAccountPasswordEditText?.setOnTouchListener { view, motionEvent ->
+        fragmentBinding?.userAccountPasswordEditText?.setOnTouchListener { view, _ ->
             // Navigate to the change password screen
             listener.navigateToChangePassword()
             view.performClick()

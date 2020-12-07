@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 
 class LoginViewModel(application: Application) : AndroidViewModel(application) {
     private val accountManager = AccountManager(application)
-    private val _isUserLogged = MutableLiveData<Boolean>(false)
+    private val _isUserLogged = MutableLiveData<Boolean>()
     val isUserLogged: LiveData<Boolean> = _isUserLogged
 
     /**
