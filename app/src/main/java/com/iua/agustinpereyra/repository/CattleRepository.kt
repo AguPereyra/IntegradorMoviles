@@ -2,12 +2,9 @@ package com.iua.agustinpereyra.repository
 
 import android.app.Application
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.liveData
 import com.iua.agustinpereyra.controller.NetworkHelper
 import com.iua.agustinpereyra.repository.database.AppDatabase
 import com.iua.agustinpereyra.repository.database.dao.CattleDAO
-import com.iua.agustinpereyra.repository.database.dao.UsersDAO
 import com.iua.agustinpereyra.repository.database.entities.Cattle
 import com.iua.agustinpereyra.repository.networking.ApiConnection
 import kotlinx.coroutines.withContext
