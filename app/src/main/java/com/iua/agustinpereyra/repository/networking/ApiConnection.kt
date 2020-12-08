@@ -80,6 +80,7 @@ class ApiConnection {
                     // Add to DB
                     cattleList.add(
                         Cattle(
+                            0,
                             caravan,
                             weight,
                             image,

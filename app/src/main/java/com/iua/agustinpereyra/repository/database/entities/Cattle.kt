@@ -10,7 +10,9 @@ import com.iua.agustinpereyra.controller.MALE_FIRST_CAP
 * Sex: False female, True male*/
 @Entity(tableName = "cattle")
 data class Cattle(
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
+    val cattleId: Int,
+    @NonNull
     val caravan: String,
     @NonNull
     val weight: Int,
