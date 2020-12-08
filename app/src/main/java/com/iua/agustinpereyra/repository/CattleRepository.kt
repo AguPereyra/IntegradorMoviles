@@ -29,8 +29,6 @@ class CattleRepository(private val application: Application) {
      * Runs on IO threads.
      */
     private suspend fun getFromNetwork(): List<Cattle> = withContext(Dispatchers.IO) {
-        // Delete data from DB
-        cattleDao.deleteAll()
         // Get data from Web
         val cattleList = ApiConnection.getCattleList()
         cattleList
@@ -41,10 +39,7 @@ class CattleRepository(private val application: Application) {
      * working with LiveData on DAO
      */
     private suspend fun updateDB(cattleList: List<Cattle>) = withContext(Dispatchers.IO) {
-        cattleDao.deleteAll()
-        for (cattle in cattleList) {
-            cattleDao.insert(cattle)
-        }
+        cattleDao.updateAll(cattleList)
     }
 
     /**
