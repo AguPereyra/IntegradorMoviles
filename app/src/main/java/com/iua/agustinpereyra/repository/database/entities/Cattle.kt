@@ -11,7 +11,7 @@ import com.iua.agustinpereyra.controller.MALE_FIRST_CAP
 @Entity(tableName = "cattle")
 data class Cattle(
     @PrimaryKey(autoGenerate = true)
-    val cattleId: Int,
+    val id: Int,
     @NonNull
     val caravan: String,
     @NonNull
