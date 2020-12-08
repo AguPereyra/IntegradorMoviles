@@ -5,16 +5,19 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.iua.agustinpereyra.repository.database.dao.CattleDAO
+import com.iua.agustinpereyra.repository.database.dao.MonitoredCattleDAO
 import com.iua.agustinpereyra.repository.database.dao.UsersDAO
 import com.iua.agustinpereyra.repository.database.entities.Cattle
+import com.iua.agustinpereyra.repository.database.entities.MonitoredCattle
 import com.iua.agustinpereyra.repository.database.entities.Users
 
 
-@Database(entities = arrayOf(Cattle::class, Users::class), version = 4)
+@Database(entities = [Cattle::class, Users::class, MonitoredCattle::class], version = 6)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun cattleDao(): CattleDAO
     abstract fun usersDao(): UsersDAO
+    abstract fun monitoredCattleDao(): MonitoredCattleDAO
 
     companion object {
 

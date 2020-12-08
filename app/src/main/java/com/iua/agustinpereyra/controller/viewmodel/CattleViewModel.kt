@@ -7,11 +7,11 @@ import com.iua.agustinpereyra.repository.database.entities.Cattle
 import kotlinx.coroutines.launch
 
 
-class CattleViewModel(application: Application) : AndroidViewModel(application) {
+class CattleViewModel(application: Application) : AndroidViewModel(application), BaseCattleViewModel {
     private val cattleRepository: CattleRepository = CattleRepository(application)
 
     // Get asynchronously
-    val cattleList: LiveData<List<Cattle>> = cattleRepository.allCattle
+    override val cattleList: LiveData<List<Cattle>> = cattleRepository.allCattle
 
     init {
         // Try to update from API

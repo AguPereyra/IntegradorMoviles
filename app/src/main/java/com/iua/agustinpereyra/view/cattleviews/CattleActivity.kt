@@ -15,11 +15,11 @@ import com.iua.agustinpereyra.view.settingsviews.SettingsActivity
 import com.iua.agustinpereyra.view.userviews.UserAccountActivity
 import com.iua.agustinpereyra.controller.VIEW_USER_REQUEST
 import com.iua.agustinpereyra.databinding.ActivityCattleBinding
-import com.iua.agustinpereyra.databinding.AppMainToolbarBinding
 import com.iua.agustinpereyra.view.NotificationGenerator
+import com.iua.agustinpereyra.view.base.BaseCattleListFragment
 import com.iua.agustinpereyra.view.welcomeviews.WelcomeActivity
 
-class CattleActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, CattleListFragment.CattleListFragmentListener {
+class CattleActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, BaseCattleListFragment.CattleListFragmentListener {
 
     lateinit var toggle : ActionBarDrawerToggle
 

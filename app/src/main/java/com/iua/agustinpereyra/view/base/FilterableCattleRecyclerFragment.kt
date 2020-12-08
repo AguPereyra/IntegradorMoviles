@@ -10,7 +10,7 @@ import com.iua.agustinpereyra.controller.*
 import com.iua.agustinpereyra.repository.database.entities.Cattle
 import com.iua.agustinpereyra.view.cattleviews.CattleCardRecyclerViewAdapter
 
-/*
+/**
 * FilterableCattleRecyclerFragment is a base fragment that contains needed logic
 * to filter, order and search cattle over a list that should be showed over a RecyclerViewAdapter.
 * Classes that inherit from it should initialize variables baseCattleList, currentCattleList and
