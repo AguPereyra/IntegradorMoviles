@@ -68,7 +68,7 @@ class ApiConnection {
                     //TODO: Refactor
                     jsonArrayItem = jsonArray.getJSONObject(i)
                     // Special treatment to get a value usable as a caravan (must be unique) from API
-                    var caravan = (10..99).random().toString() + jsonArrayItem.getString(EMAIL_FIELD).slice(0..3).toUpperCase() + (10..99).random().toString()
+                    var caravan = "2" + jsonArrayItem.getString(EMAIL_FIELD).slice(0..5).toUpperCase() + "X0"
                     // Special treatement to get a value usable as a weight from a cell number
                     var cell = jsonArrayItem.getString(CELL_FIELD).trim()
                     cell = cell.replace(" ", "").replace("-", "")
