@@ -48,6 +48,6 @@ class MonitoredCattleRepository(private val application: Application) {
      * to the indicated user.
      */
     suspend fun getAllCattleOfUser(userId: Int) = withContext(Dispatchers.IO) {
-        _monitoredCattle.value = monitoredCattleDao.getMonitoredCattleOf(userId)
+        _monitoredCattle.postValue(monitoredCattleDao.getMonitoredCattleOf(userId))
     }
 }

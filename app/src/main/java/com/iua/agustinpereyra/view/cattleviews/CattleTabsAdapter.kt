@@ -11,8 +11,8 @@ class CattleTabsAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) 
 
     override fun createFragment(position: Int): Fragment {
         return when(position) {
-            1 -> CattleListFragment()
-            else -> CattleListFragment()
+            0 -> CattleListFragment()
+            else -> MonitoredCattleListFragment()
         }
     }
 }
