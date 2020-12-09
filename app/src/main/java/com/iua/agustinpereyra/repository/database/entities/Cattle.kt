@@ -1,6 +1,7 @@
 package com.iua.agustinpereyra.repository.database.entities
 
 import androidx.annotation.NonNull
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.iua.agustinpereyra.controller.FEMALE_FIRST_CAP
@@ -12,7 +13,7 @@ import com.iua.agustinpereyra.controller.MALE_FIRST_CAP
 data class Cattle(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
-    @NonNull
+    @ColumnInfo(index = true)
     val caravan: String,
     @NonNull
     val weight: Int,

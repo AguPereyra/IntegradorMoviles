@@ -12,7 +12,7 @@ import com.iua.agustinpereyra.repository.database.entities.MonitoredCattle
 import com.iua.agustinpereyra.repository.database.entities.Users
 
 
-@Database(entities = [Cattle::class, Users::class, MonitoredCattle::class], version = 6)
+@Database(entities = [Cattle::class, Users::class, MonitoredCattle::class], version = 7)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun cattleDao(): CattleDAO

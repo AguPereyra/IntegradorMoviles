@@ -21,4 +21,13 @@ interface CattleDAO {
 
     @Insert
     fun insert(cattle: Cattle)
+
+    // Delete based on caravan (not primary key)
+    @Query("DELETE FROM cattle WHERE cattle.caravan=:caravan")
+    fun delete(caravan: String)
+
+    // Update based on caravan (not primary key)
+    @Query("UPDATE cattle SET weight=:weight, imgUrl=:imgUrl " +
+            "WHERE caravan=:caravan")
+    fun update(caravan: String, weight: Int, imgUrl: String)
 }

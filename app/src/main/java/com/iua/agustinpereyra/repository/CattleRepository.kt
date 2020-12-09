@@ -32,11 +32,45 @@ class CattleRepository(private val application: Application) {
     }
 
     /**
-     * updateCattleList updates DB with data from API. Doesn't return anything as we are
+     * updateDB updates DB with data from API. It inserts new bovines if there are
+     * ones, updates the ones we have, and deletes the ones that were in the database
+     * but not in the passed array. Doesn't return anything as we are
      * working with LiveData on DAO
      */
     private suspend fun updateDB(cattleList: List<Cattle>) = withContext(Dispatchers.IO) {
-        cattleDao.updateAll(cattleList)
+        // TODO: Check for optimization
+        // Get the current list of cattle
+        val currentCattleList = allCattle.value as MutableList<Cattle>?
+
+        // Get the received cattle list as a mutable list, to only leave the new bovines if any
+        val newCattleList : MutableList<Cattle> = ArrayList(cattleList)
+
+        if (currentCattleList != null && currentCattleList.size > 0) {
+            // Check and separate data to update, delete and insert
+            val updateCattle = mutableListOf<Cattle>()
+            for (receivedCattle in cattleList) {
+                for (currentCattle in currentCattleList) {
+                    if (receivedCattle.caravan == currentCattle.caravan) {
+                        // Set to update and remove from current list and received list
+                        // Those who remain in current list must be deleted
+                        // Those who remain in received list must be inserted
+                        updateCattle.add(receivedCattle)
+                        currentCattleList.remove(currentCattle)
+                        newCattleList.remove(currentCattle)
+                        break
+                    }
+                }
+            }
+
+            // Delete corresponding cattle
+            for (cattle in currentCattleList) {
+                cattleDao.delete(cattle.caravan)
+            }
+        }
+        // Insert the remaining cattle
+        for (cattle in newCattleList) {
+            cattleDao.insert(cattle)
+        }
     }
 
     /**
