@@ -68,7 +68,7 @@ abstract class BaseCattleListFragment : FilterableCattleRecyclerFragment(){
     }
 
     interface CattleListFragmentListener : ActionBarModifier {
-        fun navigateToSpecificBovine() : Unit
+        fun navigateToSpecificBovine()
         fun notifyNoInternet()
     }
 }
