@@ -35,11 +35,18 @@ abstract class BaseCattleListFragment : FilterableCattleRecyclerFragment(){
     ): View? {
         val fragmentBinding = FragmentCattleListBinding.inflate(inflater, container, false)
 
+        // Get Activity with needed functions
+        listener = activity as CattleListFragmentListener
+
+        // Set up the toolbar corresponding title
+        listener.setActionBarTitle(getString(R.string.cattle_list_title))
+
+
         // Set up the recycler
         baseCattleList = listOf()
         currentCattleList = baseCattleList
         val viewManager = LinearLayoutManager(context)
-        recyclerViewAdapter = CattleCardRecyclerViewAdapter(baseCattleList)
+        recyclerViewAdapter = CattleCardRecyclerViewAdapter(baseCattleList, listener)
 
         val recyclerView = fragmentBinding.cattleListRecycler
         recyclerView.apply {
@@ -53,12 +60,6 @@ abstract class BaseCattleListFragment : FilterableCattleRecyclerFragment(){
             recyclerViewAdapter.setCattle(newCattle)
         })
 
-        // Get Activity with needed functions
-        listener = activity as CattleListFragmentListener
-
-        // Set up the toolbar corresponding title
-        listener.setActionBarTitle(getString(R.string.cattle_list_title))
-
         // Check for Internet and notify no conection available
         if (!NetworkHelper.isNetworkConnected(context)) {
             listener.notifyNoInternet()
@@ -68,7 +69,7 @@ abstract class BaseCattleListFragment : FilterableCattleRecyclerFragment(){
     }
 
     interface CattleListFragmentListener : ActionBarModifier {
-        fun navigateToSpecificBovine()
+        fun navigateToSpecificBovine(caravan: String)
         fun notifyNoInternet()
     }
 }

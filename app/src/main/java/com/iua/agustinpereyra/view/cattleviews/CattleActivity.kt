@@ -9,6 +9,7 @@ import androidx.core.view.GravityCompat
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.tabs.TabLayoutMediator
 import com.iua.agustinpereyra.R
+import com.iua.agustinpereyra.controller.CARAVAN
 import com.iua.agustinpereyra.controller.PreferenceUtils
 import com.iua.agustinpereyra.view.helpviews.HelpActivity
 import com.iua.agustinpereyra.view.settingsviews.SettingsActivity
@@ -17,6 +18,7 @@ import com.iua.agustinpereyra.controller.VIEW_USER_REQUEST
 import com.iua.agustinpereyra.databinding.ActivityCattleBinding
 import com.iua.agustinpereyra.view.NotificationGenerator
 import com.iua.agustinpereyra.view.base.BaseCattleListFragment
+import com.iua.agustinpereyra.view.bovine.SingleBovineActivity
 import com.iua.agustinpereyra.view.welcomeviews.WelcomeActivity
 
 class CattleActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, BaseCattleListFragment.CattleListFragmentListener {
@@ -152,8 +154,10 @@ class CattleActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
     }
 
     // Cattle List needed functions
-    override fun navigateToSpecificBovine() {
-        TODO("Not yet implemented")
+    override fun navigateToSpecificBovine(caravan: String) {
+        val bovineIntent = Intent(this, SingleBovineActivity::class.java)
+        bovineIntent.putExtra(CARAVAN, caravan)
+        startActivity(bovineIntent)
     }
 
 }

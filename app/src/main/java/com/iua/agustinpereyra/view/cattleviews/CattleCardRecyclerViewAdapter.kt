@@ -8,12 +8,14 @@ import com.bumptech.glide.Glide
 import com.google.android.material.card.MaterialCardView
 import com.iua.agustinpereyra.databinding.CattleCardItemViewBinding
 import com.iua.agustinpereyra.repository.database.entities.Cattle
+import com.iua.agustinpereyra.view.base.BaseCattleListFragment
 
-class CattleCardRecyclerViewAdapter(private var cattleList: List<Cattle>) : RecyclerView.Adapter<CattleCardRecyclerViewAdapter.CattleCardViewHolder>() {
+class CattleCardRecyclerViewAdapter(private var cattleList: List<Cattle>,
+                                    val activity: BaseCattleListFragment.CattleListFragmentListener) : RecyclerView.Adapter<CattleCardRecyclerViewAdapter.CattleCardViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CattleCardViewHolder {
         val layoutView = CattleCardItemViewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return CattleCardViewHolder(layoutView)
+        return CattleCardViewHolder(layoutView, activity)
     }
 
     override fun onBindViewHolder(holder: CattleCardViewHolder, position: Int) {
@@ -32,13 +34,23 @@ class CattleCardRecyclerViewAdapter(private var cattleList: List<Cattle>) : Recy
         notifyDataSetChanged()
     }
 
-    class CattleCardViewHolder(private val itemBinding: CattleCardItemViewBinding) : RecyclerView.ViewHolder(itemBinding.root),
-        View.OnLongClickListener{
+    class CattleCardViewHolder(private val itemBinding: CattleCardItemViewBinding,
+                               val activity: BaseCattleListFragment.CattleListFragmentListener) : RecyclerView.ViewHolder(itemBinding.root),
+        View.OnLongClickListener, View.OnClickListener{
+
+        init {
+            itemBinding.root.setOnLongClickListener(this)
+            itemBinding.root.setOnClickListener(this)
+        }
 
         override fun onLongClick(view: View?): Boolean {
             val cardView = view as MaterialCardView
             cardView.isChecked = !cardView.isChecked
             return true
+        }
+
+        override fun onClick(view: View?) {
+            activity.navigateToSpecificBovine(itemBinding.cattleCaravan.text.toString())
         }
 
         fun bind(bovine: Cattle) {
