@@ -23,6 +23,7 @@
         <activity android:name=".view.userviews.UserAccountActivity"/>
         <activity android:name=".view.settingsviews.SettingsActivity"/>
         <activity android:name=".view.helpviews.HelpActivity"/>
+        <activity android:name=".view.bovine.SingleBovineActivity"/>
         
         <receiver android:name=".controller.AppBroadcastReceiver"/>
     </application>
