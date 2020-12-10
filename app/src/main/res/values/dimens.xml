@@ -27,4 +27,9 @@
     <!--Help section-->
     <dimen name="help_start_margin">64dp</dimen>
     <dimen name="help_bottom_margin">64dp</dimen>
+
+    <!--Bovine View-->
+    <dimen name="bovine_img_size">128dp</dimen>
+    <dimen name="bovine_img_margin">8dp</dimen>
+    <dimen name="bovine_data_margin">8dp</dimen>
 </resources>

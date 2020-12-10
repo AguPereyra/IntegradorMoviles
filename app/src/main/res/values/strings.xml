@@ -20,6 +20,12 @@
     <!--Cattle Card-->
     <string name="cattle_caravan">A34B8-09</string>
     <string name="cattle_weight">680Kg</string>
+    
+    <!--Bovine Data-->
+    <string name="generic_title_1">General</string>
+    <string name="generic_field_1">* Peso: 832Kg</string>
+    <string name="generic_field_2">* Orígen: Nacimiento Local</string>
+    <string name="generic_field_3">* Categoría: Ternero</string>
 
     <!--User-->
     <string name="user_name">El Usuario</string>
