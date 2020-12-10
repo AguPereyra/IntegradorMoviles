@@ -3,11 +3,9 @@ package com.iua.agustinpereyra.view.cattleviews
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.iua.agustinpereyra.R
+import com.google.android.material.card.MaterialCardView
 import com.iua.agustinpereyra.databinding.CattleCardItemViewBinding
 import com.iua.agustinpereyra.repository.database.entities.Cattle
 
@@ -34,7 +32,14 @@ class CattleCardRecyclerViewAdapter(private var cattleList: List<Cattle>) : Recy
         notifyDataSetChanged()
     }
 
-    class CattleCardViewHolder(private val itemBinding: CattleCardItemViewBinding) : RecyclerView.ViewHolder(itemBinding.root) {
+    class CattleCardViewHolder(private val itemBinding: CattleCardItemViewBinding) : RecyclerView.ViewHolder(itemBinding.root),
+        View.OnLongClickListener{
+
+        override fun onLongClick(view: View?): Boolean {
+            val cardView = view as MaterialCardView
+            cardView.isChecked = !cardView.isChecked
+            return true
+        }
 
         fun bind(bovine: Cattle) {
             itemBinding.cattleCaravan.text = bovine.caravan
