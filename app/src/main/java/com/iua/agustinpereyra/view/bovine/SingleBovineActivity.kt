@@ -20,6 +20,7 @@ class SingleBovineActivity : BaseActivity() {
         // Set Action Bar and Title
         setSupportActionBar(singleBovineBinding.basicAppBar.simpleToolbar)
         setActionBarTitle(getString(R.string.bovine_x, callingIntent.getStringExtra(CARAVAN)))
+        setActionBarHomeButtonAsUp()
 
         // Set Recycler View
         val bovineDataList = StaticDataGenerator.generateBovineData(this)
