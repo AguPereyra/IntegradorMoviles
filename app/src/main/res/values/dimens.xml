@@ -32,4 +32,5 @@
     <dimen name="bovine_img_size">128dp</dimen>
     <dimen name="bovine_img_margin">8dp</dimen>
     <dimen name="bovine_data_margin">8dp</dimen>
+    <dimen name="bovine_data_padding">4dp</dimen>
 </resources>

@@ -11,21 +11,22 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="@dimen/bovine_data_padding">
 
         <TextView
             android:id="@+id/bovine_data_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/generic_title_1"
-            android:textAppearance="?attr/textAppearanceHeadline4"/>
+            android:textAppearance="?attr/textAppearanceHeadline5"/>
 
         <TextView
             android:id="@+id/bovine_data_field_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/generic_field_1"
-            android:textAppearance="?attr/textAppearanceHeadline5"/>
+            android:textAppearance="?attr/textAppearanceHeadline6"/>
 
         <TextView
             android:id="@+id/bovine_data_field_2"
