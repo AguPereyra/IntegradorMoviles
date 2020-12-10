@@ -22,10 +22,13 @@
     <string name="cattle_weight">680Kg</string>
     
     <!--Bovine Data-->
+    <string name="bovine_x">Bovino %1$s</string>
     <string name="generic_title_1">General</string>
     <string name="generic_field_1">* Peso: 832Kg</string>
     <string name="generic_field_2">* Orígen: Nacimiento Local</string>
-    <string name="generic_field_3">* Categoría: Ternero</string>
+    <string name="generic_title_2">Vacunas</string>
+    <string name="generic_field_3">* Viruela: 10/12/2020</string>
+    <string name="generic_field_4">* Triquinosis: 09/09/2009</string>
 
     <!--User-->
     <string name="user_name">El Usuario</string>

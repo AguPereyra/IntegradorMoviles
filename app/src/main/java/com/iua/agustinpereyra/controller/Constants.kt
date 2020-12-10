@@ -32,6 +32,9 @@ const val FEMALE_FIRST_CAP = "Hembra"
 const val BOOLEAN_FEMALE = false
 const val OWN_PREFS_NAME = "com.iua.agustinpereyra.prefs"
 
+/* Bovine Fields */
+const val CARAVAN = "caravana"
+
 /* Register user */
 const val REGISTRED_USER_EMAIL = "REGISTRED_USER_EMAIL"
 const val REGISTRED_USER_PASSWD = "REGISTRED_USER_PASSWD"
