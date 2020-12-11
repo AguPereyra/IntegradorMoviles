@@ -5,6 +5,7 @@ import android.view.*
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.iua.agustinpereyra.R
+import com.iua.agustinpereyra.controller.CattleManager
 import com.iua.agustinpereyra.controller.NetworkHelper
 import com.iua.agustinpereyra.controller.viewmodel.BaseCattleViewModel
 import com.iua.agustinpereyra.controller.viewmodel.CattleViewModel
@@ -57,7 +58,9 @@ abstract class BaseCattleListFragment : FilterableCattleRecyclerFragment(){
         // Observe and update UI and local variable
         viewModel.cattleList.observe(viewLifecycleOwner, Observer { newCattle ->
             baseCattleList = newCattle
-            recyclerViewAdapter.setCattle(newCattle)
+            // Order showed cattle list based on preferences
+            currentCattleList =  CattleManager.orderBasedOnPreferences(baseCattleList, context)
+            recyclerViewAdapter.setCattle(currentCattleList)
         })
 
         // Check for Internet and notify no conection available
