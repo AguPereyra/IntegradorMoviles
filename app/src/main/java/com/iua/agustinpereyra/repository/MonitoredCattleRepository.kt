@@ -21,25 +21,31 @@ class MonitoredCattleRepository(private val application: Application) {
     }
 
     /**
-     * deleteMonitoredCattle removes the specified bovine from the
+     * deleteMonitoredCattle removes the specified cattle from the
      * user's monitoring list. It takes care of updating the monitoredCattle
      * list, assuming that the user ID passed to update the monitored list
      * is the same that the monitoredCattle list that is being used/observed
      */
-    suspend fun deleteMonitoredCattle(userId: Int, cattleId: Int) = withContext(Dispatchers.IO) {
-        val bovine = MonitoredCattle(cattleId, userId)
-        monitoredCattleDao.deleteMonitoredCattle(bovine)
+    suspend fun deleteMonitoredCattle(userId: Int, cattleCaravan: List<String>) = withContext(Dispatchers.IO) {
+        val delCattle = mutableListOf<MonitoredCattle>()
+        for (bovineCaravan in cattleCaravan) {
+            delCattle.add(MonitoredCattle(bovineCaravan, userId))
+        }
+        monitoredCattleDao.deleteMonitoredCattle(delCattle)
         _monitoredCattle.value = monitoredCattleDao.getMonitoredCattleOf(userId)
     }
 
     /**
-     * addMonitoredCattle adds the specified bovine to the user's monitoring list. It updates
+     * addMonitoredCattle adds the specified cattle to the user's monitoring list. It updates
      * the monitoredCattle LiveData list with the data of the same user ID that was passed to
-     * add the bovine.
+     * add the cattle.
      */
-    suspend fun addMonitoredCattle(userId: Int, cattleId: Int) = withContext(Dispatchers.IO) {
-        val bovine = MonitoredCattle(cattleId, userId)
-        monitoredCattleDao.insertMonitoredCattle(bovine)
+    suspend fun addMonitoredCattle(userId: Int, cattleCaravan: List<String>) = withContext(Dispatchers.IO) {
+        val addCattle = mutableListOf<MonitoredCattle>()
+        for (bovineCaravan in cattleCaravan) {
+            addCattle.add(MonitoredCattle(bovineCaravan, userId))
+        }
+        monitoredCattleDao.insertMonitoredCattle(addCattle)
         _monitoredCattle.value = monitoredCattleDao.getMonitoredCattleOf(userId)
     }
 

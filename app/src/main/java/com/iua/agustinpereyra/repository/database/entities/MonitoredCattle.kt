@@ -6,7 +6,7 @@ import androidx.room.ForeignKey
 import androidx.room.ForeignKey.CASCADE
 
 @Entity(tableName = "monitored_cattle",
-    primaryKeys = ["cattleId", "userId"],
+    primaryKeys = ["cattleCaravan", "userId"],
     foreignKeys = [
         ForeignKey(entity = Users::class,
         parentColumns = arrayOf("id"),
@@ -14,12 +14,12 @@ import androidx.room.ForeignKey.CASCADE
         onDelete = CASCADE,
         onUpdate = CASCADE),
         ForeignKey(entity = Cattle::class,
-        parentColumns = arrayOf("id"),
-        childColumns = arrayOf("cattleId"),
+        parentColumns = arrayOf("caravan"),
+        childColumns = arrayOf("cattleCaravan"),
         onDelete = CASCADE,
         onUpdate = CASCADE)]
 )
 data class MonitoredCattle (
-    val cattleId: Int,
+    val cattleCaravan: String,
     @ColumnInfo(index = true) // Needed for faster search
     val userId: Int)

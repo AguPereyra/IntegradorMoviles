@@ -9,7 +9,6 @@ import com.iua.agustinpereyra.repository.database.entities.Cattle
 
 @Dao
 interface CattleDAO {
-    //TODO: Make them suspend
     @Query("SELECT * FROM cattle")
     fun getAll() : LiveData<List<Cattle>>
 
@@ -22,7 +21,6 @@ interface CattleDAO {
     @Insert
     fun insert(cattle: Cattle)
 
-    // Delete based on caravan (not primary key)
     @Query("DELETE FROM cattle WHERE cattle.caravan=:caravan")
     fun delete(caravan: String)
 
