@@ -68,7 +68,7 @@ class ApiConnection {
                     //TODO: Refactor
                     jsonArrayItem = jsonArray.getJSONObject(i)
                     // Special treatment to get a value usable as a caravan (must be unique) from API
-                    var caravan = "2" + jsonArrayItem.getString(EMAIL_FIELD).slice(0..5).toUpperCase() + "X0"
+                    var caravan = (0..9).random().toString() + jsonArrayItem.getString(EMAIL_FIELD).slice(0..2).toUpperCase() + "X" + ('A'..'Z').random().toString() + ('A'..'Z').random().toString()
                     // Special treatement to get a value usable as a weight from a cell number
                     var cell = jsonArrayItem.getString(CELL_FIELD).trim()
                     cell = cell.replace(" ", "").replace("-", "")
@@ -80,7 +80,6 @@ class ApiConnection {
                     // Add to DB
                     cattleList.add(
                         Cattle(
-                            0,
                             caravan,
                             weight,
                             image,
