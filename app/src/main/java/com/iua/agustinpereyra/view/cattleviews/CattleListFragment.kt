@@ -12,6 +12,8 @@ import com.iua.agustinpereyra.view.base.BaseCattleListFragment
 class CattleListFragment : BaseCattleListFragment(),
             CattleCardRecyclerViewAdapter.cattleCardRecyclerViewAdapterListener{
 
+    private var currentUser: Int? = null
+
     // Variable used to keep the list of selected cattle
     private val selectedCaravans = mutableListOf<String>()
 
@@ -43,14 +45,13 @@ class CattleListFragment : BaseCattleListFragment(),
             return when (item.itemId) {
                 R.id.context_menu_monitor -> {
                     // Call the ViewModel with the list of caravans and the user id
-                    val preferenceUtils = PreferenceUtils(context)
-                    val currentUser = preferenceUtils.getCurrentUser()
-                    if (currentUser == null) {
+                    if (currentUser != null) {
+                        (viewModel as CattleViewModel).addToMonitored(currentUser as Int, selectedCaravans)
+                        mode.finish() // Close Contextual Menu
+                        true
+                    } else {
                         throw Error("Error: While trying to get current user at MonitoredCattleListFragment. Current user not found.")
                     }
-                    (viewModel as CattleViewModel).addToMonitored(currentUser, selectedCaravans)
-                    mode.finish() // Close Contextual Menu
-                    true
                 }
                 else -> false
             }
@@ -67,6 +68,15 @@ class CattleListFragment : BaseCattleListFragment(),
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        // Get preference utils, used to get the current user
+        val preferenceUtils = PreferenceUtils(context)
+        // Get the current user
+        currentUser = preferenceUtils.getCurrentUser()
+        if (currentUser == null) {
+            // Fail, something went wrong, there should be a user logged
+            throw java.lang.Error("Error: While trying to get current user at MonitoredCattleListFragment. Current user not found.")
+        }
+
         // Inform that it will handle option menu icons
         setHasOptionsMenu(true)
         // Get ViewModel
