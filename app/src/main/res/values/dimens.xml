@@ -33,4 +33,7 @@
     <dimen name="bovine_img_margin">8dp</dimen>
     <dimen name="bovine_data_margin">8dp</dimen>
     <dimen name="bovine_data_padding">4dp</dimen>
+
+    <!--Card Style-->
+    <dimen name="card_stroke_width">1dp</dimen>
 </resources>

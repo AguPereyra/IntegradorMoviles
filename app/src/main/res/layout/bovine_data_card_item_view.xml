@@ -7,35 +7,45 @@
     android:orientation="horizontal"
     app:cardPreventCornerOverlap="true"
     android:layout_margin="@dimen/cattle_card_margin"
-    app:cardBackgroundColor="@color/secondaryColor">
+    app:strokeWidth="@dimen/card_stroke_width"
+    app:strokeColor="@color/secondaryLightColor">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="@dimen/bovine_data_padding">
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/bovine_data_title"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingStart="@dimen/bovine_data_padding"
             android:text="@string/generic_title_1"
-            android:textAppearance="?attr/textAppearanceHeadline5"/>
+            android:textAppearance="?attr/textAppearanceHeadline5"
+            android:background="@color/secondaryLightColor"/>
 
-        <TextView
-            android:id="@+id/bovine_data_field_1"
-            android:layout_width="wrap_content"
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/generic_field_1"
-            android:textAppearance="?attr/textAppearanceHeadline6"/>
+            android:orientation="vertical"
+            android:padding="@dimen/bovine_data_padding">
 
-        <TextView
-            android:id="@+id/bovine_data_field_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/generic_field_2"
-            android:textAppearance="?attr/textAppearanceHeadline6"/>
+            <TextView
+                android:id="@+id/bovine_data_field_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/generic_field_1"
+                android:textAppearance="?attr/textAppearanceHeadline6"/>
 
+            <TextView
+                android:id="@+id/bovine_data_field_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/generic_field_2"
+                android:textAppearance="?attr/textAppearanceHeadline6"/>
+
+        </LinearLayout>
     </LinearLayout>
 
 
