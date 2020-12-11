@@ -101,4 +101,8 @@
     <!--Cattle Tabs-->
     <string name="cattle_all">TODO</string>
     <string name="cattle_monitoring">SEGUIMIENTO</string>
+
+    <!--Contextual Action Mode-->
+    <string name="options_monitor">Seguir</string>
+    <string name="options_dont_monitor">No seguir</string>
 </resources>

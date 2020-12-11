@@ -19,7 +19,7 @@ import com.iua.agustinpereyra.view.cattleviews.CattleCardRecyclerViewAdapter
 abstract class FilterableCattleRecyclerFragment : Fragment(), SearchView.OnQueryTextListener {
 
     // Base list of data
-    protected lateinit var baseCattleList : List<Cattle>
+    protected var baseCattleList : List<Cattle> = listOf()
     // Currently showing list of data, used for searches
     protected lateinit var currentCattleList : List<Cattle>
     protected lateinit var recyclerViewAdapter : CattleCardRecyclerViewAdapter

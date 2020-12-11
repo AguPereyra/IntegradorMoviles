@@ -11,7 +11,8 @@ import com.iua.agustinpereyra.controller.viewmodel.MonitoredCattleViewModel
 import com.iua.agustinpereyra.view.base.BaseCattleListFragment
 import java.lang.Error
 
-class MonitoredCattleListFragment : BaseCattleListFragment(){
+class MonitoredCattleListFragment : BaseCattleListFragment(),
+    CattleCardRecyclerViewAdapter.cattleCardRecyclerViewAdapterListener{
 
     private var currentUser: Int? = null
 
@@ -35,6 +36,9 @@ class MonitoredCattleListFragment : BaseCattleListFragment(){
         viewModel = ViewModelProvider(this).get(MonitoredCattleViewModel::class.java)
         (viewModel as MonitoredCattleViewModel).setMonitoredCattleListOfUser(currentUser as Int)
 
+        // Set the recycler view
+        recyclerViewAdapter = CattleCardRecyclerViewAdapter(baseCattleList, this)
+
         // Initialize all that's needed
         return super.onCreateView(inflater, container, savedInstanceState)
     }
@@ -54,5 +58,14 @@ class MonitoredCattleListFragment : BaseCattleListFragment(){
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onClickAction(caravan: String) {
+        // Delegate to Activity
+        listener.navigateToSpecificBovine(caravan)
+    }
+
+    override fun onLongClickAction(caravan: String) {
+        TODO("Not yet implemented")
     }
 }

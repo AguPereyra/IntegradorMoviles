@@ -26,7 +26,9 @@ abstract class BaseCattleListFragment : FilterableCattleRecyclerFragment(){
     /**
      * onCreateView sets the layout and other boilerplate code.
      * It should be called at the end of the child's as a return value
-     * if overwritten.
+     * if overwritten. Inheriting classes have to set the recyclerViewAdapter variable
+     * before calling this onCreateView, with the corresponding baseCattleList
+     * (the global inherited variable), and listener.
      */
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,10 +45,8 @@ abstract class BaseCattleListFragment : FilterableCattleRecyclerFragment(){
 
 
         // Set up the recycler
-        baseCattleList = listOf()
         currentCattleList = baseCattleList
         val viewManager = LinearLayoutManager(context)
-        recyclerViewAdapter = CattleCardRecyclerViewAdapter(baseCattleList, listener)
 
         val recyclerView = fragmentBinding.cattleListRecycler
         recyclerView.apply {

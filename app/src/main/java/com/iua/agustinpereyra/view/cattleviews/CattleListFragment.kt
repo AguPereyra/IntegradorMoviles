@@ -8,7 +8,8 @@ import com.iua.agustinpereyra.controller.NetworkHelper
 import com.iua.agustinpereyra.controller.viewmodel.CattleViewModel
 import com.iua.agustinpereyra.view.base.BaseCattleListFragment
 
-class CattleListFragment : BaseCattleListFragment(){
+class CattleListFragment : BaseCattleListFragment(),
+            CattleCardRecyclerViewAdapter.cattleCardRecyclerViewAdapterListener{
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -19,6 +20,10 @@ class CattleListFragment : BaseCattleListFragment(){
         setHasOptionsMenu(true)
         // Get ViewModel
         viewModel = ViewModelProvider(this).get(CattleViewModel::class.java)
+
+        // Set the recycler view
+        recyclerViewAdapter = CattleCardRecyclerViewAdapter(baseCattleList, this)
+
         // Initialize all that's needed
         return super.onCreateView(inflater, container, savedInstanceState)
     }
@@ -36,5 +41,14 @@ class CattleListFragment : BaseCattleListFragment(){
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onClickAction(caravan: String) {
+        // Delegate to Activity
+        listener.navigateToSpecificBovine(caravan)
+    }
+
+    override fun onLongClickAction(caravan: String) {
+        TODO("Not yet implemented")
     }
 }
