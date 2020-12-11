@@ -67,8 +67,6 @@ class ApiConnection {
                 for (i in 0 until jsonArray.length()) {
                     //TODO: Refactor
                     jsonArrayItem = jsonArray.getJSONObject(i)
-                    // Special treatment to get a value usable as a caravan (must be unique) from API
-                    var caravan = (0..9).random().toString() + jsonArrayItem.getString(EMAIL_FIELD).slice(0..2).toUpperCase() + "X" + ('A'..'Z').random().toString() + ('A'..'Z').random().toString()
                     // Special treatement to get a value usable as a weight from a cell number
                     var cell = jsonArrayItem.getString(CELL_FIELD).trim()
                     cell = cell.replace(" ", "").replace("-", "")
@@ -77,6 +75,9 @@ class ApiConnection {
                     val sex = jsonArrayItem.getString(GENDER_FIELD) == RANDOMUSER_API_MALE
                     // Get image URL
                     val image = jsonArrayItem.getJSONObject(PICTURE_FIELD).getString(IMG_LARGE)
+                    // Special treatment to get a value usable as a caravan (must be unique) from API
+                    var caravan = jsonArrayItem.getString(EMAIL_FIELD).slice(0..3).toUpperCase() + jsonArrayItem.getString(EMAIL_FIELD).slice(1..2).toUpperCase() + weight.toString()
+
                     // Add to DB
                     cattleList.add(
                         Cattle(
