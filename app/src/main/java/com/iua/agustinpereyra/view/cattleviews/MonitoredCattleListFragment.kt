@@ -65,7 +65,54 @@ class MonitoredCattleListFragment : BaseCattleListFragment(),
         listener.navigateToSpecificBovine(caravan)
     }
 
+    /**
+     * actionMode is a utility variable that helps to follow the state of
+     * the action mode
+     */
+    private var actionMode: ActionMode? = null
+    /**
+     * actionModeCallback implements the ActionMode.Callback interface
+     * with the needed logic for the Contextual Action Mode to work
+     */
+    private val actionModeCallback = object : ActionMode.Callback {
+        // Called when the action mode is created
+        override fun onCreateActionMode(mode: ActionMode, menu: Menu): Boolean {
+            // Inflate the menu resource with the context menu items
+            val inflater: MenuInflater = mode.menuInflater
+            inflater.inflate(R.menu.bovine_monitoring_menu, menu)
+            return true
+        }
+
+        // Called each time the action mode is shown, always called after onCreateActionMode
+        override fun onPrepareActionMode(mode: ActionMode, menu: Menu): Boolean {
+            return false // Return false if nothing is done
+        }
+
+        override fun onActionItemClicked(mode: ActionMode, item: MenuItem): Boolean {
+            return when (item.itemId) {
+                R.id.context_menu_dont_monitor -> {
+                        //TODO: Implement
+                        true
+                }
+                else -> false
+            }
+        }
+
+        // Called when the users leaves the action mode
+        override fun onDestroyActionMode(mode: ActionMode) {
+            actionMode = null
+        }
+
+
+    }
+
     override fun onLongClickAction(caravan: String) {
-        TODO("Not yet implemented")
+        // Check if actionMode is not already on screen
+        when (actionMode) {
+            null -> {
+                // Initiate the context action mode
+                actionMode = activity?.startActionMode(actionModeCallback)
+            }
+        }
     }
 }
