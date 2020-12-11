@@ -32,7 +32,7 @@ class MonitoredCattleRepository(private val application: Application) {
             delCattle.add(MonitoredCattle(bovineCaravan, userId))
         }
         monitoredCattleDao.deleteMonitoredCattle(delCattle)
-        _monitoredCattle.value = monitoredCattleDao.getMonitoredCattleOf(userId)
+        _monitoredCattle.postValue(monitoredCattleDao.getMonitoredCattleOf(userId))
     }
 
     /**
@@ -46,7 +46,7 @@ class MonitoredCattleRepository(private val application: Application) {
             addCattle.add(MonitoredCattle(bovineCaravan, userId))
         }
         monitoredCattleDao.insertMonitoredCattle(addCattle)
-        _monitoredCattle.value = monitoredCattleDao.getMonitoredCattleOf(userId)
+        _monitoredCattle.postValue(monitoredCattleDao.getMonitoredCattleOf(userId))
     }
 
     /**

@@ -21,5 +21,4 @@ import androidx.room.ForeignKey.CASCADE
 )
 data class MonitoredCattle (
     val cattleCaravan: String,
-    @ColumnInfo(index = true) // Needed for faster search
     val userId: Int)

@@ -75,4 +75,7 @@ dependencies {
 
     // ViewPager2 for swipe between tabs
     implementation "androidx.viewpager2:viewpager2:1.0.0"
+
+    // Debug Database
+    debugImplementation 'com.amitshekhar.android:debug-db:1.0.6'
 }

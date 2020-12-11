@@ -79,5 +79,13 @@ class AccountManager(application: Application) {
         // TODO: Encrypt password
         val newUser = Users(0, email, username, password)
         usersRepository.insertUser(newUser)
+        // Get User Id
+        val savedUser = usersRepository.getUser(email, username)
+        if (savedUser != null) {
+            preferenceUtils.saveCurrentUser(savedUser.id)
+        } else {
+            // Something went wrong
+            throw Error("Error: While trying to register user, user was not saved in database")
+        }
     }
 }

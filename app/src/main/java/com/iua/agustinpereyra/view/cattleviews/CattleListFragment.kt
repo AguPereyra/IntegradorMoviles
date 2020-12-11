@@ -5,11 +5,62 @@ import android.view.*
 import androidx.lifecycle.ViewModelProvider
 import com.iua.agustinpereyra.R
 import com.iua.agustinpereyra.controller.NetworkHelper
+import com.iua.agustinpereyra.controller.PreferenceUtils
 import com.iua.agustinpereyra.controller.viewmodel.CattleViewModel
 import com.iua.agustinpereyra.view.base.BaseCattleListFragment
 
 class CattleListFragment : BaseCattleListFragment(),
             CattleCardRecyclerViewAdapter.cattleCardRecyclerViewAdapterListener{
+
+    // Variable used to keep the list of selected cattle
+    private val selectedCaravans = mutableListOf<String>()
+
+    /**
+     * actionMode is a utility variable that helps to follow the state of
+     * the action mode
+     */
+    private var actionMode: ActionMode? = null
+
+    /**
+     * actionModeCallback implements the ActionMode.Callback interface
+     * with the needed logic for the Contextual Action Mode to work
+     */
+    private val actionModeCallback = object : ActionMode.Callback {
+        // Called when the action mode is created
+        override fun onCreateActionMode(mode: ActionMode, menu: Menu): Boolean {
+            // Inflate the menu resource with the context menu items
+            val inflater: MenuInflater = mode.menuInflater
+            inflater.inflate(R.menu.bovine_all_menu, menu)
+            return true
+        }
+
+        // Called each time the action mode is shown, always called after onCreateActionMode
+        override fun onPrepareActionMode(mode: ActionMode, menu: Menu): Boolean {
+            return false // Return false if nothing is done
+        }
+
+        override fun onActionItemClicked(mode: ActionMode, item: MenuItem): Boolean {
+            return when (item.itemId) {
+                R.id.context_menu_monitor -> {
+                    // Call the ViewModel with the list of caravans and the user id
+                    val preferenceUtils = PreferenceUtils(context)
+                    val currentUser = preferenceUtils.getCurrentUser()
+                    if (currentUser == null) {
+                        throw Error("Error: While trying to get current user at MonitoredCattleListFragment. Current user not found.")
+                    }
+                    (viewModel as CattleViewModel).addToMonitored(currentUser, selectedCaravans)
+                    mode.finish() // Close Contextual Menu
+                    true
+                }
+                else -> false
+            }
+        }
+
+        // Called when the users leaves the action mode
+        override fun onDestroyActionMode(mode: ActionMode) {
+            actionMode = null
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,48 +99,16 @@ class CattleListFragment : BaseCattleListFragment(),
         listener.navigateToSpecificBovine(caravan)
     }
 
-    /**
-     * actionMode is a utility variable that helps to follow the state of
-     * the action mode
-     */
-    private var actionMode: ActionMode? = null
-    /**
-     * actionModeCallback implements the ActionMode.Callback interface
-     * with the needed logic for the Contextual Action Mode to work
-     */
-    private val actionModeCallback = object : ActionMode.Callback {
-        // Called when the action mode is created
-        override fun onCreateActionMode(mode: ActionMode, menu: Menu): Boolean {
-            // Inflate the menu resource with the context menu items
-            val inflater: MenuInflater = mode.menuInflater
-            inflater.inflate(R.menu.bovine_all_menu, menu)
-            return true
-        }
-
-        // Called each time the action mode is shown, always called after onCreateActionMode
-        override fun onPrepareActionMode(mode: ActionMode, menu: Menu): Boolean {
-            return false // Return false if nothing is done
-        }
-
-        override fun onActionItemClicked(mode: ActionMode, item: MenuItem): Boolean {
-            return when (item.itemId) {
-                R.id.context_menu_dont_monitor -> {
-                    //TODO: Implement
-                    true
-                }
-                else -> false
-            }
-        }
-
-        // Called when the users leaves the action mode
-        override fun onDestroyActionMode(mode: ActionMode) {
-            actionMode = null
-        }
-
-
-    }
-
     override fun onLongClickAction(caravan: String) {
+        // Check if the caravan is being selected or deselected
+        if (selectedCaravans.contains(caravan)) {
+            // Deselecting
+            selectedCaravans.remove(caravan)
+        } else {
+            // Selecting
+            selectedCaravans.add(caravan)
+        }
+
         // Check if actionMode is not already on screen
         when (actionMode) {
             null -> {
