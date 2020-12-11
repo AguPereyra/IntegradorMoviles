@@ -34,4 +34,13 @@ class MonitoredCattleViewModel(application: Application) : AndroidViewModel(appl
         }
     }
 
+    /**
+     * stopMonitoring stops monitoring the cattle for the passed user
+     */
+    fun stopMonitoring(userId: Int, cattleCaravans: List<String>) {
+        viewModelScope.launch {
+            monitoredCattleRepository.deleteMonitoredCattle(userId, cattleCaravans)
+        }
+    }
+
 }

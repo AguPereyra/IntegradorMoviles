@@ -104,16 +104,19 @@ class CattleListFragment : BaseCattleListFragment(),
         if (selectedCaravans.contains(caravan)) {
             // Deselecting
             selectedCaravans.remove(caravan)
+            // Close if not selected cattle remaining
+            if (selectedCaravans.size == 0) {
+                actionMode?.finish()
+            }
         } else {
             // Selecting
             selectedCaravans.add(caravan)
-        }
-
-        // Check if actionMode is not already on screen
-        when (actionMode) {
-            null -> {
-                // Initiate the context action mode
-                actionMode = activity?.startActionMode(actionModeCallback)
+            // Check if actionMode is not already on screen
+            when (actionMode) {
+                null -> {
+                    // Initiate the context action mode
+                    actionMode = activity?.startActionMode(actionModeCallback)
+                }
             }
         }
     }
