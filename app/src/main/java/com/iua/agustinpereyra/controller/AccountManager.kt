@@ -73,19 +73,21 @@ class AccountManager(application: Application) {
 
     /**
      * registerUser does what is necessary to the user data before saving it
-     * in the database, and then saves it in database
+     * in the database, and then saves it in database. If the user was successfully
+     * registered, it returns true, otherwise it returns false.
      */
-    suspend fun registerUser(email: String, username: String, password: String) {
+    suspend fun registerUser(email: String, username: String, password: String) : Boolean {
         // TODO: Encrypt password
         val newUser = Users(0, email, username, password)
         usersRepository.insertUser(newUser)
         // Get User Id
-        val savedUser = usersRepository.getUser(email, username)
-        if (savedUser != null) {
+        val savedUser = usersRepository.getUser(email, password)
+        return if (savedUser != null) {
             preferenceUtils.saveCurrentUser(savedUser.id)
+            true
         } else {
             // Something went wrong
-            throw Error("Error: While trying to register user, user was not saved in database")
+            false
         }
     }
 }

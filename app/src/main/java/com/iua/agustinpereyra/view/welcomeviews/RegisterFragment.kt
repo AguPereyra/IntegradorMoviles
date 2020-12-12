@@ -29,6 +29,15 @@ class RegisterFragment : Fragment() {
         // Get ViewModel
         val registerViewModel = ViewModelProvider(this).get(RegisterViewModel::class.java)
 
+        // Observe if user could register
+        registerViewModel.isUserRegistered.observe(viewLifecycleOwner, { couldRegister ->
+            if (couldRegister) {
+                listener.navigateToMainPage()
+            } else {
+                fragmentBinding?.registerPasswordInputContainer?.error = getString(R.string.register_error)
+            }
+        })
+
         // Set error if password is not valid
         fragmentBinding?.registerButton?.setOnClickListener {
             if (!AccountManager.isPasswordValid(fragmentBinding?.registerPasswordEditText?.text)) {
@@ -37,16 +46,12 @@ class RegisterFragment : Fragment() {
                 // Clear the error
                 fragmentBinding?.registerPasswordInputContainer?.error = null
                 // Register
-                val preferenceUtils = PreferenceUtils(context)
                 val email = fragmentBinding?.registerEmailEditText?.text.toString()
                 val username = fragmentBinding?.registerUsernameEditText?.text.toString()
                 val passwd = fragmentBinding?.registerPasswordEditText?.text.toString()
 
                 // Register user
                 registerViewModel.registerUser(email, username, passwd)
-
-                // Navigate
-                listener.navigateToMainPage()
             }
         }
 

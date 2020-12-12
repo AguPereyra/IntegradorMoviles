@@ -15,6 +15,7 @@
     <string name="register_button">Registrarse</string>
     <string name="back_button">Volver</string>
     <string name="password_error">Mínimo 8 caracteres</string>
+    <string name="register_error">Error, intente de nuevo</string>
     <string name="new_user_question">¿Nuevo?</string>
 
     <!--Cattle Card-->
