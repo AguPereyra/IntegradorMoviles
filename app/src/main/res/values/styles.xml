@@ -6,6 +6,8 @@
         <item name="colorAccent">@color/secondaryColor</item>
 
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <item name="actionModeBackground">@color/secondaryLightColor</item>
+        <item name="windowActionModeOverlay">true</item>
     </style>
 
     <style name="Widget.BrandStyle.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
