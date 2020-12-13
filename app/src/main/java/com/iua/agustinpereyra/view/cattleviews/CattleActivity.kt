@@ -2,6 +2,7 @@ package com.iua.agustinpereyra.view.cattleviews
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -19,6 +20,7 @@ import com.iua.agustinpereyra.databinding.ActivityCattleBinding
 import com.iua.agustinpereyra.view.NotificationGenerator
 import com.iua.agustinpereyra.view.base.BaseCattleListFragment
 import com.iua.agustinpereyra.view.bovine.SingleBovineActivity
+import com.iua.agustinpereyra.view.camera.CameraActivity
 import com.iua.agustinpereyra.view.welcomeviews.WelcomeActivity
 
 class CattleActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, BaseCattleListFragment.CattleListFragmentListener {
@@ -45,28 +47,6 @@ class CattleActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         // Set item click listener
         activityCattleBinding.navigationView.setNavigationItemSelectedListener(this)
 
-
-        // TODO: Check and clean
-        /*
-        // Check whether we are re-initiating (after rotation for example) or brand-new
-        // and add fragment if needed
-        if (savedInstanceState == null) {
-            // Set fragment dinamically
-            //1. Get a reference to fragment manager
-            val fragmentManager = supportFragmentManager
-
-            //2. Start a fragment transaction
-            val fragmentTransaction = fragmentManager.beginTransaction()
-
-            //3. Add the fragment to the container
-            fragmentTransaction.replace(
-                R.id.cattle_fragment_layout,
-                CattleListFragment()
-            )
-
-            //4. Commit transaction
-            fragmentTransaction.commit()
-        }*/
         // Get and set Tab Swipe manager
         val tabsAdapter = CattleTabsAdapter(supportFragmentManager, lifecycle)
         val viewPager = activityCattleBinding.cattleViewpager
@@ -84,6 +64,11 @@ class CattleActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
         toggle.syncState()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.base_main_menu, menu)
+        return true
     }
 
     // Navigation logic inside navbar
@@ -124,6 +109,11 @@ class CattleActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         return when(item.itemId) {
             R.id.home -> {
                 activityCattleBinding.drawerLayout.openDrawer(GravityCompat.START)
+                true
+            }
+            R.id.main_top_app_bar_camera -> {
+                val cameraIntent = Intent(this, CameraActivity::class.java)
+                startActivity(cameraIntent)
                 true
             }
             else -> super.onOptionsItemSelected(item)

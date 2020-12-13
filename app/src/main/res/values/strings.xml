@@ -6,6 +6,7 @@
     <string name="brand_name">Vacas Locas</string>
     <string name="email">Email</string>
     <string name="kilogram">Kg</string>
+    <string name="recognize_with_camera">Reconocer con camara</string>
 
     <!--Login & Register-->
     <string name="hint_username">Usuario</string>
