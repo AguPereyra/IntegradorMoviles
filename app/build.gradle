@@ -94,4 +94,7 @@ dependencies {
 
     // Debug Database
     debugImplementation 'com.amitshekhar.android:debug-db:1.0.6'
+
+    // ML Kit (Face recognition)
+    implementation 'com.google.mlkit:face-detection:16.0.3'
 }

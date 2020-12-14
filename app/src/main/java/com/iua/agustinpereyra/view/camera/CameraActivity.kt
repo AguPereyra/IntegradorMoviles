@@ -4,6 +4,7 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import androidx.camera.core.CameraSelector
+import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
@@ -12,6 +13,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.iua.agustinpereyra.R
 import com.iua.agustinpereyra.controller.CAMERA_PERMISSIONS_CODE
 import com.iua.agustinpereyra.controller.CAMERA_REQUIRED_PERMISSIONS
+import com.iua.agustinpereyra.controller.FacesAnalyzer
 import com.iua.agustinpereyra.databinding.ActivityCameraBinding
 import com.iua.agustinpereyra.view.base.BaseActivity
 import java.lang.Exception
@@ -90,12 +92,20 @@ class CameraActivity : BaseActivity() {
             // Set back camera as default
             val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
 
+            // Set the image analyzer to use
+            val imageAnalyzer = ImageAnalysis.Builder()
+                .build()
+                .also {
+                    it.setAnalyzer(cameraExecutor, FacesAnalyzer())
+                }
+
             // Check if nothing is bind to the camera provider
             // and bind the camera selector and preview to it
+            // TODO: Install, test, and apply boxes over faces
             try {
                 cameraProvider.unbindAll()
                 cameraProvider.bindToLifecycle(
-                    this, cameraSelector, preview
+                    this, cameraSelector, preview, imageAnalyzer
                 )
             } catch (e: Exception) {
                 Log.e(TAG, "Failed while trying to bind CameraX Preview use case", e)
