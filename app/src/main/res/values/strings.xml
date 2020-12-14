@@ -95,10 +95,11 @@
     <string name="channel_daily">Recordatorios diarios</string>
     <string name="channel_daily_description">Se realizan recordatorios una vez al dia para usar la app</string>
 
-    <!--Dialogs-->
+    <!--Errors and Warnings-->
     <string name="no_internet_title">Sin conexión</string>
     <string name="no_internet_msg">Revisa tu conexión a Internet, los datos mostrados no se pueden actualizar</string>
     <string name="no_internet_positive_btn">Aceptar</string>
+    <string name="no_camera_permission">Función no disponible porque los permisos para acceder a la cámara fueron denegados.</string>
     
     <!--Cattle Tabs-->
     <string name="cattle_all">TODO</string>

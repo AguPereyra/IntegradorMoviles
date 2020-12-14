@@ -1,6 +1,7 @@
 package com.iua.agustinpereyra.controller
 
 import com.iua.agustinpereyra.R
+import java.util.jar.Manifest
 
 const val USERNAME = "USERNAME"
 const val PASSWD = "PASSWD"
@@ -42,3 +43,7 @@ const val REGISTRED_USER_NAME = "REGISTRED_USER_NAME"
 
 /*API Logic*/
 const val RANDOMUSER_API_MALE = "male"
+
+/*Permissions*/
+const val CAMERA_PERMISSIONS_CODE = 10 // Some number
+const val CAMERA_REQUIRED_PERMISSIONS = android.Manifest.permission.CAMERA
