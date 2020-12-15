@@ -1,12 +1,18 @@
 package com.iua.agustinpereyra.view.camera
 
 import android.content.pm.PackageManager
+import android.graphics.Paint
+import android.graphics.drawable.ShapeDrawable
+import com.google.mlkit.vision.face.Face
 import android.os.Bundle
 import android.util.Log
+import android.util.Size
+import android.view.View
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
@@ -20,7 +26,7 @@ import java.lang.Exception
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
-class CameraActivity : BaseActivity() {
+class CameraActivity : BaseActivity(), FacesAnalyzer.FacesAnalyzerResultHandler {
 
     private val TAG = CameraActivity::class.java.name
 
@@ -94,14 +100,15 @@ class CameraActivity : BaseActivity() {
 
             // Set the image analyzer to use
             val imageAnalyzer = ImageAnalysis.Builder()
+                .setTargetResolution(Size(480, 360))
+                .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
                 .build()
                 .also {
-                    it.setAnalyzer(cameraExecutor, FacesAnalyzer())
+                    it.setAnalyzer(cameraExecutor, FacesAnalyzer(this))
                 }
 
             // Check if nothing is bind to the camera provider
             // and bind the camera selector and preview to it
-            // TODO: Install, test, and apply boxes over faces
             try {
                 cameraProvider.unbindAll()
                 cameraProvider.bindToLifecycle(
@@ -112,4 +119,22 @@ class CameraActivity : BaseActivity() {
             }
         }, ContextCompat.getMainExecutor(this))
     }
+
+    // Used to draw the faces bounding boxes
+    override fun onSuccess(faces: List<Face>) {
+        // Check if Faces were found
+        if (faces.isNotEmpty()) {
+            Log.i(TAG, "A face was found!")
+            //TODO: Implement overlay over camera preview with bounding box
+        } else {
+            Log.i(TAG, "Face not found.")
+        }
+    }
+
+    override fun onFailure(exception: Exception) {
+        Log.i(TAG, exception.message?: "Something went wrong while trying to detect faces on image.")
+        exception.printStackTrace()
+        throw exception
+    }
+
 }

@@ -36,4 +36,7 @@
 
     <!--Card Style-->
     <dimen name="card_stroke_width">1dp</dimen>
+
+    <!--Face detection/recognition-->
+    <dimen name="bounding_box_stroke">1dp</dimen>
 </resources>

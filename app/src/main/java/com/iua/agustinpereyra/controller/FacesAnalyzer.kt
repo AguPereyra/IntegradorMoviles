@@ -1,6 +1,5 @@
 package com.iua.agustinpereyra.controller
-
-import android.util.Log
+import android.graphics.Bitmap
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageProxy
 import com.google.mlkit.vision.common.InputImage
@@ -12,28 +11,31 @@ import com.google.mlkit.vision.face.FaceDetectorOptions
 /**
  * Class used to detect faces in streamed images
  */
-class FacesAnalyzer : ImageAnalysis.Analyzer {
+class FacesAnalyzer(private val resultHandler: FacesAnalyzerResultHandler) : ImageAnalysis.Analyzer {
     private val TAG = FacesAnalyzer::class.java.name
 
-    @androidx.camera.core.ExperimentalGetImage // Required to run
-    override fun analyze(imageProxy: ImageProxy) {
-        // Real-time fast detection
-        val realTimeOps = FaceDetectorOptions.Builder()
-            .build()
+    // Real-time fast detection
+    private val realTimeOps = FaceDetectorOptions.Builder()
+        .setPerformanceMode(FaceDetectorOptions.PERFORMANCE_MODE_FAST)
+        .build()
 
-        // Get the corresponding Face Detector
-        val faceDetector = FaceDetection.getClient(realTimeOps)
+    // Get the corresponding Face Detector
+    private val faceDetector = FaceDetection.getClient(realTimeOps)
+
+    override fun analyze(imageProxy: ImageProxy) {
 
         // Get the frame
+        @androidx.camera.core.ExperimentalGetImage // Required to run
         val mediaImage = imageProxy.image
+        @androidx.camera.core.ExperimentalGetImage // Required to run
         if (mediaImage != null) {
             // Create Image type supported by ML Kit
             val image = InputImage.fromMediaImage(mediaImage, imageProxy.imageInfo.rotationDegrees)
 
             // Process the image
             val detectionResult = faceDetector.process(image)
-                .addOnSuccessListener { faces -> onFacesDetected(faces) }
-                .addOnFailureListener { exception -> onFailure(exception) }
+                .addOnSuccessListener { faces -> resultHandler.onSuccess(faces) }
+                .addOnFailureListener { exception -> resultHandler.onFailure(exception) }
                 .addOnCompleteListener {
                     // Close the frame
                     imageProxy.close()
@@ -41,16 +43,12 @@ class FacesAnalyzer : ImageAnalysis.Analyzer {
         }
     }
 
-    private fun onFacesDetected(faces: List<Face>) {
-        // TODO: Implement
-        Log.i(TAG, "Detectamos una cara!!!")
-    }
-
-    private fun onFailure(exception: Exception) {
-        // TODO: Implement
-        Log.i(TAG, exception.message?: "Algo fallo, sin mensaje")
-        exception.printStackTrace()
-        throw exception
+    /**
+     * interface used to handle errors and success on face detection
+     */
+    interface FacesAnalyzerResultHandler {
+        fun onSuccess(faces: List<Face>)
+        fun onFailure(exception: Exception)
     }
 
 }
