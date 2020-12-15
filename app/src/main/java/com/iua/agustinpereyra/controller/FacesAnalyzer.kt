@@ -34,10 +34,11 @@ class FacesAnalyzer : ImageAnalysis.Analyzer {
             val detectionResult = faceDetector.process(image)
                 .addOnSuccessListener { faces -> onFacesDetected(faces) }
                 .addOnFailureListener { exception -> onFailure(exception) }
+                .addOnCompleteListener {
+                    // Close the frame
+                    imageProxy.close()
+                }
         }
-
-        // Close the frame
-        imageProxy.close()
     }
 
     private fun onFacesDetected(faces: List<Face>) {
@@ -47,7 +48,9 @@ class FacesAnalyzer : ImageAnalysis.Analyzer {
 
     private fun onFailure(exception: Exception) {
         // TODO: Implement
-        Log.i(TAG, "No detectamos nada, algo fallo :(")
+        Log.i(TAG, exception.message?: "Algo fallo, sin mensaje")
+        exception.printStackTrace()
+        throw exception
     }
 
 }
