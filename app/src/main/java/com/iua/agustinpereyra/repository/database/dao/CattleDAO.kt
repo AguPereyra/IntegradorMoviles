@@ -1,10 +1,7 @@
 package com.iua.agustinpereyra.repository.database.dao
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 import com.iua.agustinpereyra.repository.database.entities.Cattle
 
 @Dao
@@ -15,8 +12,14 @@ interface CattleDAO {
     @Query("DELETE FROM cattle")
     fun deleteAll()
 
+    @Delete
+    fun deleteAll(cattleList: List<Cattle>)
+
     @Update
     fun updateAll(updatedCattle: List<Cattle>)
+
+    @Insert
+    fun insertAll(cattleList: List<Cattle>)
 
     @Insert
     fun insert(cattle: Cattle)

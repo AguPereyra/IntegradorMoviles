@@ -66,14 +66,10 @@ class CattleRepository(private val application: Application) {
             cattleDao.updateAll(updateCattle)
 
             // Delete corresponding cattle
-            for (cattle in currentCattleList) {
-                cattleDao.delete(cattle.caravan)
-            }
+            cattleDao.deleteAll(currentCattleList)
         }
         // Insert the remaining cattle
-        for (cattle in newCattleList) {
-            cattleDao.insert(cattle)
-        }
+        cattleDao.insertAll(newCattleList)
     }
 
     /**
