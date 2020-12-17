@@ -8,55 +8,57 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import com.google.android.material.navigation.NavigationView
+import com.google.android.material.tabs.TabLayoutMediator
 import com.iua.agustinpereyra.R
+import com.iua.agustinpereyra.controller.CARAVAN
+import com.iua.agustinpereyra.controller.PreferenceUtils
 import com.iua.agustinpereyra.view.helpviews.HelpActivity
 import com.iua.agustinpereyra.view.settingsviews.SettingsActivity
 import com.iua.agustinpereyra.view.userviews.UserAccountActivity
 import com.iua.agustinpereyra.controller.VIEW_USER_REQUEST
+import com.iua.agustinpereyra.databinding.ActivityCattleBinding
 import com.iua.agustinpereyra.view.NotificationGenerator
-import kotlinx.android.synthetic.main.activity_cattle.*
-import kotlinx.android.synthetic.main.app_main_toolbar.*
+import com.iua.agustinpereyra.view.base.BaseCattleListFragment
+import com.iua.agustinpereyra.view.bovine.SingleBovineActivity
+import com.iua.agustinpereyra.view.camera.CameraActivity
+import com.iua.agustinpereyra.view.welcomeviews.WelcomeActivity
 
-class CattleActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, CattleListFragment.CattleListFragmentListener {
+class CattleActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, BaseCattleListFragment.CattleListFragmentListener {
 
     lateinit var toggle : ActionBarDrawerToggle
 
+    private lateinit var activityCattleBinding: ActivityCattleBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        activityCattleBinding = ActivityCattleBinding.inflate(layoutInflater)
 
-        setContentView(R.layout.activity_cattle)
+        setContentView(activityCattleBinding.root)
 
         // Set toolbar as support action bar
-        setSupportActionBar(main_toolbar)
+        val appMainToolbarBinding = activityCattleBinding.appMainToolbar
+        setSupportActionBar(appMainToolbarBinding.mainToolbar)
 
         // Tie together drawer layout and action bar
-        toggle = ActionBarDrawerToggle(this, drawer_layout, main_toolbar, 0, 0)
-        drawer_layout.addDrawerListener(toggle)
+        toggle = ActionBarDrawerToggle(this, activityCattleBinding.drawerLayout, appMainToolbarBinding.mainToolbar, 0, 0)
+        activityCattleBinding.drawerLayout.addDrawerListener(toggle)
 
 
         // Set item click listener
-        navigation_view.setNavigationItemSelectedListener(this)
+        activityCattleBinding.navigationView.setNavigationItemSelectedListener(this)
 
+        // Get and set Tab Swipe manager
+        val tabsAdapter = CattleTabsAdapter(supportFragmentManager, lifecycle)
+        val viewPager = activityCattleBinding.cattleViewpager
+        val cattleTabLayout = activityCattleBinding.cattleTab
+        viewPager.adapter = tabsAdapter
+        TabLayoutMediator(cattleTabLayout, viewPager) {tab, position ->
+            tab.text = when(position) {
+                0 -> getString(R.string.cattle_all)
+                else -> getString(R.string.cattle_monitoring)
+            }
+        }.attach()
 
-        // Check whether we are re-initiating (after rotation for example) or brand-new
-        // and add fragment if needed
-        if (savedInstanceState == null) {
-            // Set fragment dinamically
-            //1. Get a reference to fragment manager
-            val fragmentManager = supportFragmentManager
-
-            //2. Start a fragment transaction
-            val fragmentTransaction = fragmentManager.beginTransaction()
-
-            //3. Add the fragment to the container
-            fragmentTransaction.replace(
-                R.id.cattle_fragment_layout,
-                CattleListFragment()
-            )
-
-            //4. Commit transaction
-            fragmentTransaction.commit()
-        }
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
@@ -64,9 +66,14 @@ class CattleActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         toggle.syncState()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.base_main_menu, menu)
+        return true
+    }
+
     // Navigation logic inside navbar
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        drawer_layout.closeDrawer(GravityCompat.START)
+        activityCattleBinding.drawerLayout.closeDrawer(GravityCompat.START)
         when(item.itemId){
             R.id.nav_menu_account -> {
                 val userAccountIntent = Intent(this, UserAccountActivity::class.java)
@@ -82,6 +89,17 @@ class CattleActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
                 val helpActivityIntent = Intent(this, HelpActivity::class.java)
                 startActivity(helpActivityIntent)
             }
+
+            R.id.nav_menu_signout -> {
+                val welcomeActivityIntent = Intent(this, WelcomeActivity::class.java)
+                // Sign out user from preferences
+                val preferenceUtils = PreferenceUtils(this)
+                preferenceUtils.signOut()
+                // Clean backstack and go to Welcome page
+                finishAffinity()
+                startActivity(welcomeActivityIntent)
+                finish()
+            }
         }
         return true
     }
@@ -90,17 +108,22 @@ class CattleActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId) {
             R.id.home -> {
-                drawer_layout.openDrawer(GravityCompat.START)
-                return true
+                activityCattleBinding.drawerLayout.openDrawer(GravityCompat.START)
+                true
             }
-            else -> return super.onOptionsItemSelected(item)
+            R.id.main_top_app_bar_camera -> {
+                val cameraIntent = Intent(this, CameraActivity::class.java)
+                startActivity(cameraIntent)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 
     // Close navbar if open on back pressed
     override fun onBackPressed() {
-        if (drawer_layout.isDrawerOpen(GravityCompat.START)){
-            drawer_layout.closeDrawer(GravityCompat.START)
+        if (activityCattleBinding.drawerLayout.isDrawerOpen(GravityCompat.START)){
+            activityCattleBinding.drawerLayout.closeDrawer(GravityCompat.START)
         } else {
             super.onBackPressed()
         }
@@ -121,8 +144,10 @@ class CattleActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
     }
 
     // Cattle List needed functions
-    override fun navigateToSpecificBovine() {
-        TODO("Not yet implemented")
+    override fun navigateToSpecificBovine(caravan: String) {
+        val bovineIntent = Intent(this, SingleBovineActivity::class.java)
+        bovineIntent.putExtra(CARAVAN, caravan)
+        startActivity(bovineIntent)
     }
 
 }

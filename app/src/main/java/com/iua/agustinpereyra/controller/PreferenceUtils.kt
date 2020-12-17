@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.preference.PreferenceManager
 import com.iua.agustinpereyra.R
-import com.iua.agustinpereyra.model.User
 import java.lang.NullPointerException
 
 //TODO: Analyze if it is not better as Singleton
@@ -24,7 +23,7 @@ class PreferenceUtils {
         this.ownSharedPreferences = context.getSharedPreferences(OWN_PREFS_NAME, Context.MODE_PRIVATE)
     }
 
-    public fun getOrderBy() : String {
+    fun getOrderBy() : String {
         val orderByKey = this.context.getString(R.string.order_by_settings_key)
         val pref = defaultSharedPreferences.getString(orderByKey, PREF_ORDER_BY_DEF)
         if (pref == null) {
@@ -34,10 +33,10 @@ class PreferenceUtils {
         }
     }
 
-    /*
+    /**
     * Returns: String if set, null otherwise
     * */
-    public fun getSexFilter() : String? {
+    fun getSexFilter() : String? {
         val sexFilterSwitch = this.context.getString(R.string.sex_filter_switch_key)
         val switchOn = defaultSharedPreferences.getBoolean(sexFilterSwitch, PREF_DEF_SWITCH)
         if (switchOn) {
@@ -53,11 +52,11 @@ class PreferenceUtils {
         }
     }
 
-    /*
+    /**
     * Returns: String if set, null otherwise
     * */
     //TODO: Improve usability by adding two bars or something else
-    public fun getWeightFilter() : Int? {
+    fun getWeightFilter() : Int? {
         val weightFilterSwitch = this.context.getString(R.string.weight_filter_switch_key)
         val switchOn = defaultSharedPreferences.getBoolean(weightFilterSwitch, PREF_DEF_SWITCH)
         if (switchOn) {
@@ -74,57 +73,37 @@ class PreferenceUtils {
     }
 
     /**
-    * Save login data of logged user Password should be encrypted!
+    * saveCurrentUser saves the ID of the currently logged user
     */
-    public fun saveLoggedUser(email: String, passwd : String) {
-        ownSharedPreferences.edit().putString(EMAIL, email).apply()
-        // TODO: Only as poc, should be different
-        ownSharedPreferences.edit().putString(USERNAME, ownSharedPreferences.getString(
-            REGISTRED_USER_NAME, "")).apply()
+    fun saveCurrentUser(userId: Int) {
+        ownSharedPreferences.edit().putInt(CURRENT_USER_ID, userId).apply()
     }
 
     /**
-    * Returns null if no user was logged
+    * getCurrentUser returns null if no user ID was saved as currently logged. It
+     * returns the user ID otherwise.
     * */
-    public fun getLoggedUser(): User? {
-        val email = ownSharedPreferences.getString(EMAIL, "")
-        val username = ownSharedPreferences.getString(USERNAME, "")
-        if (email != null && username != null) {
-            return User(email, username, "")
-        } else {
+    fun getCurrentUser(): Int? {
+        val userId = ownSharedPreferences.getInt(CURRENT_USER_ID, -1)
+        if (userId < 0) {
             return null
         }
+        return userId
     }
 
     /**
-     * Only creates one user, overrides if already exists
-    */
-    public fun saveRegisteredUser(email: String, username: String, passwd: String) {
-        ownSharedPreferences.edit().putString(REGISTRED_USER_EMAIL, email).apply()
-        ownSharedPreferences.edit().putString(REGISTRED_USER_NAME, username).apply()
-        ownSharedPreferences.edit().putString(REGISTRED_USER_PASSWD, passwd).apply()
-    }
-
-    /**
-     * Returned registered user
+     * signOut() removes the current user saved under shared preferences
      */
-    public fun getRegisteredUser(): User? {
-        val email = ownSharedPreferences.getString(REGISTRED_USER_EMAIL, "")
-        val username = ownSharedPreferences.getString(REGISTRED_USER_EMAIL, "")
-        val passwd = ownSharedPreferences.getString(REGISTRED_USER_PASSWD, "")
-        if (email != null && username != null && passwd != null) {
-            return User(email, username, passwd)
-        } else {
-            return null
-        }
+    fun signOut() {
+        ownSharedPreferences.edit().putInt(CURRENT_USER_ID, -1).apply()
     }
 
-    public fun changeRegisteredUsername(username: String) {
-        ownSharedPreferences.edit().putString(REGISTRED_USER_NAME, username).apply()
-        ownSharedPreferences.edit().putString(USERNAME, username).apply()
-    }
-
-    public fun changeRegisteredPasswd(passwd: String) {
-        ownSharedPreferences.edit().putString(REGISTRED_USER_PASSWD, passwd).apply()
+    /**
+     * isSignedIn() returns true if there is a valid userId saved as
+     * logged in (userId > -1). Returns false otherwise
+     */
+    fun isSignedIn(): Boolean {
+        val userId = ownSharedPreferences.getInt(CURRENT_USER_ID, -1)
+        return userId > -1
     }
 }

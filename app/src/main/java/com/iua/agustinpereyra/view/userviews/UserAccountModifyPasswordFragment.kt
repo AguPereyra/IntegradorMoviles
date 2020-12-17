@@ -5,22 +5,37 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.iua.agustinpereyra.R
 import com.iua.agustinpereyra.controller.*
+import com.iua.agustinpereyra.controller.viewmodel.UserAccountModifyPasswordViewModel
+import com.iua.agustinpereyra.databinding.FragmentUserAccountModifyPasswordBinding
 import com.iua.agustinpereyra.view.base.ActionBarModifier
-import kotlinx.android.synthetic.main.fragment_user_account_modify_password.view.*
 
 class UserAccountModifyPasswordFragment : Fragment() {
+
+    private var fragmentBinding: FragmentUserAccountModifyPasswordBinding? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_user_account_modify_password, container, false)
+        fragmentBinding = FragmentUserAccountModifyPasswordBinding.inflate(inflater, container, false)
 
         // Get listener
         val listener = activity as UserAccountModifyPasswordFragmentListener
+
+        // Get viewmodel
+        val passwdViewModel = ViewModelProvider(this).get(UserAccountModifyPasswordViewModel::class.java)
+
+        passwdViewModel.isPasswordUpdated.observe(viewLifecycleOwner, {isUpdated ->
+            if (isUpdated) {
+                listener.onSaveModifyPasswordClick()
+            } else {
+                fragmentBinding?.userAccountModifyPasswdValidateContainer?.error = getString(R.string.error_change_passwd)
+            }
+        })
 
         // Set toolbar title and back button
         // TODO: Ask if there is a better way to do this
@@ -28,41 +43,46 @@ class UserAccountModifyPasswordFragment : Fragment() {
         listener.setActionBarHomeButtonAsUp()
 
         // Set click listener
-        view.user_account_modify_passwd_cancel_button.setOnClickListener {
+        fragmentBinding?.userAccountModifyPasswdCancelButton?.setOnClickListener {
             listener.onCancelModifyPasswordClick()
         }
 
-        view.user_account_modify_passwd_save_button.setOnClickListener {
+        fragmentBinding?.userAccountModifyPasswdSaveButton?.setOnClickListener {
             // Change passwd if possible
-            val oldPasswd = view.user_account_modify_passwd_old_edit_text.text.toString()
-            val newPasswd = view.user_account_modify_passwd_new_edit_text.text.toString()
-            val confirmPasswd = view.user_account_modify_passwd_validate_edit_text.text.toString()
-            if (AccountManager.changePasswd(oldPasswd, newPasswd, confirmPasswd, context)) {
-                listener.onSaveModifyPasswordClick()
-            } else {
-                view.user_account_modify_passwd_validate_container.error = getString(R.string.error_change_passwd)
-            }
+            val oldPasswd = fragmentBinding?.userAccountModifyPasswdOldEditText?.text.toString()
+            val newPasswd = fragmentBinding?.userAccountModifyPasswdNewEditText?.text.toString()
+            val confirmPasswd = fragmentBinding?.userAccountModifyPasswdValidateEditText?.text.toString()
+
+            // Asynchronously try to change password
+            passwdViewModel.changePassword(oldPasswd, newPasswd, confirmPasswd)
 
         }
 
         // Check if there is save state and replace
-        view.user_account_modify_passwd_new_edit_text.setText(savedInstanceState?.getString(
+        fragmentBinding?.userAccountModifyPasswdNewEditText?.setText(savedInstanceState?.getString(
             STATE_PASSWORD_NEW))
-        view.user_account_modify_passwd_old_edit_text.setText(savedInstanceState?.getString(
+        fragmentBinding?.userAccountModifyPasswdOldEditText?.setText(savedInstanceState?.getString(
             STATE_PASSWORD_OLD))
-        view.user_account_modify_passwd_validate_edit_text.setText(savedInstanceState?.getString(
+        fragmentBinding?.userAccountModifyPasswdValidateEditText?.setText(savedInstanceState?.getString(
             STATE_PASSWORD_VALIDATE))
-        return view
+        return fragmentBinding?.root
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         // Save username and password
         outState.run {
-            putString(STATE_PASSWORD_NEW, view?.user_account_modify_passwd_new_edit_text?.text.toString())
-            putString(STATE_PASSWORD_OLD, view?.user_account_modify_passwd_old_edit_text?.text.toString())
-            putString(STATE_PASSWORD_VALIDATE, view?.user_account_modify_passwd_validate_edit_text?.text.toString())
+            putString(STATE_PASSWORD_NEW, fragmentBinding?.userAccountModifyPasswdNewEditText?.text.toString())
+            putString(STATE_PASSWORD_OLD, fragmentBinding?.userAccountModifyPasswdOldEditText?.text.toString())
+            putString(STATE_PASSWORD_VALIDATE, fragmentBinding?.userAccountModifyPasswdValidateEditText?.text.toString())
         }
         super.onSaveInstanceState(outState)
+    }
+
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        // Cleaning up any references to the binding class
+        fragmentBinding = null
     }
 
     interface UserAccountModifyPasswordFragmentListener : ActionBarModifier {

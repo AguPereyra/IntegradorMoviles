@@ -1,18 +1,11 @@
 package com.iua.agustinpereyra.view.base
 
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
-import com.iua.agustinpereyra.R
+import androidx.viewbinding.ViewBinding
+import com.iua.agustinpereyra.databinding.AppSimpleToolbarBinding
 
 abstract class BaseActivity : AppCompatActivity(), ActionBarModifier {
-
-    // TODO:Check for a better way
-    override fun setContentView(layoutResID: Int) {
-        super.setContentView(layoutResID)
-        // Set bar as actionbar
-        val appBar = findViewById<Toolbar>(R.id.simple_toolbar)
-        setSupportActionBar(appBar)
-    }
 
     // ActionBarModifier functions
     override fun setActionBarTitle(title: String) {

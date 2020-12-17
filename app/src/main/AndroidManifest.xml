@@ -1,6 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.iua.agustinpereyra">
 
+    <uses-feature android:name="android.hardware.camera2.CameraDevice" />
+
+    <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.VIBRATE"/>
@@ -23,6 +26,8 @@
         <activity android:name=".view.userviews.UserAccountActivity"/>
         <activity android:name=".view.settingsviews.SettingsActivity"/>
         <activity android:name=".view.helpviews.HelpActivity"/>
+        <activity android:name=".view.bovine.SingleBovineActivity"/>
+        <activity android:name=".view.camera.CameraActivity"/>
         
         <receiver android:name=".controller.AppBroadcastReceiver"/>
     </application>

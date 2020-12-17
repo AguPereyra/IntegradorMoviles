@@ -10,7 +10,7 @@ import com.iua.agustinpereyra.controller.*
 import com.iua.agustinpereyra.repository.database.entities.Cattle
 import com.iua.agustinpereyra.view.cattleviews.CattleCardRecyclerViewAdapter
 
-/*
+/**
 * FilterableCattleRecyclerFragment is a base fragment that contains needed logic
 * to filter, order and search cattle over a list that should be showed over a RecyclerViewAdapter.
 * Classes that inherit from it should initialize variables baseCattleList, currentCattleList and
@@ -19,7 +19,7 @@ import com.iua.agustinpereyra.view.cattleviews.CattleCardRecyclerViewAdapter
 abstract class FilterableCattleRecyclerFragment : Fragment(), SearchView.OnQueryTextListener {
 
     // Base list of data
-    protected lateinit var baseCattleList : List<Cattle>
+    protected var baseCattleList : List<Cattle> = listOf()
     // Currently showing list of data, used for searches
     protected lateinit var currentCattleList : List<Cattle>
     protected lateinit var recyclerViewAdapter : CattleCardRecyclerViewAdapter
@@ -40,32 +40,7 @@ abstract class FilterableCattleRecyclerFragment : Fragment(), SearchView.OnQuery
 
     override fun onResume() {
         super.onResume()
-        // TODO: Is it okay to put it here or should go at controller?
-        // Do only if already initiallized
-        // TODO: Is it right?
-        var cattleList = baseCattleList
-        val preferenceUtils = PreferenceUtils(context)
-
-        // Filtering
-        // Check sex filter
-        val sexFilterStatus = preferenceUtils.getSexFilter()
-        if (sexFilterStatus != null) {
-            cattleList = CattleManager.filterListBySex(sexFilterStatus, cattleList)
-        }
-
-        // Check weight filter
-        val weightFilterStatus = preferenceUtils.getWeightFilter()
-        if (weightFilterStatus != null) {
-            cattleList = CattleManager.filterListByWeight(weightFilterStatus, cattleList)
-        }
-
-        // Order resulting list
-        val orderCriteria = preferenceUtils.getOrderBy()
-        // Reorder list
-        cattleList = CattleManager.orderListBy(orderCriteria, cattleList)
-
-        // Swap to new adapter with updated data
-        //  TODO: Is this optimal? Maybe a method to insert and pop all data in Adapter is better
+        val cattleList = CattleManager.orderBasedOnPreferences(baseCattleList, context)
         currentCattleList = cattleList
         recyclerViewAdapter.setCattle(cattleList)
     }

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="BoundingBoxOverlay">
+        <attr name="rightPos" format="float"/>
+        <attr name="leftPos" format="float"/>
+        <attr name="topPos" format="float"/>
+        <attr name="bottomPos" format="float"/>
+        <attr name="strokeColor" format="color"/>
+    </declare-styleable>
+</resources>

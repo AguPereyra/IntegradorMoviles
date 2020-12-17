@@ -6,6 +6,7 @@
     <string name="brand_name">Vacas Locas</string>
     <string name="email">Email</string>
     <string name="kilogram">Kg</string>
+    <string name="recognize_with_camera">Reconocer con camara</string>
 
     <!--Login & Register-->
     <string name="hint_username">Usuario</string>
@@ -15,11 +16,21 @@
     <string name="register_button">Registrarse</string>
     <string name="back_button">Volver</string>
     <string name="password_error">Mínimo 8 caracteres</string>
+    <string name="register_error">Error, intente de nuevo</string>
     <string name="new_user_question">¿Nuevo?</string>
 
     <!--Cattle Card-->
     <string name="cattle_caravan">A34B8-09</string>
     <string name="cattle_weight">680Kg</string>
+    
+    <!--Bovine Data-->
+    <string name="bovine_x">Bovino %1$s</string>
+    <string name="generic_title_1">General</string>
+    <string name="generic_field_1">* Peso: 832Kg</string>
+    <string name="generic_field_2">* Orígen: Nacimiento Local</string>
+    <string name="generic_title_2">Vacunas</string>
+    <string name="generic_field_3">* Viruela: 10/12/2020</string>
+    <string name="generic_field_4">* Triquinosis: 09/09/2009</string>
 
     <!--User-->
     <string name="user_name">El Usuario</string>
@@ -66,6 +77,7 @@
     <string name="nav_preferences">Preferencias</string>
     <string name="nav_account">Cuenta</string>
     <string name="nav_help">Ayuda</string>
+    <string name="nav_signout">Cerrar sesión</string>
 
     <!--Top App Bar Menu-->
     <string name="search_hint">Buscar caravana</string>
@@ -83,8 +95,23 @@
     <string name="channel_daily">Recordatorios diarios</string>
     <string name="channel_daily_description">Se realizan recordatorios una vez al dia para usar la app</string>
 
-    <!--Dialogs-->
+    <!--Errors and Warnings-->
     <string name="no_internet_title">Sin conexión</string>
     <string name="no_internet_msg">Revisa tu conexión a Internet, los datos mostrados no se pueden actualizar</string>
     <string name="no_internet_positive_btn">Aceptar</string>
+    <string name="no_camera_permission">Función no disponible porque los permisos para acceder a la cámara fueron denegados.</string>
+    
+    <!--Cattle Tabs-->
+    <string name="cattle_all">TODO</string>
+    <string name="cattle_monitoring">SEGUIMIENTO</string>
+
+    <!--Contextual Action Mode-->
+    <string name="options_monitor">Seguir</string>
+    <string name="options_dont_monitor">No seguir</string>
+
+    <!--Face Recognition-->
+    <string name="camera_view_title">Identificación Caravana</string>
+    <string name="searching_bovine">Buscando bovino...</string>
+    <string name="found_caravan">Caravana: %1$s</string>
+    <string name="go_to_bovine">Ver</string>
 </resources>

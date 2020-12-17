@@ -1,6 +1,7 @@
 package com.iua.agustinpereyra.controller
 
 import com.iua.agustinpereyra.R
+import java.util.jar.Manifest
 
 const val USERNAME = "USERNAME"
 const val PASSWD = "PASSWD"
@@ -12,7 +13,7 @@ const val STATE_PASSWORD_OLD = STATE_PASSWORD
 const val STATE_PASSWORD_NEW = "STATE_PASSWORD_NEW"
 const val STATE_PASSWORD_VALIDATE = "STATE_PASSWORD_VALIDATE"
 const val STATE_EMAIL = "STATE_EMAIL"
-
+const val CURRENT_USER_ID = "CURRENT_USER_ID"
 
 /* Settings/Preferences */
 //TODO:Check if can be improved/use some variable to make it be automatically modified if array changes
@@ -32,6 +33,9 @@ const val FEMALE_FIRST_CAP = "Hembra"
 const val BOOLEAN_FEMALE = false
 const val OWN_PREFS_NAME = "com.iua.agustinpereyra.prefs"
 
+/* Bovine Fields */
+const val CARAVAN = "caravana"
+
 /* Register user */
 const val REGISTRED_USER_EMAIL = "REGISTRED_USER_EMAIL"
 const val REGISTRED_USER_PASSWD = "REGISTRED_USER_PASSWD"
@@ -39,3 +43,7 @@ const val REGISTRED_USER_NAME = "REGISTRED_USER_NAME"
 
 /*API Logic*/
 const val RANDOMUSER_API_MALE = "male"
+
+/*Permissions*/
+const val CAMERA_PERMISSIONS_CODE = 10 // Some number
+const val CAMERA_REQUIRED_PERMISSIONS = android.Manifest.permission.CAMERA

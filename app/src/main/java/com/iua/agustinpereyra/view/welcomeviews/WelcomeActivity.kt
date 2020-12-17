@@ -4,10 +4,11 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.iua.agustinpereyra.R
 import com.iua.agustinpereyra.controller.AppBroadcastReceiver
+import com.iua.agustinpereyra.controller.PreferenceUtils
+import com.iua.agustinpereyra.databinding.ActivityWelcomeBinding
 import com.iua.agustinpereyra.view.cattleviews.CattleActivity
 import com.iua.agustinpereyra.view.welcomeviews.LoginFragment.LoginFragmentListener
 import java.util.*
@@ -18,13 +19,21 @@ class WelcomeActivity : AppCompatActivity(), LoginFragmentListener,
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_welcome)
+        val activityBinding = ActivityWelcomeBinding.inflate(layoutInflater)
+        setContentView(activityBinding.root)
 
         // TODO: Should be here?
         // Register daily notification
         setDailyAlert()
 
-        // Check whether we are re-initiating (after rotaion for example) or brand-new
+        // Check if the user is already logged, and proceed accordingly
+        val preferenceUtils = PreferenceUtils(this)
+        if(preferenceUtils.isSignedIn()) {
+            // Move to Main Page
+            this.navigateToMainPage()
+        }
+
+        // Check whether we are re-initiating (after rotation for example) or brand-new
         if (savedInstanceState == null) {
             // Set fragment dinamically
             //1. Get a reference to fragment manager
@@ -43,7 +52,6 @@ class WelcomeActivity : AppCompatActivity(), LoginFragmentListener,
     }
 
     override fun navigateToMainPage() {
-        // Get username (TODO: Change this when persistence is implemented)
         val mainPageIntent = Intent(this, CattleActivity::class.java)
         startActivity(mainPageIntent)
         // Not returning here

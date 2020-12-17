@@ -64,7 +64,7 @@ class SettingsMainFragment : PreferenceFragmentCompat(), SharedPreferences.OnSha
         // Get the right Summary text based on the position of value in array resource
         // Get position
         var entryPos : Int? = null
-        for (i in 0..orderByEntries.length()) {
+        for (i in 0 until orderByEntries.length()) {
             if (orderByValues.getString(i) == pref.value ) {
                 entryPos = i
                 break

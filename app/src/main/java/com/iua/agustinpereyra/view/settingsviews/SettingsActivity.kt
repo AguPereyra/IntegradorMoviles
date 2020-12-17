@@ -2,13 +2,18 @@ package com.iua.agustinpereyra.view.settingsviews
 
 import android.os.Bundle
 import com.iua.agustinpereyra.R
+import com.iua.agustinpereyra.databinding.ActivitySettingsBinding
 import com.iua.agustinpereyra.view.base.BaseActivity
 
 class SettingsActivity : BaseActivity(), SettingsMainFragment.MainSettingsFragmentListener, SettingsFiltersFragment.SettingsFilterFragmentListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_settings)
+        val activityBinding = ActivitySettingsBinding.inflate(layoutInflater)
+        setContentView(activityBinding.root)
+
+        // Set toolbar
+        setSupportActionBar(activityBinding.basicAppBar.simpleToolbar)
 
         // Set fragment dinamically
         //1. Get a reference to fragment manager

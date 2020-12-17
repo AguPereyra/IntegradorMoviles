@@ -4,8 +4,21 @@
         <item name="colorPrimary">@color/primaryColor</item>
         <item name="colorPrimaryDark">@color/primaryDarkColor</item>
         <item name="colorAccent">@color/secondaryColor</item>
+        <item name="android:textColorPrimary">@color/primaryTextColor</item>
+        <item name="android:textColorSecondary">@color/secondaryTextColor</item>
 
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <item name="actionModeBackground">@color/secondaryLightColor</item>
+        <item name="windowActionModeOverlay">true</item>
+    </style>
+
+    <style name="Widget.BrandStyle.BottomCameraPane.Text" parent="TextAppearance.MaterialComponents.Headline4">
+        <item name="android:textColor">@color/primaryTextColor</item>
+    </style>
+
+    <style name="Widget.BrandStyle.BottomCameraPane.Button" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textColor">@color/secondaryDarkColor</item>
+        <item name="android:textSize">@dimen/go_to_bovine_button_text_size</item>
     </style>
 
     <style name="Widget.BrandStyle.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">

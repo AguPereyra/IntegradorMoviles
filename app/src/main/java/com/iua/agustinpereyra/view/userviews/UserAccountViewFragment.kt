@@ -5,30 +5,38 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.iua.agustinpereyra.R
 import com.iua.agustinpereyra.controller.PreferenceUtils
 import com.iua.agustinpereyra.controller.STATE_EMAIL
 import com.iua.agustinpereyra.controller.STATE_USERNAME
+import com.iua.agustinpereyra.controller.viewmodel.UserAccountViewModel
+import com.iua.agustinpereyra.databinding.FragmentUserAccountBinding
 import com.iua.agustinpereyra.view.base.ActionBarModifier
-import kotlinx.android.synthetic.main.fragment_user_account.view.*
-import java.lang.Exception
+
 
 class UserAccountViewFragment : Fragment() {
+
+    private var fragmentBinding: FragmentUserAccountBinding? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_user_account, container, false)
-
-        // Preference manager used below
-        val preferenceUtils = PreferenceUtils(context)
+        fragmentBinding = FragmentUserAccountBinding.inflate(inflater, container, false)
 
         // Get listener
         val listener = activity as UserAccountFragmentListener
+
+        // Get viewmodel
+        val accountViewModel = ViewModelProvider(this).get(UserAccountViewModel::class.java)
+
+        // Observe current user data
+        accountViewModel.getCurrentUser().observe(viewLifecycleOwner, {user ->
+            fragmentBinding?.userAccountUsernameEditText?.setText(user.username)
+            fragmentBinding?.userAccountEmailEditText?.setText(user.email)
+        })
 
         // Set toolbar title and back button
         listener.setActionBarTitle(getString(R.string.user_account_title))
@@ -36,43 +44,45 @@ class UserAccountViewFragment : Fragment() {
 
         // Check if data was stored and rewrite in that case
         if (savedInstanceState != null) {
-            view.user_account_username_edit_text.setText(savedInstanceState.getString(STATE_USERNAME))
-            view.user_account_email_edit_text.setText(savedInstanceState.getString(STATE_EMAIL))
-        } else {
-            val currentUser = preferenceUtils.getLoggedUser()
-            view.user_account_username_edit_text.setText(currentUser?.username)
-            view.user_account_email_edit_text.setText(currentUser?.email)
+            fragmentBinding?.userAccountUsernameEditText?.setText(savedInstanceState.getString(STATE_USERNAME))
+            fragmentBinding?.userAccountEmailEditText?.setText(savedInstanceState.getString(STATE_EMAIL))
         }
 
         // Set click listeners
-        view.user_account_cancel_button.setOnClickListener{
+        fragmentBinding?.userAccountCancelButton?.setOnClickListener{
             listener.onCancelUserAccountViewClick()
         }
 
-        view.user_account_save_button.setOnClickListener{
+        fragmentBinding?.userAccountSaveButton?.setOnClickListener{
             // Save new username, don't edit email
-            val username = view?.user_account_username_edit_text?.text.toString()
-            preferenceUtils.changeRegisteredUsername(username)
+            val username = fragmentBinding?.userAccountUsernameEditText?.text.toString()
+            accountViewModel.changeUsername(username)
             listener.onSaveUserAccountViewClick()
         }
 
-        view.user_account_password_edit_text.setOnTouchListener { view, motionEvent ->
+        fragmentBinding?.userAccountPasswordEditText?.setOnTouchListener { view, _ ->
             // Navigate to the change password screen
             listener.navigateToChangePassword()
             view.performClick()
             true
         }
 
-        return view
+        return fragmentBinding?.root
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         // Save username and password
         outState.run {
-            putString(STATE_USERNAME, view?.user_account_username_edit_text?.text.toString())
-            putString(STATE_EMAIL, view?.user_account_email_edit_text?.text.toString())
+            putString(STATE_USERNAME, fragmentBinding?.userAccountUsernameEditText?.text.toString())
+            putString(STATE_EMAIL, fragmentBinding?.userAccountEmailEditText?.text.toString())
         }
         super.onSaveInstanceState(outState)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        // Cleaning up any references to the binding class
+        fragmentBinding = null
     }
 
     interface UserAccountFragmentListener : ActionBarModifier {

@@ -5,19 +5,20 @@ Integrative work for the subject Tecnologías Móviles (Mobile Technologies).
 The goal is to develop an individual application on the Android platform that allows the user to visualize their cattle and its data.
 
 ## To run
-In order to be able to build the app, the following software is needed:
+You can open the project directly on Android Studio. In order to be able to build the app, the following software is needed:
+
 * Kotlin
 * JVM
 * Gradle
+* Android 6.0 or higher
 
 ### Apk file
 The Apk file can be found at *githubStuff/app-VacasLocas-TP_Integrador_PEREYRA.apk*
 
-To run from an Android device:
-* Android 6.0 or higher
-
 ## Login data
-You can go to the register screen and create a brand new user. It will be registered and you will be able to reuse it for next logins.
+You can go to the register screen and create a brand new user. It will be registered and you will be able to reuse it for next logins. Users are saved in plain text under a local SQLite, which you can access connecting your device to your computer and running (under a Linux shell):  
+`adb forward tcp:8080 tcp:8080`  
+Then going to your browser to the URL localhost:8080.
 
 ## App working
 <img src="githubStuff/media/appSample.gif" width=25% height=25% />
@@ -39,6 +40,10 @@ You can go to the register screen and create a brand new user. It will be regist
 2. Delivery date: 12/11/2020
 3. Delivery method: Upload repository to GitHub.
 4. Add a gif of the application and the compiled application (.apk)
+
+
+### Extra
+We were asked to add an extra part for the final presentation. In my case, I choose to incorporate the ML Kit library and use it *Face Detection* functionality to simulate the recognition of cattle through their faces.
 
 ## Workgroup
 * Members: Pereyra Agustín Ezequiel.

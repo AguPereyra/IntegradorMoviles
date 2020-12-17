@@ -2,8 +2,6 @@ package com.iua.agustinpereyra.repository
 
 import android.app.Application
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.liveData
 import com.iua.agustinpereyra.controller.NetworkHelper
 import com.iua.agustinpereyra.repository.database.AppDatabase
 import com.iua.agustinpereyra.repository.database.dao.CattleDAO
@@ -28,23 +26,50 @@ class CattleRepository(private val application: Application) {
      * Runs on IO threads.
      */
     private suspend fun getFromNetwork(): List<Cattle> = withContext(Dispatchers.IO) {
-        // Delete data from DB
-        //TODO: Not working because of way of implementing, follow
-        cattleDao.deleteAll()
         // Get data from Web
         val cattleList = ApiConnection.getCattleList()
         cattleList
     }
 
     /**
-     * updateCattleList updates DB with data from API. Doesn't return anything as we are
+     * updateDB updates DB with data from API. It inserts new bovines if there are
+     * ones, updates the ones we have, and deletes the ones that were in the database
+     * but not in the passed array. Doesn't return anything as we are
      * working with LiveData on DAO
      */
     private suspend fun updateDB(cattleList: List<Cattle>) = withContext(Dispatchers.IO) {
-        cattleDao.deleteAll()
-        for (cattle in cattleList) {
-            cattleDao.insert(cattle)
+        // TODO: Check for optimization
+        // Get the current list of cattle (deep copy)
+        val currentCattleList = ArrayList(allCattle.value?.map { it.copy() })
+
+        // Get the received cattle list as a mutable list, to only leave the new bovines if any
+        val newCattleList : MutableList<Cattle> = ArrayList(cattleList)
+
+        if (currentCattleList != null && currentCattleList.size > 0) {
+            // Check and separate data to update, delete and insert
+            val updateCattle = mutableListOf<Cattle>()
+            for (receivedCattle in cattleList) {
+                for (currentCattle in currentCattleList) {
+                    if (receivedCattle.caravan == currentCattle.caravan) {
+                        // Set to update and remove from current list and received list
+                        // Those who remain in current list must be deleted
+                        // Those who remain in received list must be inserted
+                        updateCattle.add(receivedCattle)
+                        currentCattleList.remove(currentCattle)
+                        newCattleList.remove(receivedCattle)
+                        break
+                    }
+                }
+            }
+
+            // Update
+            cattleDao.updateAll(updateCattle)
+
+            // Delete corresponding cattle
+            cattleDao.deleteAll(currentCattleList)
         }
+        // Insert the remaining cattle
+        cattleDao.insertAll(newCattleList)
     }
 
     /**
