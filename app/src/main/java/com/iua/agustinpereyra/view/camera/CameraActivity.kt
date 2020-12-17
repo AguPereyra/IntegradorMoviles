@@ -1,5 +1,6 @@
 package com.iua.agustinpereyra.view.camera
 
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.Paint
@@ -25,12 +26,10 @@ import androidx.core.view.marginRight
 import androidx.core.view.marginTop
 import com.google.android.material.snackbar.Snackbar
 import com.iua.agustinpereyra.R
-import com.iua.agustinpereyra.controller.CAMERA_PERMISSIONS_CODE
-import com.iua.agustinpereyra.controller.CAMERA_REQUIRED_PERMISSIONS
-import com.iua.agustinpereyra.controller.CoordinatesTranslator
-import com.iua.agustinpereyra.controller.FacesAnalyzer
+import com.iua.agustinpereyra.controller.*
 import com.iua.agustinpereyra.databinding.ActivityCameraBinding
 import com.iua.agustinpereyra.view.base.BaseActivity
+import com.iua.agustinpereyra.view.bovine.SingleBovineActivity
 import java.lang.Exception
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
@@ -57,6 +56,7 @@ class CameraActivity : BaseActivity(), FacesAnalyzer.FacesAnalyzerResultHandler 
         }
 
         // Set camera title and back button
+        setSupportActionBar(viewBinding.basicAppBar.simpleToolbar)
         setActionBarTitle(getString(R.string.camera_view_title))
         setActionBarHomeButtonAsUp()
 
@@ -83,6 +83,15 @@ class CameraActivity : BaseActivity(), FacesAnalyzer.FacesAnalyzerResultHandler 
     override fun onDestroy() {
         super.onDestroy()
         cameraExecutor.shutdown()
+    }
+
+    // Used to go to the detected bovine
+    private fun navigateToSpecificBovine(caravan: String) {
+        val bovineIntent = Intent(this, SingleBovineActivity::class.java)
+        bovineIntent.putExtra(CARAVAN, caravan)
+        startActivity(bovineIntent)
+        // Not returning here
+        finish()
     }
 
     // Function used to check if needed permissions were granted
@@ -138,10 +147,18 @@ class CameraActivity : BaseActivity(), FacesAnalyzer.FacesAnalyzerResultHandler 
         if (faces.isNotEmpty()) {
             Log.d(TAG, "A face was found!")
             //TODO: Implement overlay over camera preview with bounding box
+            //Show caravan and button, with functionality
+            // Set OnClick listener for goto bovine button
+            viewBinding.goToBovineButton.setOnClickListener {
+                navigateToSpecificBovine(getString(R.string.cattle_caravan))
+            }
             viewBinding.bottomPanelText.text = getString(R.string.found_caravan, getString(R.string.cattle_caravan))
+            viewBinding.goToBovineButton.visibility = View.VISIBLE
         } else {
             Log.d(TAG, "Face not found.")
+            //Show text and hide button
             viewBinding.bottomPanelText.text = getString(R.string.searching_bovine)
+            viewBinding.goToBovineButton.visibility = View.INVISIBLE
         }
     }
 

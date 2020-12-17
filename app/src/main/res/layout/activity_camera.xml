@@ -21,14 +21,23 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         android:orientation="horizontal"
-        android:background="@color/primaryLightColor">
+        android:background="@color/primaryColor"
+        android:padding="@dimen/camera_detection_text_padding">
 
         <TextView
             android:id="@+id/bottom_panel_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/searching_bovine"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"/>
+            style="@style/Widget.BrandStyle.BottomCameraPane.Text"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/go_to_bovine_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/go_to_bovine"
+            style="@style/Widget.BrandStyle.BottomCameraPane.Button"
+            android:visibility="invisible"/>
 
     </LinearLayout>
 
