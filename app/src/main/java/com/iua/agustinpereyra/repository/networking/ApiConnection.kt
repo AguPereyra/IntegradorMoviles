@@ -2,6 +2,7 @@ package com.iua.agustinpereyra.repository.networking
 
 import android.net.Uri
 import com.iua.agustinpereyra.controller.RANDOMUSER_API_MALE
+import com.iua.agustinpereyra.controller.StaticDataGenerator
 import com.iua.agustinpereyra.repository.database.entities.Cattle
 import org.json.JSONObject
 import java.io.BufferedReader
@@ -73,8 +74,8 @@ class ApiConnection {
                     val weight = cell.slice(cell.length-3 until cell.length).toInt()
                     // Get sex as boolean
                     val sex = jsonArrayItem.getString(GENDER_FIELD) == RANDOMUSER_API_MALE
-                    // Get image URL
-                    val image = jsonArrayItem.getJSONObject(PICTURE_FIELD).getString(IMG_LARGE)
+                    // Get image URL, not from RandomUsers
+                    val image = StaticDataGenerator.generateBovineUrl()
                     // Special treatment to get a value usable as a caravan (must be unique) from API
                     var caravan = jsonArrayItem.getString(EMAIL_FIELD).slice(0..3).toUpperCase() + jsonArrayItem.getString(EMAIL_FIELD).slice(1..2).toUpperCase() + weight.toString()
 

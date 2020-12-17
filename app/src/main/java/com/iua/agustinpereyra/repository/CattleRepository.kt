@@ -56,7 +56,7 @@ class CattleRepository(private val application: Application) {
                         // Those who remain in received list must be inserted
                         updateCattle.add(receivedCattle)
                         currentCattleList.remove(currentCattle)
-                        newCattleList.remove(currentCattle)
+                        newCattleList.remove(receivedCattle)
                         break
                     }
                 }
