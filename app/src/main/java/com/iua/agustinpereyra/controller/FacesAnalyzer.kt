@@ -34,7 +34,7 @@ class FacesAnalyzer(private val resultHandler: FacesAnalyzerResultHandler) : Ima
 
             // Process the image
             val detectionResult = faceDetector.process(image)
-                .addOnSuccessListener { faces -> resultHandler.onSuccess(faces) }
+                .addOnSuccessListener { faces -> resultHandler.onSuccess(faces, image.width, image.height) }
                 .addOnFailureListener { exception -> resultHandler.onFailure(exception) }
                 .addOnCompleteListener {
                     // Close the frame
@@ -47,7 +47,7 @@ class FacesAnalyzer(private val resultHandler: FacesAnalyzerResultHandler) : Ima
      * interface used to handle errors and success on face detection
      */
     interface FacesAnalyzerResultHandler {
-        fun onSuccess(faces: List<Face>)
+        fun onSuccess(faces: List<Face>, imageWidth: Int, imageHeight: Int)
         fun onFailure(exception: Exception)
     }
 

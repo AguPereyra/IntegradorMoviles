@@ -38,5 +38,6 @@
     <dimen name="card_stroke_width">1dp</dimen>
 
     <!--Face detection/recognition-->
-    <dimen name="bounding_box_stroke">1dp</dimen>
+    <dimen name="bounding_box_stroke_width">3dp</dimen>
+    <dimen name="bounding_box_corner_radius">2dp</dimen>
 </resources>

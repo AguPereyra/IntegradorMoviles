@@ -1,13 +1,18 @@
 package com.iua.agustinpereyra.view.camera
 
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.graphics.Paint
+import android.graphics.Rect
+import android.graphics.RectF
 import android.graphics.drawable.ShapeDrawable
+import android.graphics.drawable.shapes.RectShape
 import com.google.mlkit.vision.face.Face
 import android.os.Bundle
 import android.util.Log
 import android.util.Size
 import android.view.View
+import android.view.ViewGroup
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.Preview
@@ -15,10 +20,14 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.view.marginLeft
+import androidx.core.view.marginRight
+import androidx.core.view.marginTop
 import com.google.android.material.snackbar.Snackbar
 import com.iua.agustinpereyra.R
 import com.iua.agustinpereyra.controller.CAMERA_PERMISSIONS_CODE
 import com.iua.agustinpereyra.controller.CAMERA_REQUIRED_PERMISSIONS
+import com.iua.agustinpereyra.controller.CoordinatesTranslator
 import com.iua.agustinpereyra.controller.FacesAnalyzer
 import com.iua.agustinpereyra.databinding.ActivityCameraBinding
 import com.iua.agustinpereyra.view.base.BaseActivity
@@ -100,7 +109,6 @@ class CameraActivity : BaseActivity(), FacesAnalyzer.FacesAnalyzerResultHandler 
 
             // Set the image analyzer to use
             val imageAnalyzer = ImageAnalysis.Builder()
-                .setTargetResolution(Size(480, 360))
                 .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
                 .build()
                 .also {
@@ -120,14 +128,28 @@ class CameraActivity : BaseActivity(), FacesAnalyzer.FacesAnalyzerResultHandler 
         }, ContextCompat.getMainExecutor(this))
     }
 
-    // Used to draw the faces bounding boxes
-    override fun onSuccess(faces: List<Face>) {
+    // Used to draw the faces' bounding boxes
+    override fun onSuccess(faces: List<Face>, imageWidth: Int, imageHeight: Int) {
         // Check if Faces were found
         if (faces.isNotEmpty()) {
-            Log.i(TAG, "A face was found!")
+            Log.d(TAG, "A face was found!")
             //TODO: Implement overlay over camera preview with bounding box
+            val firstFace = faces[0] // Only care about this one
+            val bounds = firstFace.boundingBox
+
+            // Translate to view coordinates
+            CoordinatesTranslator.setScaleX(viewBinding.cameraPreview.width.toFloat(),
+                imageWidth.toFloat()
+            )
+            CoordinatesTranslator.setScaleY(viewBinding.cameraPreview.height.toFloat(),
+                imageHeight.toFloat()
+            )
+            val drawBounds = CoordinatesTranslator.translateRect(bounds)
+
+            viewBinding.boundingBox.setBoundingBox(drawBounds)
         } else {
-            Log.i(TAG, "Face not found.")
+            Log.d(TAG, "Face not found.")
+            viewBinding.boundingBox.clearBoundingBox()
         }
     }
 
@@ -136,5 +158,4 @@ class CameraActivity : BaseActivity(), FacesAnalyzer.FacesAnalyzerResultHandler 
         exception.printStackTrace()
         throw exception
     }
-
 }
