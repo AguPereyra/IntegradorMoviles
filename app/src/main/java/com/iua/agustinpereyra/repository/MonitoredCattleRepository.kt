@@ -43,7 +43,11 @@ class MonitoredCattleRepository(private val application: Application) {
     suspend fun addMonitoredCattle(userId: Int, cattleCaravan: List<String>) = withContext(Dispatchers.IO) {
         val addCattle = mutableListOf<MonitoredCattle>()
         for (bovineCaravan in cattleCaravan) {
-            addCattle.add(MonitoredCattle(bovineCaravan, userId))
+            // Check if register exists
+            if (monitoredCattleDao.checkRegisterExists(userId, bovineCaravan) != 1) {
+                // Doesn't exist, add
+                addCattle.add(MonitoredCattle(bovineCaravan, userId))
+            }
         }
         monitoredCattleDao.insertMonitoredCattle(addCattle)
         _monitoredCattle.postValue(monitoredCattleDao.getMonitoredCattleOf(userId))

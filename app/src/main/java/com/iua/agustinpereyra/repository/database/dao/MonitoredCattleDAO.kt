@@ -21,4 +21,10 @@ interface MonitoredCattleDAO {
 
     @Delete
     fun deleteMonitoredCattle(monitoredCattle: List<MonitoredCattle>)
+
+    /**
+     * checkRegisterExists returns 1 if the register exists, nothing otherwise
+     */
+    @Query("SELECT 1 FROM monitored_cattle WHERE userId=:userId AND cattleCaravan LIKE :cattleCaravan")
+    fun checkRegisterExists(userId: Int, cattleCaravan: String): Int
 }
