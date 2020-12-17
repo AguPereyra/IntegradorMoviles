@@ -58,6 +58,9 @@ class MonitoredCattleListFragment : BaseCattleListFragment(),
         // Called when the users leaves the action mode
         override fun onDestroyActionMode(mode: ActionMode) {
             actionMode = null
+            // TODO: There is a better way?
+            // Reload list so items get unchecked
+            recyclerViewAdapter.notifyDataSetChanged()
         }
 
 
