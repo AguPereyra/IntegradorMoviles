@@ -108,4 +108,9 @@
     <!--Contextual Action Mode-->
     <string name="options_monitor">Seguir</string>
     <string name="options_dont_monitor">No seguir</string>
+
+    <!--Face Recognition-->
+    <string name="camera_view_title">Identificación Caravana</string>
+    <string name="searching_bovine">Buscando bovino...</string>
+    <string name="found_caravan">Caravana: %1$s</string>
 </resources>

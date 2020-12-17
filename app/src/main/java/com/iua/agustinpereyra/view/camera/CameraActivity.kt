@@ -56,6 +56,10 @@ class CameraActivity : BaseActivity(), FacesAnalyzer.FacesAnalyzerResultHandler 
             ActivityCompat.requestPermissions(this, arrayOf(CAMERA_REQUIRED_PERMISSIONS), CAMERA_PERMISSIONS_CODE)
         }
 
+        // Set camera title and back button
+        setActionBarTitle(getString(R.string.camera_view_title))
+        setActionBarHomeButtonAsUp()
+
         cameraExecutor = Executors.newSingleThreadExecutor()
     }
 
@@ -134,22 +138,10 @@ class CameraActivity : BaseActivity(), FacesAnalyzer.FacesAnalyzerResultHandler 
         if (faces.isNotEmpty()) {
             Log.d(TAG, "A face was found!")
             //TODO: Implement overlay over camera preview with bounding box
-            val firstFace = faces[0] // Only care about this one
-            val bounds = firstFace.boundingBox
-
-            // Translate to view coordinates
-            CoordinatesTranslator.setScaleX(viewBinding.cameraPreview.width.toFloat(),
-                imageWidth.toFloat()
-            )
-            CoordinatesTranslator.setScaleY(viewBinding.cameraPreview.height.toFloat(),
-                imageHeight.toFloat()
-            )
-            val drawBounds = CoordinatesTranslator.translateRect(bounds)
-
-            viewBinding.boundingBox.setBoundingBox(drawBounds)
+            viewBinding.bottomPanelText.text = getString(R.string.found_caravan, getString(R.string.cattle_caravan))
         } else {
             Log.d(TAG, "Face not found.")
-            viewBinding.boundingBox.clearBoundingBox()
+            viewBinding.bottomPanelText.text = getString(R.string.searching_bovine)
         }
     }
 
