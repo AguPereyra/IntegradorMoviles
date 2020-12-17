@@ -39,8 +39,8 @@ class CattleRepository(private val application: Application) {
      */
     private suspend fun updateDB(cattleList: List<Cattle>) = withContext(Dispatchers.IO) {
         // TODO: Check for optimization
-        // Get the current list of cattle
-        val currentCattleList = allCattle.value as MutableList<Cattle>?
+        // Get the current list of cattle (deep copy)
+        val currentCattleList = ArrayList(allCattle.value?.map { it.copy() })
 
         // Get the received cattle list as a mutable list, to only leave the new bovines if any
         val newCattleList : MutableList<Cattle> = ArrayList(cattleList)
@@ -61,6 +61,9 @@ class CattleRepository(private val application: Application) {
                     }
                 }
             }
+
+            // Update
+            cattleDao.updateAll(updateCattle)
 
             // Delete corresponding cattle
             for (cattle in currentCattleList) {
